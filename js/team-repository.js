@@ -1,3 +1,4 @@
+//TODO object in memory
 var TeamRepository = {
 
         STORE_NAME : 'peoples',

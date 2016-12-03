@@ -2,16 +2,19 @@
   app.page("team-list", function()
   {
 
-    var tpl = document.querySelector('ul.teamlist');
-    var peoples = TeamRepository.getPeoples();
-    console.log(peoples);
-    if (!peoples) {
-        peoples = [];
-    }
+    var olist = document.querySelector('ul.teamlist');
+    var tpl = olist.innerHTML;
 
-    
+
     return function(params) {
-      var output = mustache(tpl.innerHTML,{ peoples: peoples });
-      tpl.innerHTML = output;
+      console.log('kikou');
+      var peoples = TeamRepository.getPeoples();
+
+      if (!peoples) {
+          peoples = [];
+      }
+
+      var output = mustache(tpl,{ peoples: peoples });
+      olist.innerHTML = output;
     }
   });
