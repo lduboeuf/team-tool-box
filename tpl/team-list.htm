@@ -1,0 +1,13 @@
+<div>
+<h2>Team list</h2>
+<a href="#team-add">Add a member</a>
+<ul class="teamlist" >
+  {{#peoples}}
+  <li>
+      <a href="#team-member-details:{{id}}">
+        {{name}}
+      </a>
+  </li>
+  {{/peoples}}
+</ul>
+</div>
