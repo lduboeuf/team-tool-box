@@ -2,7 +2,7 @@
 (function(window){
 
     var STORE_NAME = 'peoples';
-    var peoples = fetch() || [];
+    var peoples = null;
 
 
     function store(){
@@ -22,6 +22,9 @@
     }
 
     TeamRepository.findAll = function(){
+      if (!peoples){
+        peoples = fetch() || [];
+      }
       return peoples;
     }
 
