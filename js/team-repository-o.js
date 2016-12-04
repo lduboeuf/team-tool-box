@@ -6,6 +6,7 @@
 
 
     function store(){
+       console.log(peoples[0]);
         var str = JSON.stringify(peoples);
         localStorage.setItem(STORE_NAME, str);
     }

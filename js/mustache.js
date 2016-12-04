@@ -54,6 +54,11 @@ function mustache(template, self, parent, invert) {
         }
       }
     )
+    //dereference prototype
+    if (Object.getPrototypeOf(ctx) == Object.prototype){
+      delete ctx.prototype;
+      delete ctx[""]
+    }
   }
   return output
 }
