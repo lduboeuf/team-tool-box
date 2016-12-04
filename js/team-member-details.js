@@ -2,18 +2,14 @@ app.page("team-member-details", function()
   {
     // initialize view variables
 
-    var formFields = document.querySelector('#team-member-details form div');
+    var form = document.querySelector('#team-member-details form');
+    var $id = form.querySelector('[name="id"]');
+    var $name = form.querySelector('[name="name"]');
+    var submitBtn = form.querySelector('input[name="update-member"]');
+    var removeBtn = form.querySelector('input[name="remove-member"]');
 
-    var tpl = formFields.innerHTML;
-
-    var submitBtn = document.querySelector('input[name="update-member"]');
-    var removeBtn = document.querySelector('input[name="remove-member"]');
     submitBtn.onclick = function(e){
       e.preventDefault();
-      var formFields = document.querySelector('#team-member-details form div');
-      var $id = formFields.querySelector('[name="id"]');
-      var $name = formFields.querySelector('[name="name"]');
-
       var member = TeamRepository.findById(parseInt($id.value));
       member.name = $name.value;
 
@@ -25,7 +21,6 @@ app.page("team-member-details", function()
 
     removeBtn.onclick = function(e){
       e.preventDefault();
-      var $id = formFields.querySelector('[name="id"]');
       TeamRepository.remove(parseInt($id.value));
       //TODO handle error
       history.pushState(null, null, "#team-list");
@@ -37,7 +32,7 @@ app.page("team-member-details", function()
       var id = parseInt(params);
       var member = TeamRepository.findById(id);
 
-      var output = mustache(tpl, { obj: member });
-      formFields.innerHTML = output;
+      $id.value = member.id;
+      $name.value = member.name;
     }
   });
