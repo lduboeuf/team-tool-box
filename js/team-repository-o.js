@@ -7,7 +7,7 @@
 
     function store(){
        console.log(peoples[0]);
-        var str = JSON.stringify(peoples);
+        var str = JSON.stringify(peoples, ['id','name']);
         localStorage.setItem(STORE_NAME, str);
     }
 
