@@ -92,7 +92,10 @@ app.page("home", function()
 
     //var gen_member = document.getElementById('gen_members');
     var gen_teams = document.getElementById('gen_teams');
-
+    gen_teams.onclick = generateTeams;
+    var gen_members = document.getElementById('gen_members');
+    gen_members.onclick = findPeoples;
+    /*
     document.querySelector('#home form').onsubmit = function(e){
       e.preventDefault();
       if (gen_teams.checked)
@@ -101,7 +104,7 @@ app.page("home", function()
         findPeoples();
       }
     }
-
+    */
 
     //document.getElementById('gen_teams').addEventListener('click', generateTeams);
 
