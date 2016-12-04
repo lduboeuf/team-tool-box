@@ -1,0 +1,15 @@
+<div>
+<h2>Member Details</h2>
+
+<form>
+  <div>
+  {{#obj}}
+    <input type="hidden" name="id" value="{{id}}"/>
+    <input type="text" name="name" value="{{name}}"/>
+  {{/obj}}
+  </div>
+  <input type="submit" name="update-member" value="update"/>
+  <input type="button" name="remove-member" value="remove"/>
+</form>
+
+</div>

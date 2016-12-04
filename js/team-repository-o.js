@@ -35,8 +35,9 @@
             people = peoples[i];
             break;
         }
-        return people;
+
       }
+      return people;
     }
 
 
@@ -68,7 +69,7 @@
             people.id = id;
             peoples.push(people);
         }else { //update mode
-          var people = findById(people.id);
+          var people = TeamRepository.findById(people.id);
           if (people){
             people.name = people.name;
           } //TODO exception

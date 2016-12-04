@@ -7,7 +7,7 @@ app.page("team-add", function()
   submitBtn.onclick = function(e){
     e.preventDefault();
     var nameInput = document.querySelector('form input[name="member-name"]');
-    window.TeamRepository.save({ "name": nameInput.value});
+    TeamRepository.save({ "name": nameInput.value});
     //refresh view
     //hack:..., not compatible old browser grrr.....
     history.pushState(null, null, "#team-list");

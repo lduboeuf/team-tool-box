@@ -12,7 +12,7 @@ body.about           > section#about,
 body.home    > section#home,
 body.team-list    > section#team-list,
 body.team-add    > section#team-add,
-body.contact-details > section#contact-details { display:block; }
+body.team-member-details > section#team-member-details { display:block; }
 
 
 
