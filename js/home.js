@@ -4,6 +4,33 @@ app.page("home", function()
   var olist = document.getElementById('teams-result');
   var tpl = olist.innerHTML;
 
+  var findPeoples = function() {
+        var peoples = TeamRepository.findAll();
+
+        //define an array of indices
+        var idxs = peoples.map(function (x, i) { return i });
+
+        var nbPers = document.getElementById("nb").value;
+        //to avoid infinite loop
+        if (nbPers.length === 0) return;
+
+        var members = [nbPers];
+        var idx, n;
+        var nb = Math.min(nbPers, peoples.length);
+        var team = { name : "Hall of fame:"};
+        for (var i=0; i < nb;i++){
+           //n = Math.floor(Math.random() * (idxs.length - 1));
+           n = Math.floor(Math.random() * idxs.length);
+           idx = idxs.splice(n, 1);
+           members[i] = peoples[idx];
+
+        }
+        team.members = members;
+        displayTeams([team], "Hall of fame:");
+
+
+      }
+
   var generateTeams = function() {
       var peoples = TeamRepository.findAll();
 
@@ -63,7 +90,20 @@ app.page("home", function()
     olist.innerHTML = null;
 
 
-    document.getElementById('gen_teams').addEventListener('click', generateTeams);
+    //var gen_member = document.getElementById('gen_members');
+    var gen_teams = document.getElementById('gen_teams');
+
+    document.querySelector('#home form').onsubmit = function(e){
+      e.preventDefault();
+      if (gen_teams.checked)
+        generateTeams();
+      else {
+        findPeoples();
+      }
+    }
+
+
+    //document.getElementById('gen_teams').addEventListener('click', generateTeams);
 
 
 

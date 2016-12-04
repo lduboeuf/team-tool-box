@@ -1,29 +1,36 @@
 <div>
-<h2>Build your teams randomly!</h2>
-        <select id="nb">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-        </select>
-        <button id="gen_teams">Generate Teams</button>
-        <button id="gen_peoples">Find volonteer(s)</button>
-<div id="teams-result">
-{{#list}}
-  <h3>{{name}}</h3>
-  <ul class="teams" >
-    {{#members}}
-    <li>
-        <a href="#team-member-details:{{id}}">
-          {{name}}
-        </a>
-    </li>
-    {{/members}}
-  </ul>
-{{/list}}
-</div>
+  <h2>Build your teams randomly!</h2>
+  <form>
+    <fieldset>
+      <legend>select :</legend>
+      <input type="radio" name="opt" id="gen_teams" checked=""/>Teams
+      <input type="radio" name="opt" id="gen_members"/> Members
+    </fieldset>
+    <label for="nb">nb of members :</label>
+    <select id="nb">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+    </select>
+    <input type="submit" value="ok"/>
+  </form>
+  <div id="teams-result">
+  {{#list}}
+    <h3>{{name}}</h3>
+    <ul class="teams" >
+      {{#members}}
+      <li>
+          <a href="#team-member-details:{{id}}">
+            {{name}}
+          </a>
+      </li>
+      {{/members}}
+    </ul>
+  {{/list}}
+  </div>
 </div>
