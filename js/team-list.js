@@ -8,13 +8,9 @@
 
     return function(params) {
       console.log('kikou');
-      var peoples = TeamRepository.getPeoples();
+      var peoples = TeamRepository.findAll();
 
-      if (!peoples) {
-          peoples = [];
-      }
-
-      var output = mustache(tpl,{ peoples: peoples });
+      var output = mustache(tpl, { list: peoples} );
       olist.innerHTML = output;
     }
   });

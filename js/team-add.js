@@ -7,9 +7,12 @@ app.page("team-add", function()
   submitBtn.onclick = function(e){
     e.preventDefault();
     var nameInput = document.querySelector('form input[name="member-name"]');
-    TeamRepository.save({ "name": nameInput.value});
+    window.TeamRepository.save({ "name": nameInput.value});
     //refresh view
+    //hack:..., not compatible old browser grrr.....
+    history.pushState(null, null, "#team-list");
     app("team-list");
+
   }
 
   return function(params) {
