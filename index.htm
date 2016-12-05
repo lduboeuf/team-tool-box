@@ -57,7 +57,10 @@
 
     var links = document.querySelectorAll('header ul li a');
     for(i=0;i<links.length;i++) {
-      links[i].onclick = setSelected;
+
+      links[i].addEventListener('click',setSelected);
+
+
     }
     document.querySelector('div.brand a').onclick = setSelected;
 
