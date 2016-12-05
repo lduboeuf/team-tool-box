@@ -2,6 +2,7 @@ app.page("home", function()
 {
 
   var olist = document.getElementById('teams-result');
+  var oSelect = document.getElementById("nb");
   var tpl = olist.innerHTML;
 
   var findPeoples = function() {
@@ -10,7 +11,7 @@ app.page("home", function()
         //define an array of indices
         var idxs = peoples.map(function (x, i) { return i });
 
-        var nbPers = document.getElementById("nb").value;
+        var nbPers = oSelect.value;
         //to avoid infinite loop
         if (nbPers.length === 0) return;
 
@@ -38,7 +39,7 @@ app.page("home", function()
       var idxs = peoples.map(function (x, i) { return i });
 
 
-      var nbPers = document.getElementById("nb").value;
+      var nbPers = oSelect.value;
       //to avoid infinite loop
       if (nbPers.length === 0) return;
 
@@ -48,7 +49,7 @@ app.page("home", function()
       var idx, n;
       var teams = [nbTeam];
       for (var i = 0; i < nbTeam; i++) {
-        var team = { name : 'Team ' + i };
+        var team = { name : 'Team ' + i + ':'};
         var members = [nbPers];
         for (var j = 0; j < nbPers; j++) {
           n = Math.floor(Math.random() * idxs.length);
@@ -95,18 +96,16 @@ app.page("home", function()
     gen_teams.onclick = generateTeams;
     var gen_members = document.getElementById('gen_members');
     gen_members.onclick = findPeoples;
-    /*
-    document.querySelector('#home form').onsubmit = function(e){
-      e.preventDefault();
-      if (gen_teams.checked)
+
+    oSelect.onchange = function(){
+      if (gen_teams.checked){
         generateTeams();
-      else {
+      }else if( gen_members.checked){
         findPeoples();
       }
-    }
-    */
 
-    //document.getElementById('gen_teams').addEventListener('click', generateTeams);
+    }
+
 
 
 

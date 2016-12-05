@@ -1,5 +1,11 @@
 
-body {margin:0;}
+body {
+  margin:0;
+  font-family: Verdana,sans-serif;
+}
+
+h2 { font-size: 1.17em; }
+h3 { font-size: 1em; }
 
 /* all sections are off by default */
 body > section {
@@ -14,11 +20,28 @@ body.team-list    > section#team-list,
 body.team-add    > section#team-add,
 body.team-member-details > section#team-member-details { display:block; }
 
+body header {
+  background-color: #333;
+  color: #f2f2f2;
+  top:0;
+  width: 100%;
+}
 
+body .brand {
+  float: left;
+  padding: 14px 12px;
+  text-align: center;
+}
+.brand a{
+  text-decoration: none;
+  font-weight: bold;
+  color: #f2f2f2;
+}
 
 /*menu style*/
 
 ul.topnav {
+  text-align: right;
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -26,7 +49,9 @@ ul.topnav {
   background-color: #333;
 }
 
-ul.topnav li {float: left;}
+ul.topnav li {
+  display:inline;
+}
 
 ul.topnav li a {
   display: inline-block;
@@ -66,3 +91,33 @@ ul.topnav li.icon {display: none;}
     text-align: left;
   }
 }
+
+/***end menu style**/
+
+section ul {
+    list-style-type: none;
+    padding: 0;
+    border: 1px solid #ddd;
+}
+
+section ul li {
+    padding: 8px 16px;
+    border-bottom: 1px solid #ddd;
+}
+
+section ul li a {
+    display: block;
+    text-decoration: none;
+    color: #605D5D;
+
+}
+
+section ul li:hover {
+	background-color: #fcfcfc;
+}
+
+section ul li:last-child {
+    border-bottom: none
+}
+
+/** form elements **/

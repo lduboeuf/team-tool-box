@@ -12,20 +12,21 @@
           <option value="7">7</option>
           <option value="8">8</option>
       </select>
-      <input type="radio" name="opt" id="gen_teams"/> members per team
-      <input type="radio" name="opt" id="gen_members"/> members
-
+      <div class="radio-group">
+        <label for="gen_teams">
+          <input type="radio" name="opt" id="gen_teams"/> members/team
+        </label>
+        <label for="gen_members">
+          <input type="radio" name="opt" id="gen_members"/> members
+        </label>
+      </div>
   </form>
   <div id="teams-result">
   {{#list}}
     <h3>{{name}}</h3>
     <ul class="teams" >
       {{#members}}
-      <li>
-          <a href="#team-member-details:{{id}}">
-            {{name}}
-          </a>
-      </li>
+      <li>{{name}}</li>
       {{/members}}
     </ul>
   {{/list}}

@@ -17,16 +17,21 @@
     </style>
   </head>
 <body>
-  <ul class="topnav" id="menu">
-   <li><a href="#home">Home</a></li>
-   <li><a href="#team-list">Team List</a></li>
-   <li><a href="#contact-list">Archives</a></li>
-   <li><a href="#about">About</a></li>
-   <li class="icon">
-     <a href="javascript:void(0);" onclick="menuHandler()">&#9776;</a>
-   </li>
- </ul>
+  <!--[if lt IE 9]> <p class="browserupgrade">You are using an <strong>outdated</strong> browser. And it is realy hard to code with them... Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p> <![endif]-->
+  <header>
+    <div class="brand">
+      <a href="#home">Team Tool Box</a>
+    </div>
 
+    <ul class="topnav" id="menu">
+     <li><a href="#team-list">Team List</a></li>
+     <li><a href="#contact-list">Archives</a></li>
+     <li><a href="#about">About</a></li>
+     <li class="icon">
+       <a href="javascript:void(0);" onclick="menuHandler()">&#9776;</a>
+     </li>
+   </ul>
+ </header>
   <section id="home" src="tpl/home.htm" default></section>
   <section id="team-list" src="tpl/team-list.htm"></section>
   <section id="team-add" src="tpl/team-add.htm"></section>
@@ -41,6 +46,25 @@
             x.className = "topnav";
         }
     }
+
+    //handle click on nav a, make it selected style
+    function setSelected(){
+      for(i=0;i<links.length;i++) {
+        links[i].classList.remove('selected');
+      }
+      this.classList.add('selected');
+    }
+
+    var links = document.querySelectorAll('header ul li a');
+    for(i=0;i<links.length;i++) {
+      links[i].onclick = setSelected;
+    }
+    document.querySelector('div.brand a').onclick = setSelected;
+
+
+
+
+
   </script>
 </body>
 </html>
