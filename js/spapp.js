@@ -109,6 +109,9 @@
     request.send();
   };
 
+  app.start = function(){
+    window.dispatchEvent(new CustomEvent('hashchange'));
+  }
 
   function onhashchange()
   {
@@ -128,9 +131,10 @@
 
   // Call onhashchange manually for the initialization.
   // setTimeout is used to postpone initialization so application can configure window.app.get = function(src,$page,pageName); for example
-  window.setTimeout( function() {
-    window.dispatchEvent(new CustomEvent('hashchange'));
-    //$(onhashchange);
-  });
+  //don't work everytime
+  // window.setTimeout( function() {
+  //   window.dispatchEvent(new CustomEvent('hashchange'));
+  //   //$(onhashchange);
+  // });
 
 })(this);
