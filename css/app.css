@@ -42,6 +42,7 @@ body.about           > section#about,
 body.home    > section#home,
 body.team-list    > section#team-list,
 body.team-add    > section#team-add,
+body.archive-save    > section#archive-save,
 body.team-member-details > section#team-member-details { display:block; }
 
 /*header*/
@@ -186,6 +187,19 @@ button, input[type=submit]:hover {
 
 .radio-group label:last-of-type {
   border-radius: 0 4px 4px 0;
+}
+
+textarea{
+  color: #5f5f5f;
+  box-sizing: border-box;
+  width: 240px;
+  height: 80px;
+  box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.08);
+  font: normal 13px sans-serif;
+  padding: 12px;
+  border: 1px solid #dbdbdb;
+  resize: vertical;
+  display:block;
 }
 
 

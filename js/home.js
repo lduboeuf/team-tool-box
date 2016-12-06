@@ -3,7 +3,10 @@ app.page("home", function()
 
   var olist = document.getElementById('teams-result');
   var oSelect = document.getElementById("nb");
+  var btnSave = document.querySelector('#home button');
   var tpl = olist.innerHTML;
+
+  var currentOutput = null;
 
   var findPeoples = function() {
         var peoples = TeamRepository.findAll();
@@ -82,6 +85,7 @@ app.page("home", function()
 
     var displayTeams = function(teams) {
         var output = mustache(tpl, { list: teams} );
+        currentOutput = teams;
         olist.innerHTML = output;
     }
 
@@ -104,6 +108,13 @@ app.page("home", function()
 
     }
 
+    // btnSave.onclick = function(){
+    //   if (currentOutput){
+    //     app("archive-save", currentOutput);
+    //   }
+    // }
+
+    //save output
 
 
 
