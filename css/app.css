@@ -7,6 +7,30 @@ body {
 h2 { font-size: 1.17em; }
 h3 { font-size: 1em; }
 
+
+.alert-info {
+  margin: 10px;
+  display:none;
+  background-color: #D9EDF7;
+  color:#31708f;
+  border: 1px solid #31708f;
+}
+.alert-closebtn {
+    margin:2px;
+    text-decoration: none;
+    float: right;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: inherit;
+}
+.alert-closebtn:hover{
+  cursor: pointer;
+  color: #000;
+}
+.alert-msg {
+    padding:16px;
+}
+
 /* all sections are off by default */
 body > section {
   margin: 1em;
@@ -20,6 +44,7 @@ body.team-list    > section#team-list,
 body.team-add    > section#team-add,
 body.team-member-details > section#team-member-details { display:block; }
 
+/*header*/
 body header {
   background-color: #333;
   color: #f2f2f2;
@@ -38,7 +63,7 @@ body .brand {
   color: #f2f2f2;
 }
 
-/*menu style*/
+
 
 ul.topnav {
   text-align: right;

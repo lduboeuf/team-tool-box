@@ -6,7 +6,7 @@
     <style></style>
     <script type="text/javascript" src="js/mustache.min.js"></script>
     <script type="text/javascript" src="js/spapp.js"></script>
-
+    <script type="text/javascript" src="js/app-utils.js"></script>
     <script type="text/javascript" src="js/team-repository-o.js"></script>
     <script type="text/javascript" src="js/team-list.js"></script>
     <script type="text/javascript" src="js/home.js"></script>
@@ -32,11 +32,17 @@
      </li>
    </ul>
  </header>
+
   <section id="home" src="tpl/home.htm" default></section>
   <section id="team-list" src="tpl/team-list.htm"></section>
   <section id="team-add" src="tpl/team-add.htm"></section>
   <section id="team-member-details" src="tpl/team-member-details.htm"></section>
   <section id="about" src="tpl/about.htm"></section>
+
+  <div class="alert-info">
+    <span onclick="this.parentElement.style.display='none'" class="alert-closebtn">&times;</span>
+    <p class="alert-msg"></p>
+  </div>
   <script>
     function menuHandler() {
         var x = document.getElementById("menu");
@@ -53,6 +59,8 @@
         links[i].classList.remove('selected');
       }
       this.classList.add('selected');
+      //make sure every alert box is hidden
+      document.querySelector('.alert-info').style.display = 'none';
     }
 
     var links = document.querySelectorAll('header ul li a');

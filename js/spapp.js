@@ -109,6 +109,7 @@
     request.send();
   };
 
+
   function onhashchange()
   {
     var hash = location.hash || ("#" + document.querySelector('section[default]').getAttribute('id'));
