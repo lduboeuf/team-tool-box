@@ -93,7 +93,7 @@ ul.topnav li a.selected {background-color: #555;}
 ul.topnav li.icon {display: none;}
 
 @media screen and (max-width:680px) {
-  ul.topnav li:not(:first-child) {display: none;}
+  ul.topnav li {display: none;}
   ul.topnav li.icon {
     float: right;
     display: inline-block;
