@@ -11,4 +11,11 @@
 ##usage
  - open index.html in your favorite browser
 
+##compressing for production
+  - need nodejs
+```
+npm install
+grunt # will output app in dist folder
+```
+
  work in progress...
