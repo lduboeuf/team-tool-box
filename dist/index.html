@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Team Tool Box</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="scripts/mustache.min.js"></script>
+    <script src="scripts/scripts.js"></script>
+    <link rel="stylesheet" href="styles/main.css">
+  </head>
+<body>
+  <!--[if lt IE 9]> <p class="browserupgrade">You are using an <strong>outdated</strong> browser. And it is realy hard to code with them... Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p> <![endif]-->
+  <header>
+    <div class="brand">
+      <a href="#home">Team Tool Box</a>
+    </div>
+
+    <ul class="topnav" id="menu">
+    <li><a href="#home">Home</a></li>
+     <li><a href="#team-list">Team List</a></li>
+     <li><a href="#contact-list">Archives</a></li>
+     <li><a href="#about">About</a></li>
+     <li class="icon">
+       <a href="javascript:void(0);" onclick="menuHandler()">&#9776;</a>
+     </li>
+   </ul>
+ </header>
+
+  <section id="home" src="tpl/home.html" default></section>
+  <section id="team-list" src="tpl/team-list.html"></section>
+  <section id="team-add" src="tpl/team-add.html"></section>
+  <section id="team-member-details" src="tpl/team-member-details.html"></section>
+  <section id="about" src="tpl/about.html"></section>
+  <section id="archive-save" src="tpl/archive-save.html"></section>
+
+  <div class="alert-info">
+    <span onclick="this.parentElement.style.display='none'" class="alert-closebtn">&times;</span>
+    <p class="alert-msg"></p>
+  </div>
+  <script>
+    function menuHandler() {
+        var x = document.getElementById("menu");
+        if (x.className === "topnav") {
+            x.className += " responsive";
+        } else {
+            x.className = "topnav";
+        }
+    }
+
+    //handle click on nav a, make it selected style
+    function setSelected(){
+      for(i=0;i<links.length;i++) {
+        links[i].classList.remove('selected');
+      }
+      this.classList.add('selected');
+      //make sure every alert box is hidden
+      document.querySelector('.alert-info').style.display = 'none';
+    }
+
+    var links = document.querySelectorAll('header ul li a');
+    for(i=0;i<links.length;i++) {
+
+      links[i].addEventListener('click',setSelected);
+
+
+    }
+    document.querySelector('div.brand a').onclick = setSelected;
+
+
+    app.start();
+
+
+  </script>
+</body>
+</html>
