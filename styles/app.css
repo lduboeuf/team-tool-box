@@ -121,7 +121,7 @@ ul.topnav li.icon {display: none;}
 /***end menu style**/
 select{
   display: inline-block;
-  padding: 12px;
+  padding: 8px;
   background-color: #fff;
   border: 1px solid #D1D1D1;
   border-radius: 4px;
@@ -134,7 +134,7 @@ input[type=text], input[type=url], input[type=email], input[type=password], inpu
   box-sizing: border-box;
   width: 240px;
   box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.08);
-  padding: 12px;
+  padding: 8px;
   border: 1px solid #dbdbdb;
 }
 
@@ -145,7 +145,7 @@ button, input[type=submit] {
   color: #ffffff;
   font-weight: bold;
   box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.08);
-  padding: 14px 22px;
+  padding: 8px 12px;
   border: 0;
 }
 button, input[type=submit]:hover {
@@ -167,7 +167,7 @@ button, input[type=submit]:hover {
   background-color: #fff;
   font-weight: bold;
   box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.08);
-  padding: 12px 2px;
+  padding: 8px 2px;
   border: 0;
   border: 1px solid rgba(0, 0, 0, 0.2);
 }
