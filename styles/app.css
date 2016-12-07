@@ -14,6 +14,7 @@ h3 { font-size: 1em; }
   background-color: #D9EDF7;
   color:#31708f;
   border: 1px solid #31708f;
+  border-radius: 4px;
 }
 .alert-closebtn {
     margin:2px;
@@ -116,6 +117,11 @@ ul.topnav li.icon {display: none;}
     display: block;
     text-align: left;
   }
+}
+.link-home {
+  color:#000;
+  text-decoration: none;
+  padding-right: 12px;
 }
 
 /***end menu style**/

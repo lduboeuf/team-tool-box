@@ -10,10 +10,9 @@ app.page("team-add", function()
     e.preventDefault();
     if (nameInput.value.length>0){
       TeamRepository.save({ "name": nameInput.value});
-      //refresh view
-      //hack:..., not compatible old browser grrr.....
-      history.pushState(null, null, "#team-list");
-      app("team-list");
+
+      history.back();
+
     }else {
       //handle error msg
     }
