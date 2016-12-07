@@ -3,6 +3,7 @@
 * @name jQuery Single Page Application micro framework
 * @license MIT
 * @purpose routing and dynamic content on single page web applications
+* @modifiedby Lionel Duboeuf - turned native
 */
 //custom event IE polyfill
 (function () {

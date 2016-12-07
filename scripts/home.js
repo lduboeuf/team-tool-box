@@ -50,7 +50,7 @@ app.page("home", function()
       console.log("nbPers:" + nbPers + " - nbTeam:" + nbTeam);
 
       var idx, n;
-      var teams = [nbTeam];
+      var teams = [];
       for (var i = 0; i < nbTeam; i++) {
         var team = { name : 'Team ' + i + ':'};
         var members = [nbPers];
@@ -122,7 +122,7 @@ app.page("home", function()
     console.log('kikou');
     var members = TeamRepository.findAll();
     if (members.length==0){
-      app.alert('alert-info','no members found, you can add members by clicking on the "Team List" menu');
+      app.alert('alert-info','hello, no members found, you can add members by clicking on the "Team List" menu');
     //  olist.innerHTML = '''<p class="alert-info"> no members found, you can add members by clicking on the "Team List" menu</p>'
     }
   }

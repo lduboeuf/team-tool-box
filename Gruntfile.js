@@ -1,18 +1,9 @@
-// Generated on 2014-01-16 using generator-angular 0.7.1
 'use strict';
-
-// # Globbing
-// for performance reasons we're only matching one level down:
-// 'test/spec/{,*/}*.js'
-// use this if you want to recursively match all subfolders:
-// 'test/spec/**/*.js'
 
 module.exports = function(grunt) {
 
   // load grunt tasks based on dependencies in package.json
     require('load-grunt-tasks')(grunt);
-
-
 
    // Configurable paths for the application
   var appConfig = {
@@ -44,7 +35,15 @@ module.exports = function(grunt) {
     },
 
 
-
+    jshint: {
+      options: {
+        curly: true,
+        eqeqeq: true,
+        eqnull: true,
+        browser: true
+      },
+      all: ['Gruntfile.js', 'scripts/*.js']
+    },
 
     // Reads HTML for usemin blocks to enable smart builds that automatically
     // concat, minify and revision files. Creates configurations in memory so
@@ -85,7 +84,20 @@ module.exports = function(grunt) {
         }]
       }
     },
-
+    htmlmin: {                                     // Task
+      dist: {                                      // Target
+        options: {                                 // Target options
+          removeComments: true,
+          collapseWhitespace: true
+        },
+        files: [{
+          expand: true,
+          cwd: '<%= appConfig.dist %>',
+          src: ['index.html','tpl/*.html'],
+          dest:'<%= appConfig.dist %>',
+        }]
+      }
+    }
 
 
   });
@@ -94,11 +106,13 @@ module.exports = function(grunt) {
   grunt.registerTask('build', [
     'clean:dist',
     'copy:dist',
+    //'jshint',
     'useminPrepare',
     'concat',
     'uglify',
     'cssmin',
     'usemin',
+    'htmlmin:dist',
 
   ]);
 
