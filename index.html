@@ -5,20 +5,22 @@
     <title>Team Tool Box</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="scripts/mustache.min.js"></script>
+    <!-- build:js scripts/scripts.js -->
 
+    <script type="text/javascript" src="scripts/spapp.js"></script>
+    <script type="text/javascript" src="scripts/team-repository-o.js"></script>
+    <script type="text/javascript" src="scripts/app-utils.js"></script>
 
-    <script type="text/javascript" src="js/mustache.min.js"></script>
-    <script type="text/javascript" src="js/spapp.js"></script>
-    <script type="text/javascript" src="js/app-utils.js"></script>
-    <script type="text/javascript" src="js/team-repository-o.js"></script>
-    <script type="text/javascript" src="js/team-list.js"></script>
-    <script type="text/javascript" src="js/home.js"></script>
-    <script type="text/javascript" src="js/team-member-details.js"></script>
-    <script type="text/javascript" src="js/team-add.js"></script>
-    <script type="text/javascript" src="js/archive-save.js"></script>
-    <style>
-      @import url(css/app.css);
-    </style>
+    <script type="text/javascript" src="scripts/team-list.js"></script>
+    <script type="text/javascript" src="scripts/home.js"></script>
+    <script type="text/javascript" src="scripts/team-member-details.js"></script>
+    <script type="text/javascript" src="scripts/team-add.js"></script>
+    <script type="text/javascript" src="scripts/archive-save.js"></script>
+    <!-- endbuild -->
+    <!-- build:css styles/main.css -->
+    <link rel="stylesheet" href="styles/app.css">
+    <!-- endbuild -->
   </head>
 <body>
   <!--[if lt IE 9]> <p class="browserupgrade">You are using an <strong>outdated</strong> browser. And it is realy hard to code with them... Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p> <![endif]-->
@@ -38,12 +40,12 @@
    </ul>
  </header>
 
-  <section id="home" src="tpl/home.htm" default></section>
-  <section id="team-list" src="tpl/team-list.htm"></section>
-  <section id="team-add" src="tpl/team-add.htm"></section>
-  <section id="team-member-details" src="tpl/team-member-details.htm"></section>
-  <section id="about" src="tpl/about.htm"></section>
-  <section id="archive-save" src="tpl/archive-save.htm"></section>
+  <section id="home" src="tpl/home.html" default></section>
+  <section id="team-list" src="tpl/team-list.html"></section>
+  <section id="team-add" src="tpl/team-add.html"></section>
+  <section id="team-member-details" src="tpl/team-member-details.html"></section>
+  <section id="about" src="tpl/about.html"></section>
+  <section id="archive-save" src="tpl/archive-save.html"></section>
 
   <div class="alert-info">
     <span onclick="this.parentElement.style.display='none'" class="alert-closebtn">&times;</span>
