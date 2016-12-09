@@ -55,9 +55,9 @@ body header {
 }
 
 body .brand {
-  float: left;
+  /*float: left;*/
   padding: 14px 12px;
-  text-align: center;
+  text-align: left;
 }
 .brand a{
   text-decoration: none;
@@ -87,7 +87,7 @@ ul.topnav li a {
   padding: 14px 16px;
   text-decoration: none;
   transition: 0.3s;
-  font-size: 17px;
+  /*font-size: 17px;*/
 }
 
 ul.topnav li a:hover {background-color: #555;}
@@ -95,6 +95,11 @@ ul.topnav li a.selected {background-color: #555;}
 ul.topnav li.icon {display: none;}
 
 @media screen and (max-width:680px) {
+  ul.topnav {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
   ul.topnav li {display: none;}
   ul.topnav li.icon {
     float: right;
@@ -103,7 +108,12 @@ ul.topnav li.icon {display: none;}
 }
 
 @media screen and (max-width:680px) {
-  ul.topnav.responsive {position: relative;}
+  ul.topnav.responsive {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding-right: 30px;
+  }
   ul.topnav.responsive li.icon {
     position: absolute;
     right: 0;
@@ -125,6 +135,14 @@ ul.topnav li.icon {display: none;}
 }
 
 /***end menu style**/
+
+#home form{
+  border: 1px solid #dbdbdb;
+  border-radius: 4px;
+  padding:8px;
+  box-shadow: 1px 1px 0px #dbdbdb;
+}
+
 select{
   display: inline-block;
   padding: 8px;
