@@ -1,22 +1,30 @@
 app.page("home", function()
 {
 
-  var olist = document.getElementById('teams-result');
-  var oSelect = document.getElementById("nb");
-  var btnSave = document.querySelector('#home button');
+  var section = document.getElementById('home');
+  var oSelect = section.querySelector("#nb");
+  var gen_teams = section.querySelector('#gen_teams');
+  var gen_members = section.querySelector('#gen_members');
+  var olist = section.querySelector('#teams-result');
+
+  //store template definition
   var tpl = olist.innerHTML;
 
   var currentOutput = null;
 
+
   var findPeoples = function() {
         var peoples = TeamRepository.findAll();
-
+        if (peoples.length==0){
+          return;
+        }
         //define an array of indices
         var idxs = peoples.map(function (x, i) { return i });
 
-        var nbPers = oSelect.value;
-        //to avoid infinite loop
-        if (nbPers.length === 0) return;
+        var nbPers = parseInt(oSelect.value);
+
+
+
 
         var members = [nbPers];
         var idx, n;
@@ -37,14 +45,14 @@ app.page("home", function()
 
   var generateTeams = function() {
       var peoples = TeamRepository.findAll();
-
+      if (peoples.length==0){
+        return;
+      }
       //define an array of indices
       var idxs = peoples.map(function (x, i) { return i });
 
+      var nbPers = parseInt(oSelect.value);
 
-      var nbPers = oSelect.value;
-      //to avoid infinite loop
-      if (nbPers.length === 0) return;
 
       var nbTeam = Math.floor(peoples.length / nbPers);
       console.log("nbPers:" + nbPers + " - nbTeam:" + nbTeam);
@@ -87,18 +95,19 @@ app.page("home", function()
         var output = mustache(tpl, { list: teams} );
         currentOutput = teams;
         olist.innerHTML = output;
+        // var btnSave = olist.querySelector('button');
+        // btnSave.onclick = function(){
+        //   if (currentOutput){
+        //     app("archive-save", currentOutput);
+        //   }
+        // }
     }
 
     //empty tpl by default
     olist.innerHTML = null;
 
-
-    //var gen_member = document.getElementById('gen_members');
-    var gen_teams = document.getElementById('gen_teams');
     gen_teams.onclick = generateTeams;
-    var gen_members = document.getElementById('gen_members');
     gen_members.onclick = findPeoples;
-
     oSelect.onchange = function(){
       if (gen_teams.checked){
         generateTeams();
@@ -108,11 +117,7 @@ app.page("home", function()
 
     }
 
-    // btnSave.onclick = function(){
-    //   if (currentOutput){
-    //     app("archive-save", currentOutput);
-    //   }
-    // }
+
 
     //save output
 

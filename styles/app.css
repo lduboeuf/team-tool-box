@@ -2,9 +2,11 @@
 body {
   margin:0;
   font-family: Verdana,sans-serif;
+  background-color: #F5F5F5;
+  font-size: 14px;
 }
 
-h2 { font-size: 1.17em; }
+h2 { font-size: 1.10em; }
 h3 { font-size: 1em; }
 
 
@@ -50,6 +52,7 @@ body.team-member-details > section#team-member-details { display:block; }
 body header {
   background-color: #333;
   color: #f2f2f2;
+  box-shadow: 0px 5px 8px #ccc;
   top:0;
   width: 100%;
 }
@@ -63,6 +66,9 @@ body .brand {
   text-decoration: none;
   font-weight: bold;
   color: #f2f2f2;
+}
+.brand span{
+  display: block;
 }
 
 
@@ -141,11 +147,15 @@ ul.topnav li.icon {display: none;}
   border-radius: 4px;
   padding:8px;
   box-shadow: 1px 1px 0px #dbdbdb;
+  background-color: #fff;
+}
+.box-right{
+  text-align: right;
 }
 
 select{
   display: inline-block;
-  padding: 8px;
+  padding: 7px;
   background-color: #fff;
   border: 1px solid #D1D1D1;
   border-radius: 4px;
@@ -195,11 +205,11 @@ button, input[type=submit], input[type=button]:hover {
   display: inline-block;
   border-radius: 2px;
   background-color: #fff;
-  font-weight: bold;
+  font-size:0.9em;
   box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.08);
   padding: 8px 2px;
-  border: 0;
   border: 1px solid rgba(0, 0, 0, 0.2);
+
 }
 
 .radio-group label:hover {
@@ -232,11 +242,24 @@ textarea{
   display:block;
 }
 
+section div.team {
+  margin-top:20px;
+  padding:0;
+}
+div.team h3{
+  margin:0;
+  padding:12px;
+  background-color: #E7E7E7;
+  border: 1px solid #ddd;
+  border-bottom: 0;
+}
 
 section ul {
+    margin: 0;
     list-style-type: none;
     padding: 0;
     border: 1px solid #ddd;
+    background-color: #fff;
 }
 
 section ul li {
