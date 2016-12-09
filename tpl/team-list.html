@@ -1,13 +1,21 @@
 <div>
-<h2>Team list</h2>
-<a href="#team-add">+ Add a member</a>
-<ul class="teamlist" >
-  {{#list}}
-  <li>
-      <a href="#team-member-details:{{id}}">
-        {{name}}
-      </a>
-  </li>
-  {{/list}}
-</ul>
+  <h2>Team list</h2>
+  <div>
+  <select class="team-list">
+    {{#teams}}
+    <option value="{{id}}">{{name}}</option>
+    {{/teams}}
+  </select>
+  <a href="#team-add">Add a new Team</a>
+  </div>
+  <a href="javascript:void(0);" id="add-member-btn">+ Add a member</a>
+  <ul class="members-list" >
+    {{#members}}
+    <li>
+        <a href="#team-member-details:{{id}}">
+          {{name}}
+        </a>
+    </li>
+    {{/members}}
+  </ul>
 </div>

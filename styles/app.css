@@ -45,6 +45,7 @@ body.about           > section#about,
 body.home    > section#home,
 body.team-list    > section#team-list,
 body.team-add    > section#team-add,
+body.team-member-add    > section#team-member-add,
 body.archive-save    > section#archive-save,
 body.team-member-details > section#team-member-details { display:block; }
 

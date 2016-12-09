@@ -1,20 +1,42 @@
 //TODO object in memory
 (function(window){
 
-    var STORE_NAME = 'peoples';
-    var peoples = fetch() || [];
+    var STORE_NAME = 'ttb';
+    //localStorage.clear();
+    var data = fetch() || { teams : [] };
 
 
     function store(){
-       console.log(peoples[0]);
-        var str = JSON.stringify(peoples, ['id','name']);
+        var str = JSON.stringify(data);
         localStorage.setItem(STORE_NAME, str);
     }
 
     function fetch(){
-      var peoplesStr = localStorage.getItem(STORE_NAME);
-      return JSON.parse(peoplesStr);
+      var teamsStr = localStorage.getItem(STORE_NAME);
+      return JSON.parse(teamsStr);
     }
+
+    function findById(collection, id){
+      for (var i = 0; i < collection.length; i++) {
+        if (collection[i].id === id) {
+          return collection[i];
+        }
+      }
+      return null;
+    }
+
+    function getLastElementId(collection, id){
+      var id = 1;
+      if(collection.length>0){
+          var lastElement = collection[collection.length-1];
+          if (typeof lastElement.id != 'undefined'){
+              id = lastElement.id + 1;
+          }
+
+      }
+      return id;
+    }
+
 
     function TeamRepository(){
       console.log('TeamRepo called');
@@ -22,28 +44,25 @@
     }
 
     TeamRepository.findAll = function(){
-      return peoples;
+      return data.teams;
     }
 
     TeamRepository.findById = function(id){
-      var people = null;
-      for (var i=0; i < peoples.length; i++){
-        if (peoples[i].id === id){
-            people = peoples[i];
-            break;
-        }
-
-      }
-      return people;
+      return findById(data.teams, id);
     }
 
 
 
 
-    TeamRepository.remove = function(id){
-        for (var i=0; i < peoples.length; i++){
-            if (peoples[i].id === id){
-                peoples.splice(i, 1);
+    TeamRepository.removeMember = function(teamId, memberId){
+        var team = findById(teamId);
+        if (!team){
+          throw 'don\'t find team wih id' + teamId;
+        }
+        var members = team.members;
+        for (var i=0; i < members.length; i++){
+            if (members[i].id === id){
+                members.splice(i, 1);
                 break;
             }
         }
@@ -51,28 +70,52 @@
         store();
     }
 
-
-
-    TeamRepository.save = function(people){
+    TeamRepository.addTeam = function(team){
       //add mode
-        if (typeof people.id == 'undefined'){
-            var id = 1;
-            if(peoples.length>0){
-                var lastElement = peoples[peoples.length-1];
-                if (typeof lastElement.id != 'undefined'){
-                    id = lastElement.id + 1;
-                }
+      team.id = getLastElementId(data.teams);
+      data.teams.push(team);
+      store();
+    }
 
-            }
-            people.id = id;
-            peoples.push(people);
-        }else { //update mode
-          var people = TeamRepository.findById(people.id);
-          if (people){
-            people.name = people.name;
-          } //TODO exception
-        }
-        store();
+    TeamRepository.addMember = function(teamId, member){
+      //add mode
+      var team = findById(teamId);
+      if (!team){
+        throw 'gloups, team does not exist';
+      }
+
+      var id = 1;
+      var members = team.members;
+      if(members.length>0){
+          var lastElement = members[members.length-1];
+          if (typeof lastElement.id != 'undefined'){
+              id = lastElement.id + 1;
+          }
+
+      }
+      member.id = id;
+      members.push(member);
+
+
+      store();
+    }
+
+
+
+    TeamRepository.updateMember = function(teamId, member){
+
+      var team = findById(teamId);
+      if (!team){
+        throw 'gloups, team does not exist';
+      }
+
+      var member = findById(team.members, id);
+      if (member){
+        member.name = member.name;
+      }
+      //TODO exception
+
+      store();
     }
 
     window.TeamRepository = TeamRepository;
