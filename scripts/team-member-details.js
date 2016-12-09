@@ -12,19 +12,24 @@ app.page("team-member-details", function()
       e.preventDefault();
       var member = TeamRepository.findById(parseInt($id.value));
       member.name = $name.value;
-
       TeamRepository.save(member);
-      history.pushState(null, null, "#team-list");
-      app("team-list");
+      history.back();
+      //history.pushState(null, null, "#team-list");
+      //app("team-list");
 
     }
 
     removeBtn.onclick = function(e){
       e.preventDefault();
-      TeamRepository.remove(parseInt($id.value));
-      //TODO handle error
-      history.pushState(null, null, "#team-list");
-      app("team-list");
+      var res = window.confirm("are you sure you want to remove "+ $name.value);
+      if (res){
+        TeamRepository.remove(parseInt($id.value));
+        //TODO handle error
+        history.back();
+      }
+
+      //history.pushState(null, null, "#team-list");
+      //app("team-list");
     }
 
     // present the view - load data and show:
