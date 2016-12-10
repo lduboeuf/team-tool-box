@@ -21,6 +21,7 @@ app.page("team-add", function()
   }
 
   return function(params) {
-    //nothing to handle here
+
+    nameInput.value = "";
   }
 });

@@ -23,5 +23,6 @@ app.page("team-member-add", function()
 
   return function(params) {
     selectedTeamId = parseInt(params);
+    nameInput.value = "";
   }
 });
