@@ -2,26 +2,18 @@
   app.page("team-list", function()
   {
 
-    var addMemberBtn = document.getElementById('add-member-btn');
-    var selectTeamList = document.querySelector('#team-list select');
-    var ulMemberList = document.querySelector('#team-list ul');
+    var ulTeamList = document.querySelector('#team-list ul');
 
-    var tplTeamList = selectTeamList.innerHTML;
-    var tplMemberList = ulMemberList.innerHTML;
+    var tplTeamList = ulTeamList.innerHTML;
 
-    selectTeamList.innerHTML=null;
-    ulMemberList.innerHTML=null;
-
-    addMemberBtn.onclick = function(){
-      app("team-member-add", selectTeamList.options[selectTeamList.selectedIndex].value);
-    }
+    ulTeamList.innerHTML=null;
 
 
     return function(params) {
 
       var teams = TeamRepository.findAll();
       var output = mustache(tplTeamList, { teams: teams} );
-      selectTeamList.innerHTML = output;
+      ulTeamList.innerHTML = output;
       // var peoples = TeamRepository.findAll();
       //
       // var output = mustache(tpl, { list: peoples} );

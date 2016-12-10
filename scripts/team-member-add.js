@@ -10,7 +10,7 @@ app.page("team-member-add", function()
   submitBtn.onclick = function(e){
     e.preventDefault();
     if (nameInput.value.length>0){
-      TeamRepository.addMember({ "name": nameInput.value});
+      TeamRepository.addMember(selectedTeamId, { name: nameInput.value});
 
       history.back();
 

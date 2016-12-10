@@ -3,11 +3,10 @@
 
     var STORE_NAME = 'ttb';
     //localStorage.clear();
-    var data = fetch() || { teams : [] };
-
+    var data = fetch() || { last_member_id: 0, last_team_id: 0,  teams : [] };
 
     function store(){
-        var str = JSON.stringify(data);
+        var str = JSON.stringify(data,['last_member_id','last_team_id','teams','members','name','id','description']);
         localStorage.setItem(STORE_NAME, str);
     }
 
@@ -25,17 +24,6 @@
       return null;
     }
 
-    function getLastElementId(collection, id){
-      var id = 1;
-      if(collection.length>0){
-          var lastElement = collection[collection.length-1];
-          if (typeof lastElement.id != 'undefined'){
-              id = lastElement.id + 1;
-          }
-
-      }
-      return id;
-    }
 
 
     function TeamRepository(){
@@ -54,51 +42,62 @@
 
 
 
-    TeamRepository.removeMember = function(teamId, memberId){
-        var team = findById(teamId);
-        if (!team){
-          throw 'don\'t find team wih id' + teamId;
-        }
-        var members = team.members;
+    TeamRepository.removeMember = function(memberId){
+
+      for (var i=0; i < data.teams.length; i++){
+        var members = data.teams[i].members;
         for (var i=0; i < members.length; i++){
-            if (members[i].id === id){
+            if (members[i].id === memberId){
                 members.splice(i, 1);
                 break;
             }
         }
 
-        store();
+      }
+
+      store();
     }
 
     TeamRepository.addTeam = function(team){
       //add mode
-      team.id = getLastElementId(data.teams);
+      data.last_team_id++;
+      team.id = data.last_team_id;
       data.teams.push(team);
       store();
     }
 
+    TeamRepository.findMember = function(memberId){
+      for (var i=0; i < data.teams.length; i++){
+        var member = findById(data.teams[i].members, memberId );
+        if (member){
+          return member;
+        }
+      }
+      //not found
+      return null;
+    }
+
     TeamRepository.addMember = function(teamId, member){
       //add mode
-      var team = findById(teamId);
+      var team = findById(data.teams, teamId);
       if (!team){
         throw 'gloups, team does not exist';
       }
 
-      var id = 1;
-      var members = team.members;
-      if(members.length>0){
-          var lastElement = members[members.length-1];
-          if (typeof lastElement.id != 'undefined'){
-              id = lastElement.id + 1;
-          }
-
+      if (!team.members){
+        team.members = [];
       }
-      member.id = id;
+
+      var members = team.members;
+      data.last_member_id++;
+      member.id = data.last_member_id;
       members.push(member);
 
 
       store();
     }
+
+    TeamRepository.save = store;
 
 
 

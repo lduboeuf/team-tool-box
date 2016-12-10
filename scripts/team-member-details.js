@@ -8,11 +8,13 @@ app.page("team-member-details", function()
     var submitBtn = form.querySelector('input[name="update-member"]');
     var removeBtn = form.querySelector('input[name="remove-member"]');
 
+    var selectedMember = null;
+
     submitBtn.onclick = function(e){
       e.preventDefault();
-      var member = TeamRepository.findById(parseInt($id.value));
-      member.name = $name.value;
-      TeamRepository.save(member);
+      //var member = TeamRepository.findMember(parseInt($id.value));
+      selectedMember.name = $name.value;
+      TeamRepository.save();
       history.back();
       //history.pushState(null, null, "#team-list");
       //app("team-list");
@@ -23,7 +25,7 @@ app.page("team-member-details", function()
       e.preventDefault();
       var res = window.confirm("are you sure you want to remove "+ $name.value);
       if (res){
-        TeamRepository.remove(parseInt($id.value));
+        TeamRepository.removeMember(parseInt($id.value));
         //TODO handle error
         history.back();
       }
@@ -35,9 +37,9 @@ app.page("team-member-details", function()
     // present the view - load data and show:
     return function(params) {
       var id = parseInt(params);
-      var member = TeamRepository.findById(id);
+      selectedMember = TeamRepository.findMember(id);
 
-      $id.value = member.id;
-      $name.value = member.name;
+      $id.value = selectedMember.id;
+      $name.value = selectedMember.name;
     }
   });

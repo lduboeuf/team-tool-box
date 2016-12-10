@@ -44,6 +44,7 @@ body > section {
 body.about           > section#about,
 body.home    > section#home,
 body.team-list    > section#team-list,
+body.team-list-details    > section#team-list-details,
 body.team-add    > section#team-add,
 body.team-member-add    > section#team-member-add,
 body.archive-save    > section#archive-save,
@@ -94,12 +95,13 @@ ul.topnav li a {
   padding: 14px 16px;
   text-decoration: none;
   transition: 0.3s;
-  /*font-size: 17px;*/
+  font-size: 1.2em;
 }
 
 ul.topnav li a:hover {background-color: #555;}
 ul.topnav li a.selected {background-color: #555;}
 ul.topnav li.icon {display: none;}
+
 
 @media screen and (max-width:680px) {
   ul.topnav {
