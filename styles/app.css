@@ -58,6 +58,9 @@ body> header {
   top:0;
   width: 100%;
 }
+table td{
+  padding:0;
+}
 
 body .brand {
   /*float: left;*/

@@ -3,10 +3,8 @@
   <form>
     <table>
       <tr>
-        <td>
-      <label for="nb">find:</label>
-    </td>
     <td>
+    
       <select id="nb">
           <option value="1">1</option>
           <option value="2">2</option>
@@ -27,16 +25,17 @@
     </td>
   </tr>
     <tr>
+
+
+
       <td>
         <label for="nb">within:</label>
-      </td>
-      <td>
       <select class="team-list" name="team-list">
         {{#teams}}
         <option value="{{id}}">{{name}}</option>
         {{/teams}}
       </select>
-      <input type="submit" name="ok" value="ok" class="button btn-default"/>
+      <input type="submit" name="ok" value="find" class="button btn-default"/>
       </td>
     </tr>
     </table>

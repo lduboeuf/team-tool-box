@@ -87,7 +87,7 @@ app.page("home", function()
       //any orphans ?
       if (idxs.length>0) {
           //add them to first team and so on
-          var members = idxs.map(function (x, i) { return peoples[x] });
+          var members = idxs.map(function (x, i) { return teamMembers[x] });
           var team = {
             name : 'Team Orphan(s)',
             members : members
