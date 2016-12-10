@@ -207,7 +207,7 @@ button, input[type=submit], input[type=button]:hover {
 }
 
 .radio-group {
-  display: inline;
+  display: block;
   margin:0;
   font-size:0.9em;
 }
