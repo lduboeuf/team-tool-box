@@ -6,7 +6,7 @@ body {
   font-size: 14px;
 }
 
-h2 { font-size: 1.10em; }
+h2 { font-size: 1.10em; margin-top: 0;}
 h3 { font-size: 1em; }
 
 
@@ -172,9 +172,18 @@ ul.topnav li.icon {
 #teams-result div{
   padding-top:12px;
 }
-.box-right{
-  text-align: right;
+
+#team-list-details header{
+  display:flex;
+  justify-content: space-between;
 }
+/*#team-list-details header div:first-child{
+  margin-right: auto;
+}
+#team-list-details header div:last-child{
+  margin-left: auto;
+}*/
+
 
 select{
   display: inline-block;

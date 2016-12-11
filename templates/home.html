@@ -32,16 +32,18 @@
   </form>
 </header>
   <div id="teams-result">
-  {{#list}}
-  <div class="team">
-    <h3>{{name}}</h3>
-    <ul class="teams" >
-      {{#members}}
-      <li>{{name}}</li>
-      {{/members}}
-    </ul>
-  </div>
-  {{/list}}
-  <button class="btn-default">save</button>
+    {{#list}}
+    <div class="team">
+      <h3>{{name}}</h3>
+      <ul class="teams" >
+        {{#members}}
+        <li>{{name}}</li>
+        {{/members}}
+      </ul>
+    </div>
+    {{/list}}
+    <div>
+      <button class="btn-default">save</button>
+    </div>
   </div>
 </div>
