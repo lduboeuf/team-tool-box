@@ -1,13 +1,8 @@
 <div>
   <header>
   <form>
-    <label for="team-list">within:</label>
-    <select class="team-list" name="team-list">
-      {{#teams}}
-      <option value="{{id}}">{{name}}</option>
-      {{/teams}}
-    </select>
-    <label for="nb">find:</label>
+
+    <label for="nb">find:</label><br/>
       <select id="nb">
           <option value="1">1</option>
           <option value="2">2</option>
@@ -18,7 +13,6 @@
           <option value="7">7</option>
           <option value="8">8</option>
       </select>
-      <input type="submit" name="ok" value="ok" class="button btn-default"/>
       <div class="radio-group">
 
           <input type="radio" name="opt" id="gen_teams" checked="checked"/>
@@ -26,6 +20,14 @@
           <input type="radio" name="opt" id="gen_members"/>
         <label for="gen_members">members</label>
       </div>
+      <label for="team-list">within:</label>
+      <select class="team-list" name="team-list">
+        {{#teams}}
+        <option value="{{id}}">{{name}}</option>
+        {{/teams}}
+      </select>
+      <input type="submit" name="ok" value="ok" class="button btn-default"/>
+
 
   </form>
 </header>
@@ -40,6 +42,6 @@
     </ul>
   </div>
   {{/list}}
-    <!-- <button class="btn-default">save</button> -->
+  <button class="btn-default">save</button>
   </div>
 </div>

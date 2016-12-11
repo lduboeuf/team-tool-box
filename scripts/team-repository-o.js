@@ -3,10 +3,17 @@
 
     var STORE_NAME = 'ttb';
     //localStorage.clear();
-    var data = fetch() || { last_member_id: 0, last_team_id: 0,  teams : [] };
+    var data = fetch() || { last_member_id: 0, last_team_id: 0, last_archive_id:0,  teams : [], archives: [] };
+
+    //data.archives = null;
+    //archive patch
+    if (!data.archives){
+      data.archives= [];
+      data.last_archive_id=0;
+    }
 
     function store(){
-        var str = JSON.stringify(data,['last_member_id','last_team_id','teams','members','name','id','description']);
+        var str = JSON.stringify(data,['last_member_id','last_team_id','last_archive_id','teams','members','name','id','archives','description']);
         localStorage.setItem(STORE_NAME, str);
     }
 
@@ -64,6 +71,21 @@
       team.id = data.last_team_id;
       data.teams.push(team);
       store();
+    }
+
+    TeamRepository.addArchive = function(archive){
+      data.last_archive_id++;
+      archive.id = data.last_archive_id;
+
+      data.archives.push(archive);
+      store();
+    }
+
+    TeamRepository.findArchives =function(){
+      return data.archives;
+    }
+    TeamRepository.findArchive =function(archiveId){
+      return findById(data.archives,archiveId);
     }
 
     TeamRepository.findMember = function(memberId){

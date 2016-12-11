@@ -48,6 +48,8 @@ body.team-list-details    > section#team-list-details,
 body.team-add    > section#team-add,
 body.team-member-add    > section#team-member-add,
 body.archive-save    > section#archive-save,
+body.archive-list    > section#archive-list,
+body.archive-details    > section#archive-details,
 body.team-member-details > section#team-member-details { display:block; }
 
 /*header*/
@@ -60,6 +62,11 @@ body> header {
 }
 table td{
   padding:0;
+}
+
+a {
+  text-decoration: none;
+  color: #4078c0;
 }
 
 body .brand {
@@ -76,6 +83,9 @@ body .brand {
   display: block;
 }
 
+#archive-save .team-list{
+  font-size: 0.7em;
+}
 
 
 ul.topnav {
@@ -207,7 +217,7 @@ button, input[type=submit], input[type=button]:hover {
 }
 
 .radio-group {
-  display: block;
+  display: inline-block;;
   margin:0;
   font-size:0.9em;
 }
@@ -261,7 +271,7 @@ section header {
   margin-bottom:20px;
   padding:0;
 }
-div.team h3{
+div.team h3, .header-tbl{
   margin:0;
   padding:12px;
   background-color: #E7E7E7;
@@ -285,7 +295,8 @@ section ul li {
 section ul li a {
     display: block;
     text-decoration: none;
-    color: #605D5D;
+    /*color: #605D5D;*/
+    color: #4078c0;
 
 }
 

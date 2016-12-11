@@ -104,21 +104,18 @@ app.page("home", function()
         var output = mustache(tpl, { list: teams} );
         currentOutput = teams;
         olist.innerHTML = output;
-        // var btnSave = olist.querySelector('button');
-        // btnSave.onclick = function(){
-        //   if (currentOutput){
-        //     app("archive-save", currentOutput);
-        //   }
-        // }
+        var btnSave = olist.querySelector('button');
+        btnSave.onclick = function(){
+          if (currentOutput){
+            app("archive-save", currentOutput);
+          }
+        }
     }
 
     //empty tpl by default
     olist.innerHTML = null;
 
 
-    //gen_teams.onclick = exec;
-    //gen_members.onclick = exec;
-    //oSelect.onchange = exec;
     okBtn.onclick = function(e){
       e.preventDefault();
       exec();

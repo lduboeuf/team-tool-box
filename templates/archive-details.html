@@ -1,0 +1,21 @@
+<div>
+
+  <header>
+    <h2><a href="javascript:void(0);" onclick="history.back();" class="link-home">&#8592;</a>Archive "{{name}}"</h2>
+
+  </header>
+
+  <div class="team-list">
+    <span>description:</span>{{description}}
+    {{#teams}}
+    <div class="team">
+      <h3>{{name}}</h3>
+      <ul class="teams" >
+        {{#members}}
+        <li>{{name}}</li>
+        {{/members}}
+      </ul>
+    </div>
+    {{/teams}}
+  </div>
+</div>
