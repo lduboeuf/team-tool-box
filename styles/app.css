@@ -9,7 +9,7 @@ body {
 h2 { font-size: 1.10em; margin-top: 0;}
 h3 { font-size: 1em; }
 
-
+/*alert box*/
 .alert-info {
   margin: 10px;
   display:none;
@@ -51,6 +51,19 @@ body.archive-save    > section#archive-save,
 body.archive-list    > section#archive-list,
 body.archive-details    > section#archive-details,
 body.team-member-details > section#team-member-details { display:block; }
+
+/* nav highlightion rules */
+body.about #menu a[href="#about"],
+body.team-list #menu a[href="#team-list"],
+body.team-list-details #menu a[href="#team-list"],
+body.team-add #menu a[href="#team-list"],
+body.team-member-add #menu a[href="#team-list"],
+body.team-member-details #menu a[href="#team-list"],
+body.archive-list  #menu a[href="#archive-list "],
+body.archive-save  #menu a[href="#archive-list "],
+body.archive-details  #menu a[href="#archive-list "],
+body.home #menu a[href="#home"] { background-color: #555; }
+
 
 /*header*/
 body> header {

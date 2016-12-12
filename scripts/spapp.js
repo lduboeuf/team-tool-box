@@ -61,8 +61,20 @@
       }
     }
     document.body.classList.add(currentPageName = pageName); // set new page class
-    if($currentPage = $page)
+
+    if($currentPage = $page){
+
       document.dispatchEvent(new CustomEvent('page.shown', {'currentPage' : currentPageName}));
+      //update url location if not
+      var url = '#' + currentPageName;
+      if (param)
+        url += ':' + param;
+
+    //  var url = '#' + currentPageName + ':';
+      if (location.hash!=="" && location.hash!==url){
+        history.pushState(null, null, "#" + pageName);
+      }
+    }
       //$currentPage.trigger("page.shown",currentPageName);
   }
 
