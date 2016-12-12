@@ -1,0 +1,23 @@
+<div>
+  <h3>Save output</h3>
+  <form>
+    <div class="form-group">
+      <input name="name" type="text" placeholder="archive name" required="required"/>
+      <textarea name="description" placeholder="description"></textarea>
+      <input type="submit" name="add-member" value="save" class="button btn-default"/>
+    </div>
+  </form>
+  <br/>
+  <div class="team-list">
+    {{#list}}
+    <div class="team">
+      <h3>{{name}}</h3>
+      <ul class="teams" >
+        {{#members}}
+        <li>{{name}}</li>
+        {{/members}}
+      </ul>
+    </div>
+    {{/list}}
+  </div>
+</div>

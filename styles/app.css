@@ -2,9 +2,11 @@
 body {
   margin:0;
   font-family: Verdana,sans-serif;
+  background-color: #F5F5F5;
+  font-size: 14px;
 }
 
-h2 { font-size: 1.17em; }
+h2 { font-size: 1.10em; margin-top: 0;}
 h3 { font-size: 1em; }
 
 
@@ -42,16 +44,29 @@ body > section {
 body.about           > section#about,
 body.home    > section#home,
 body.team-list    > section#team-list,
+body.team-list-details    > section#team-list-details,
 body.team-add    > section#team-add,
+body.team-member-add    > section#team-member-add,
 body.archive-save    > section#archive-save,
+body.archive-list    > section#archive-list,
+body.archive-details    > section#archive-details,
 body.team-member-details > section#team-member-details { display:block; }
 
 /*header*/
-body header {
+body> header {
   background-color: #333;
   color: #f2f2f2;
+  box-shadow: 0px 5px 8px #ccc;
   top:0;
   width: 100%;
+}
+table td{
+  padding:0;
+}
+
+a {
+  text-decoration: none;
+  color: #4078c0;
 }
 
 body .brand {
@@ -64,7 +79,13 @@ body .brand {
   font-weight: bold;
   color: #f2f2f2;
 }
+.brand span{
+  display: block;
+}
 
+#archive-save .team-list{
+  font-size: 0.7em;
+}
 
 
 ul.topnav {
@@ -87,12 +108,16 @@ ul.topnav li a {
   padding: 14px 16px;
   text-decoration: none;
   transition: 0.3s;
-  /*font-size: 17px;*/
+
 }
 
 ul.topnav li a:hover {background-color: #555;}
 ul.topnav li a.selected {background-color: #555;}
-ul.topnav li.icon {display: none;}
+ul.topnav li.icon {
+  display: none;
+  font-size: 1.2em;
+}
+
 
 @media screen and (max-width:680px) {
   ul.topnav {
@@ -141,16 +166,34 @@ ul.topnav li.icon {display: none;}
   border-radius: 4px;
   padding:8px;
   box-shadow: 1px 1px 0px #dbdbdb;
+  background-color: #fff;
 }
+
+#teams-result div{
+  padding-top:12px;
+}
+
+#team-list-details header{
+  display:flex;
+  justify-content: space-between;
+}
+/*#team-list-details header div:first-child{
+  margin-right: auto;
+}
+#team-list-details header div:last-child{
+  margin-left: auto;
+}*/
+
 
 select{
   display: inline-block;
-  padding: 8px;
+  padding: 7px;
   background-color: #fff;
   border: 1px solid #D1D1D1;
   border-radius: 4px;
   box-shadow: none;
   box-sizing: border-box;
+  font-size: 0.9em;
 }
 
 input[type=text], input[type=url], input[type=email], input[type=password], input[type=tel] {
@@ -183,10 +226,11 @@ button, input[type=submit], input[type=button]:hover {
 }
 
 .radio-group {
-  display: inline-block;
+  display: inline-block;;
   margin:0;
+  font-size:0.9em;
 }
-
+/*
 .radio-group input {
   display: none;
 }
@@ -195,11 +239,11 @@ button, input[type=submit], input[type=button]:hover {
   display: inline-block;
   border-radius: 2px;
   background-color: #fff;
-  font-weight: bold;
+  font-size:0.9em;
   box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.08);
   padding: 8px 2px;
-  border: 0;
   border: 1px solid rgba(0, 0, 0, 0.2);
+
 }
 
 .radio-group label:hover {
@@ -217,7 +261,7 @@ button, input[type=submit], input[type=button]:hover {
 
 .radio-group label:last-of-type {
   border-radius: 0 4px 4px 0;
-}
+}*/
 
 textarea{
   color: #5f5f5f;
@@ -232,11 +276,24 @@ textarea{
   display:block;
 }
 
+section header {
+  margin-bottom:20px;
+  padding:0;
+}
+div.team h3, .header-tbl{
+  margin:0;
+  padding:12px;
+  background-color: #E7E7E7;
+  border: 1px solid #ddd;
+  border-bottom: 0;
+}
 
 section ul {
+    margin: 0;
     list-style-type: none;
     padding: 0;
     border: 1px solid #ddd;
+    background-color: #fff;
 }
 
 section ul li {
@@ -247,7 +304,8 @@ section ul li {
 section ul li a {
     display: block;
     text-decoration: none;
-    color: #605D5D;
+    /*color: #605D5D;*/
+    color: #4078c0;
 
 }
 

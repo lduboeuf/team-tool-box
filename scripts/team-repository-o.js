@@ -1,20 +1,37 @@
 //TODO object in memory
 (function(window){
 
-    var STORE_NAME = 'peoples';
-    var peoples = fetch() || [];
+    var STORE_NAME = 'ttb';
+    //localStorage.clear();
+    var data = fetch() || { last_member_id: 0, last_team_id: 0, last_archive_id:0,  teams : [], archives: [] };
 
+    //data.archives = null;
+    //archive patch
+    if (!data.archives){
+      data.archives= [];
+      data.last_archive_id=0;
+    }
 
     function store(){
-       console.log(peoples[0]);
-        var str = JSON.stringify(peoples, ['id','name']);
+        var str = JSON.stringify(data,['last_member_id','last_team_id','last_archive_id','teams','members','name','id','archives','description']);
         localStorage.setItem(STORE_NAME, str);
     }
 
     function fetch(){
-      var peoplesStr = localStorage.getItem(STORE_NAME);
-      return JSON.parse(peoplesStr);
+      var teamsStr = localStorage.getItem(STORE_NAME);
+      return JSON.parse(teamsStr);
     }
+
+    function findById(collection, id){
+      for (var i = 0; i < collection.length; i++) {
+        if (collection[i].id === id) {
+          return collection[i];
+        }
+      }
+      return null;
+    }
+
+
 
     function TeamRepository(){
       console.log('TeamRepo called');
@@ -22,56 +39,116 @@
     }
 
     TeamRepository.findAll = function(){
-      return peoples;
+      return data.teams;
     }
 
     TeamRepository.findById = function(id){
-      var people = null;
-      for (var i=0; i < peoples.length; i++){
-        if (peoples[i].id === id){
-            people = peoples[i];
-            break;
-        }
-
-      }
-      return people;
+      return findById(data.teams, id);
     }
 
 
 
 
-    TeamRepository.remove = function(id){
-        for (var i=0; i < peoples.length; i++){
-            if (peoples[i].id === id){
-                peoples.splice(i, 1);
+    TeamRepository.removeMember = function(memberId){
+
+      for (var i=0; i < data.teams.length; i++){
+        var members = data.teams[i].members;
+        for (var i=0; i < members.length; i++){
+            if (members[i].id === memberId){
+                members.splice(i, 1);
                 break;
             }
         }
 
-        store();
+      }
+
+      store();
     }
 
-
-    TeamRepository.save = function(people){
+    TeamRepository.addTeam = function(team){
       //add mode
-        if (typeof people.id == 'undefined'){
-            var id = 1;
-            if(peoples.length>0){
-                var lastElement = peoples[peoples.length-1];
-                if (typeof lastElement.id != 'undefined'){
-                    id = lastElement.id + 1;
-                }
+      data.last_team_id++;
+      team.id = data.last_team_id;
+      data.teams.push(team);
+      store();
+    }
 
-            }
-            people.id = id;
-            peoples.push(people);
-        }else { //update mode
-          var people = TeamRepository.findById(people.id);
-          if (people){
-            people.name = people.name;
-          } //TODO exception
+    TeamRepository.removeTeam = function(teamId){
+      for (var i=0; i < data.teams.length; i++){
+        var team = data.teams[i];
+        if (team.id === teamId){
+            data.teams.splice(i, 1);
+            break;
         }
-        store();
+      }
+
+      store();
+    }
+
+    TeamRepository.addArchive = function(archive){
+      data.last_archive_id++;
+      archive.id = data.last_archive_id;
+
+      data.archives.push(archive);
+      store();
+    }
+
+    TeamRepository.findArchives =function(){
+      return data.archives;
+    }
+    TeamRepository.findArchive =function(archiveId){
+      return findById(data.archives,archiveId);
+    }
+
+    TeamRepository.findMember = function(memberId){
+      for (var i=0; i < data.teams.length; i++){
+        var member = findById(data.teams[i].members, memberId );
+        if (member){
+          return member;
+        }
+      }
+      //not found
+      return null;
+    }
+
+    TeamRepository.addMember = function(teamId, member){
+      //add mode
+      var team = findById(data.teams, teamId);
+      if (!team){
+        throw 'gloups, team does not exist';
+      }
+
+      if (!team.members){
+        team.members = [];
+      }
+
+      var members = team.members;
+      data.last_member_id++;
+      member.id = data.last_member_id;
+      members.push(member);
+
+
+      store();
+    }
+
+    TeamRepository.save = store;
+
+
+
+    TeamRepository.updateMember = function(teamId, member){
+
+      var team = findById(teamId);
+      if (!team){
+        throw 'gloups, team does not exist';
+      }
+
+      var member = findById(team.members, id);
+      if (member){
+        member.name = member.name;
+      }
+      //TODO exception
+
+      store();
     }
 
     window.TeamRepository = TeamRepository;

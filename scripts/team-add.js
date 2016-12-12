@@ -2,14 +2,14 @@
 
 app.page("team-add", function()
 {
-  var nameInput = document.querySelector('form input[name="member-name"]');
-  var submitBtn = document.querySelector('form input[name="add-member"]');
+  var nameInput = document.querySelector('#team-add form input[name="name"]');
+  var submitBtn = document.querySelector('#team-add form input[name="add"]');
 
 
   submitBtn.onclick = function(e){
     e.preventDefault();
     if (nameInput.value.length>0){
-      TeamRepository.save({ "name": nameInput.value});
+      TeamRepository.addTeam({ "name": nameInput.value});
 
       history.back();
 
@@ -21,6 +21,7 @@ app.page("team-add", function()
   }
 
   return function(params) {
-    //nothing to handle here
+
+    nameInput.value = "";
   }
 });

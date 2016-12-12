@@ -1,0 +1,19 @@
+<div>
+  <header>
+    <h2><a href="javascript:void(0);" onclick="history.back();" class="link-home">&#8592;</a>Team list</h2>
+  </header>
+  <div>
+    <div class="header-tbl">
+      <span>+</span><a href="#team-add" class="add-link"> Add a team</a>
+    </div>
+    <ul class="team-list" >
+      {{#teams}}
+      <li>
+          <a href="#team-list-details:{{id}}">
+            {{name}}
+          </a>
+      </li>
+      {{/teams}}
+    </ul>
+  </div>
+</div>

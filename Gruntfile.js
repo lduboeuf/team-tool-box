@@ -72,7 +72,7 @@ module.exports = function(grunt) {
           src: [
             '*.{ico,png,txt}',
             '*.html',
-            'tpl/{,*/}*.html',
+            'templates/{,*/}*.html',
             'images/{,*/}*.{webp}',
             'fonts/*'
           ]
@@ -93,7 +93,7 @@ module.exports = function(grunt) {
         files: [{
           expand: true,
           cwd: '<%= appConfig.dist %>',
-          src: ['index.html','tpl/*.html'],
+          src: ['index.html','templates/*.html'],
           dest:'<%= appConfig.dist %>',
         }]
       }
