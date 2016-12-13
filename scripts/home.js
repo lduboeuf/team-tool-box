@@ -19,7 +19,18 @@ app.page("home", function()
   var exec = function(){
 
     var teamId = parseInt(teamList.value);
-    var team = TeamRepository.findById(teamId);
+    var team = null;
+    //special case for all teams
+    if (teamId==-1){
+      team = {members: []};
+      var teams = TeamRepository.findAll();
+      for (var i = 0; i < teams.length;i++){
+        team.members.push.apply(team.members, teams[i].members);
+      }
+
+    }else{
+     team = TeamRepository.findById(teamId);
+    }
 
     var members = team.members;
     if (members.length==0){

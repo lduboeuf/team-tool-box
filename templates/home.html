@@ -21,6 +21,7 @@
       </div>
       <label for="team-list">within:</label>
       <select class="team-list" name="team-list">
+        <option value="-1">--all teams--</option>
         {{#teams}}
         <option value="{{id}}">{{name}}</option>
         {{/teams}}
