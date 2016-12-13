@@ -1,8 +1,10 @@
 #Team Tool Box
+*Team Tool Box is a standalone offline mini js app*
+It helps you :
  - build teams randomly
  - choose randomly members from a Team
 
- - Team Tool Box is a standalone offline mini js app
+
 ##what is inside
  - use tiny MVC library borrowed and turned into native js from ( https://github.com/c-smile/spapp )
  - use tiny templating engine (https://github.com/aishikaty/tiny-mustache)

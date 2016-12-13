@@ -121,14 +121,14 @@ ul.topnav li a {
   padding: 14px 16px;
   text-decoration: none;
   transition: 0.3s;
-
+  font-size: 1.2em;
 }
 
 ul.topnav li a:hover {background-color: #555;}
 ul.topnav li a.selected {background-color: #555;}
 ul.topnav li.icon {
   display: none;
-  font-size: 1.2em;
+
 }
 
 
@@ -165,6 +165,9 @@ ul.topnav li.icon {
     display: block;
     text-align: left;
   }
+
+
+
 }
 .link-home {
   color:#000;
@@ -212,7 +215,6 @@ select{
 input[type=text], input[type=url], input[type=email], input[type=password], input[type=tel] {
   color: #5f5f5f;
   box-sizing: border-box;
-  width: 240px;
   box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.08);
   padding: 8px;
   border: 1px solid #dbdbdb;
@@ -226,6 +228,7 @@ input[type=text], input[type=url], input[type=email], input[type=password], inpu
 
 button, input[type=submit],input[type=button]  {
   display: inline-block;
+  margin-top:12px;
   border-radius: 2px;
   color: #ffffff;
   font-weight: bold;
@@ -239,42 +242,11 @@ button, input[type=submit], input[type=button]:hover {
 }
 
 .radio-group {
-  display: inline-block;;
-  margin:0;
-  font-size:0.9em;
-}
-/*
-.radio-group input {
-  display: none;
-}
-
-.radio-group label {
   display: inline-block;
-  border-radius: 2px;
-  background-color: #fff;
+  margin:0;
+  padding:7px;
   font-size:0.9em;
-  box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.08);
-  padding: 8px 2px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-
 }
-
-.radio-group label:hover {
-	cursor: pointer;
-}
-
-.radio-group input:checked + label {
-  background-color: #6caee0;
-  color: #ffffff;
-}
-
-.radio-group label:first-of-type {
-  border-radius: 4px 0 0 4px;
-}
-
-.radio-group label:last-of-type {
-  border-radius: 0 4px 4px 0;
-}*/
 
 textarea{
   color: #5f5f5f;
@@ -289,6 +261,18 @@ textarea{
   display:block;
 }
 
+/*forms for mobiles*/
+@media screen and (max-width:680px) {
+  input, select, textarea, button {
+    width: 100%;
+  }
+  input[type="radio"] {
+      width: auto;
+  }
+  .radio-group {
+    display: block;
+  }
+}
 section header {
   margin-bottom:20px;
   padding:0;

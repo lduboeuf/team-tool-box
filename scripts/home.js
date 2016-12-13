@@ -133,7 +133,18 @@ app.page("home", function()
       app.alert('alert-info','hello, no members found, you can add members by clicking on the "Team List" menu');
     //  olist.innerHTML = '''<p class="alert-info"> no members found, you can add members by clicking on the "Team List" menu</p>'
     }
+    console.log(params);
+
+
     var output = mustache(tplTeamList, {teams: teams });
     teamList.innerHTML = output;
+
+    //list already saved ?
+    if (params && params.event =='onSavedOutput'){
+      var btnSave = olist.querySelector('button');
+      btnSave.classList.toggle('btn-default');
+      btnSave.onclick = null;
+    }
+
   }
 });

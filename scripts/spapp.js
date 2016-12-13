@@ -24,6 +24,7 @@
   var pageHandlers = {};
 
   var currentPageName = null;
+  var oldPageName = null;
   var $currentPage = null;
   //equivalent of "is" jquery function
   var matches = function(el, selector) {
@@ -60,6 +61,7 @@
             //$currentPage.empty();
       }
     }
+    oldPageName = currentPageName;
     document.body.classList.add(currentPageName = pageName); // set new page class
 
     if($currentPage = $page){
@@ -71,7 +73,7 @@
         url += ':' + param;
 
     //  var url = '#' + currentPageName + ':';
-      if (location.hash!=="" && location.hash!==url){
+      if (location.hash=="" || location.hash!==url){
         history.pushState(null, null, "#" + pageName);
       }
     }
@@ -92,6 +94,9 @@
       show(pageName,param);
   }
 
+  app.back = function(params){
+    app(oldPageName, params);
+  }
   // Registration of page's handler function - scope initializer and controller
   app.page = function(pageName, handler) {
      pageHandlers[pageName] = handler;
