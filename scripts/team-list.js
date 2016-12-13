@@ -2,18 +2,17 @@
   app.page("team-list", function()
   {
 
-    var ulTeamList = document.querySelector('#team-list ul');
+    var $teamList = document.querySelector('#team-list ul');
+    var tplTeamList = $teamList.innerHTML;
 
-    var tplTeamList = ulTeamList.innerHTML;
-
-    ulTeamList.innerHTML=null;
+    $teamList.innerHTML=null;
 
 
     return function(params) {
 
       var teams = TeamRepository.findAll();
       var output = mustache(tplTeamList, { teams: teams} );
-      ulTeamList.innerHTML = output;
+      $teamList.innerHTML = output;
       // var peoples = TeamRepository.findAll();
       //
       // var output = mustache(tpl, { list: peoples} );

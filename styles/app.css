@@ -9,31 +9,6 @@ body {
 h2 { font-size: 1.10em; margin-top: 0;}
 h3 { font-size: 1em; }
 
-/*alert box*/
-.alert-info {
-  margin: 10px;
-  display:none;
-  background-color: #D9EDF7;
-  color:#31708f;
-  border: 1px solid #31708f;
-  border-radius: 4px;
-}
-.alert-closebtn {
-    margin:2px;
-    text-decoration: none;
-    float: right;
-    font-size: 1.2em;
-    font-weight: bold;
-    color: inherit;
-}
-.alert-closebtn:hover{
-  cursor: pointer;
-  color: #000;
-}
-.alert-msg {
-    padding:16px;
-}
-
 /* all sections are off by default */
 body > section {
   margin: 1em;
@@ -128,7 +103,6 @@ ul.topnav li a:hover {background-color: #555;}
 ul.topnav li a.selected {background-color: #555;}
 ul.topnav li.icon {
   display: none;
-
 }
 
 
@@ -174,8 +148,35 @@ ul.topnav li.icon {
   text-decoration: none;
   padding-right: 12px;
 }
+/***end header style**/
 
-/***end menu style**/
+/*alert box*/
+.alert-info {
+  margin: 10px;
+  display:none;
+  background-color: #D9EDF7;
+  color:#31708f;
+  border: 1px solid #31708f;
+  border-radius: 4px;
+}
+.alert-closebtn {
+    margin:2px;
+    text-decoration: none;
+    float: right;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: inherit;
+}
+.alert-closebtn:hover{
+  cursor: pointer;
+  color: #000;
+}
+.alert-msg {
+    padding:16px;
+}
+
+
+/***forms***/
 
 #home form{
   border: 1px solid #dbdbdb;
@@ -193,13 +194,6 @@ ul.topnav li.icon {
   display:flex;
   justify-content: space-between;
 }
-/*#team-list-details header div:first-child{
-  margin-right: auto;
-}
-#team-list-details header div:last-child{
-  margin-left: auto;
-}*/
-
 
 select{
   display: inline-block;
@@ -273,6 +267,8 @@ textarea{
     display: block;
   }
 }
+
+
 section header {
   margin-bottom:20px;
   padding:0;

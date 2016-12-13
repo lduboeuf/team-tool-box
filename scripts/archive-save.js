@@ -30,5 +30,7 @@ app.page("archive-save", function()
     $currentOutput = params;
     var output = mustache(tplTeamList, { list: $currentOutput});
     $teamList.innerHTML = output;
+    $name.value ="";
+    $desc.value="";
   }
 });

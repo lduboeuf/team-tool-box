@@ -2,13 +2,13 @@
   app.page("team-list-details", function()
   {
 
-    var o = document.getElementById('team-list-details');
-    var tpl= o.innerHTML;
+    var $teamListDetails = document.getElementById('team-list-details');
+    var tpl= $teamListDetails.innerHTML;
 
     var currentTeamId = null;
 
     //default is not shown
-    o.innerHTML=null;
+    $teamListDetails.innerHTML=null;
 
     var remove = function(){
       if (confirm('sure you want to remove this team ?')){
@@ -23,9 +23,9 @@
       currentTeamId = parseInt(params);
       var team = TeamRepository.findById(currentTeamId);
       var output = mustache(tpl,  team );
-      o.innerHTML = output;
+      $teamListDetails.innerHTML = output;
 
-      o.querySelector('.remove-link').onclick=remove;
+      $teamListDetails.querySelector('.remove-link').onclick=remove;
 
     }
   });

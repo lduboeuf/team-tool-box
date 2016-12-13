@@ -93,8 +93,6 @@ app.page("home", function()
 
       }
 
-
-
       //any orphans ?
       if (idxs.length>0) {
           //add them to first team and so on
