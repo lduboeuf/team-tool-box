@@ -190,7 +190,7 @@ ul.topnav li.icon {
   padding-top:12px;
 }
 
-#team-list-details header{
+section header{
   display:flex;
   justify-content: space-between;
 }

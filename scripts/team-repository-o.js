@@ -85,6 +85,18 @@
       store();
     }
 
+    TeamRepository.removeArchive = function(archiveId){
+      for (var i=0; i < data.archives.length; i++){
+        var archive = data.archives[i];
+        if (archive.id === archiveId){
+            data.archives.splice(i, 1);
+            break;
+        }
+      }
+
+      store();
+    }
+
     TeamRepository.addArchive = function(archive){
       data.last_archive_id++;
       archive.id = data.last_archive_id;
