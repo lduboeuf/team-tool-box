@@ -14,8 +14,11 @@ app.page("team-member-details", function()
       e.preventDefault();
       //var member = TeamRepository.findMember(parseInt($id.value));
       selectedMember.name = $name.value;
-      TeamRepository.save();
-      history.back();
+      remoteStorage.teams.updateMember(selectedMember).then(function(){
+        history.back();
+      });
+      //TeamRepository.save();
+
       //history.pushState(null, null, "#team-list");
       //app("team-list");
 
@@ -25,9 +28,12 @@ app.page("team-member-details", function()
       e.preventDefault();
       var res = window.confirm("are you sure you want to remove "+ $name.value);
       if (res){
-        TeamRepository.removeMember(parseInt($id.value));
+        //TeamRepository.removeMember(parseInt($id.value));
         //TODO handle error
-        history.back();
+        remoteStorage.teams.removeMember(selectedMember.id).then(function(){
+          history.back();
+        })
+
       }
 
       //history.pushState(null, null, "#team-list");
@@ -36,10 +42,17 @@ app.page("team-member-details", function()
 
     // present the view - load data and show:
     return function(params) {
-      var id = parseInt(params);
-      selectedMember = TeamRepository.findMember(id);
+      //var id = parseInt(params);
+      remoteStorage.teams.findMember(params).then(function(member){
+        if (member){
+          selectedMember = member;
+          $id.value = selectedMember.id;
+          $name.value = selectedMember.name;
+        }
+      })
 
-      $id.value = selectedMember.id;
-      $name.value = selectedMember.name;
+      //selectedMember = TeamRepository.findMember(id);
+
+
     }
   });

@@ -9,13 +9,18 @@ app.page("team-add", function()
   $submitBtn.onclick = function(e){
     e.preventDefault();
     if ($nameInput.value.length>0){
-      TeamRepository.addTeam({ "name": $nameInput.value});
-
-      history.back();
-
-    }else {
-      //handle error msg
+      remoteStorage.teams.store({ "name": $nameInput.value}).then(function(){
+        history.back();
+      });
     }
+    // if ($nameInput.value.length>0){
+    //   TeamRepository.addTeam({ "name": $nameInput.value});
+    //
+    //   history.back();
+    //
+    // }else {
+    //   //handle error msg
+    // }
 
 
   }

@@ -10,9 +10,13 @@ app.page("team-member-add", function()
   submitBtn.onclick = function(e){
     e.preventDefault();
     if (nameInput.value.length>0){
-      TeamRepository.addMember(selectedTeamId, { name: nameInput.value});
+      remoteStorage.teams.addMember(selectedTeamId, { name: nameInput.value}).then(
+        function(){
+          history.back();
+      });
+      //TeamRepository.addMember(selectedTeamId, { name: nameInput.value});
 
-      history.back();
+
 
     }else {
       //handle error msg
@@ -22,7 +26,7 @@ app.page("team-member-add", function()
   }
 
   return function(params) {
-    selectedTeamId = parseInt(params);
+    selectedTeamId = params;
     nameInput.value = "";
   }
 });

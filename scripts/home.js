@@ -10,8 +10,8 @@ app.page("home", function()
   var okBtn = section.querySelector('input[type="submit"]');
 
   //store template definition
-  var tpl = olist.innerHTML;
-  var tplTeamList = teamList.innerHTML;
+  var tpl = doT.template(teamList.innerHTML);
+  //var tplTeamList = teamList.innerHTML;
 
   var currentOutput = null;
 
@@ -136,17 +136,27 @@ app.page("home", function()
 
 
   return function(params) {
-    console.log('kikou');
     var teams = TeamRepository.findAll();
-    if (teams.length==0){
-      app.alert('alert-info','hello, no members found, you can add members by clicking on the "Team List" menu');
-    //  olist.innerHTML = '''<p class="alert-info"> no members found, you can add members by clicking on the "Team List" menu</p>'
-    }
-    console.log(params);
+    remoteStorage.teams.findAll().then(
+      function(teams){
+
+        if (teams.length==0){
+          app.alert('alert-info','hello, no members found, you can add members by clicking on the "Team List" menu');
+        //  olist.innerHTML = '''<p class="alert-info"> no members found, you can add members by clicking on the "Team List" menu</p>'
+        }
+
+        teamList.innerHTML = tpl(teams);;
+        /*
+        var output = mustache(tplTeamList,{data: teams });
+        teamList.innerHTML = output;
+        */
+
+      }
+    );
 
 
-    var output = mustache(tplTeamList, {teams: teams });
-    teamList.innerHTML = output;
+
+
 
     //list already saved ?
     if (params && params.event =='onSavedOutput'){

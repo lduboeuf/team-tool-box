@@ -3,7 +3,8 @@
   {
 
     var $teamListDetails = document.getElementById('team-list-details');
-    var tpl= $teamListDetails.innerHTML;
+    var tpl = doT.template($teamListDetails.innerHTML);
+    //var tpl= $teamListDetails.innerHTML;
 
     var currentTeamId = null;
 
@@ -12,20 +13,29 @@
 
     var remove = function(){
       if (confirm('sure you want to remove this team ?')){
-        TeamRepository.removeTeam(currentTeamId);
-        history.back();
+        //TeamRepository.removeTeam(currentTeamId);
+        remoteStorage.teams.remove(currentTeamId).then(function(){
+          history.back();
+        })
+
       }
       return false;
     }
 
 
     return function(params) {
-      currentTeamId = parseInt(params);
-      var team = TeamRepository.findById(currentTeamId);
-      var output = mustache(tpl,  team );
-      $teamListDetails.innerHTML = output;
+      currentTeamId = params;
+      //var team = TeamRepository.findById(currentTeamId);
+      remoteStorage.teams.find(currentTeamId).then(
+        function(team){
+          $teamListDetails.innerHTML = tpl(team);
+          $teamListDetails.querySelector('.remove-link').onclick=remove;
+        }
+      )
 
-      $teamListDetails.querySelector('.remove-link').onclick=remove;
+
+
+
 
     }
   });

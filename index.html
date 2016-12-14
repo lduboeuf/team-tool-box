@@ -5,8 +5,13 @@
     <title>Team Tool Box</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- build:js scripts/vendor.js -->
+    <script src="scripts/remotestorage.min.js"></script>
+    <script src="scripts/doT.min.js"></script>
+    <!-- endbuild -->
 
     <!-- build:js scripts/scripts.js -->
+    <script src="scripts/remotestorage-ttb.js"></script>
     <script type="text/javascript" src="scripts/mustache.min.js"></script>
     <script type="text/javascript" src="scripts/spapp.js"></script>
     <script type="text/javascript" src="scripts/team-repository-o.js"></script>
@@ -97,6 +102,36 @@
 
 
     app.start();
+
+    //remotestorage
+
+    remoteStorage.access.claim('teams', 'rw');
+    remoteStorage.caching.enable('teams/');
+    //remoteStorage.local.reset();
+    remoteStorage.displayWidget();
+
+/*
+    var team = {name:'team1', members: [{ id: 'kikou', name: 'kikouzone'}]};
+
+    remoteStorage.teams.store(team).then(
+      function(team){
+        console.log('Got team: ', team);
+      }
+    );
+
+    remoteStorage.teams.findAll().then(
+      function(teams){
+        console.log('Got teams: ', teams);
+      }
+    );
+
+    remoteStorage.teams.find('X127v').then(
+      function(team){
+        console.log('cool got it:', team );
+      }
+    )
+    */
+
 
 
   </script>
