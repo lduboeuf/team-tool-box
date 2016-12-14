@@ -3,12 +3,13 @@
 module.exports = function(grunt) {
 
   // load grunt tasks based on dependencies in package.json
-    require('load-grunt-tasks')(grunt);
-
+  require('load-grunt-tasks')(grunt);
+  var outputDir = 'dist/dev';
+  if (grunt.option('rev')=='prod') outputDir = 'dist';
    // Configurable paths for the application
   var appConfig = {
     app: '',
-    dist: 'dist'
+    dist: outputDir
   };
 
 

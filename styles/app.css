@@ -96,7 +96,7 @@ ul.topnav li a {
   padding: 14px 16px;
   text-decoration: none;
   transition: 0.3s;
-  font-size: 1.2em;
+  /*font-size: 1.2em;*/
 }
 
 ul.topnav li a:hover {background-color: #555;}
