@@ -6,7 +6,7 @@ It helps you to:
 
 ##what is inside
  - use tiny MVC library borrowed and turned into native js from ( https://github.com/c-smile/spapp )
- - use tiny templating engine (https://github.com/aishikaty/tiny-mustache)
+ - use tiny templating engine (https://github.com/olado/doT)
  - use of `localStorage`
 
 ##usage
@@ -16,7 +16,8 @@ It helps you to:
   - need nodejs, grunt `npm install -g grunt`
 ```
 npm install
-grunt # will output app in dist folder
+grunt # will output app in dist/dev folder
+grunt --rev=prod #will output in dist folder
 ```
 
  work in progress...
