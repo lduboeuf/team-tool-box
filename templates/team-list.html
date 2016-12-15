@@ -7,13 +7,13 @@
       <span>+</span><a href="#team-add" class="add-link"> Add a team</a>
     </div>
     <ul class="team-list" >
-      {{#teams}}
+      {{ for(var prop in it) { }}
       <li>
-          <a href="#team-list-details:{{id}}">
-            {{name}}
+          <a href="#team-list-details:{{=it[prop].id}}">
+            {{=it[prop].name}}
           </a>
       </li>
-      {{/teams}}
+      {{ } }}
     </ul>
   </div>
 </div>

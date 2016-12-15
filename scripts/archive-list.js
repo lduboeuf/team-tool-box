@@ -2,8 +2,7 @@ app.page("archive-list", function()
 {
 
   var $archiveList = document.querySelector('#archive-list .archive-list');
-
-  var tpl= $archiveList.innerHTML;
+  var tpl = doT.template($archiveList.innerHTML);
 
   $archiveList.innerHTML=null;
 
@@ -11,8 +10,7 @@ app.page("archive-list", function()
   return function(params) {
 
     var archives = TeamRepository.findArchives();
-    var output = mustache(tpl, { archives: archives} );
-    $archiveList.innerHTML = output;
-    
+    $archiveList.innerHTML = tpl(archives);
+
   }
 });

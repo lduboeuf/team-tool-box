@@ -4,13 +4,13 @@
   </header>
   <div>
   <ul class="archive-list" >
-    {{#archives}}
+    {{~it :archive:index}}
     <li>
-        <a href="#archive-details:{{id}}">
-          {{name}}
+        <a href="#archive-details:{{=archive.id}}">
+          {{=archive.name}}
         </a>
     </li>
-    {{/archives}}
+    {{~}}
   </ul>
 </div>
 </div>

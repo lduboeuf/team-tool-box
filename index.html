@@ -5,9 +5,10 @@
     <title>Team Tool Box</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <!-- build:js scripts/vendors.js -->
+    <script type="text/javascript" src="scripts/vendors/doT.min.js"></script>
+    <!-- endbuild -->
     <!-- build:js scripts/scripts.js -->
-    <script type="text/javascript" src="scripts/mustache.min.js"></script>
     <script type="text/javascript" src="scripts/spapp.js"></script>
     <script type="text/javascript" src="scripts/team-repository-o.js"></script>
     <script type="text/javascript" src="scripts/app-utils.js"></script>
@@ -27,7 +28,7 @@
     <!-- endbuild -->
   </head>
 <body>
-  <!--[if lt IE 9]> <p class="browserupgrade">You are using an <strong>outdated</strong> browser. And it is realy hard to code with them... Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p> <![endif]-->
+  <!--[if lt IE 10]> <p class="browserupgrade"><strong>Ohlala, so sorry!</strong>, developping apps for old browser is so painfull and time consuming that i choosed not to support them ... Please <a href="http://browsehappy.com/">upgrade your browser</a> .</p> <![endif]-->
   <header>
     <div class="brand">
       <a href="#home">Team Tool Box</a>
@@ -98,7 +99,7 @@
 
     app.start();
 
-
+    //document.writeln(localStorage.getItem('ttb'));
   </script>
 </body>
 </html>

@@ -3,7 +3,7 @@
   {
 
     var $teamListDetails = document.getElementById('team-list-details');
-    var tpl= $teamListDetails.innerHTML;
+    var tpl = doT.template($teamListDetails.innerHTML);
 
     var currentTeamId = null;
 
@@ -20,10 +20,9 @@
 
 
     return function(params) {
-      currentTeamId = parseInt(params);
+      currentTeamId = params;
       var team = TeamRepository.findById(currentTeamId);
-      var output = mustache(tpl,  team );
-      $teamListDetails.innerHTML = output;
+      $teamListDetails.innerHTML = tpl(team);
 
       $teamListDetails.querySelector('.remove-link').onclick=remove;
 

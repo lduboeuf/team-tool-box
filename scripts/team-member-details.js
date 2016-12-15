@@ -25,7 +25,8 @@ app.page("team-member-details", function()
       e.preventDefault();
       var res = window.confirm("are you sure you want to remove "+ $name.value);
       if (res){
-        TeamRepository.removeMember(parseInt($id.value));
+        TeamRepository.removeMember($id.value);
+        TeamRepository.save();
         //TODO handle error
         history.back();
       }
@@ -36,7 +37,7 @@ app.page("team-member-details", function()
 
     // present the view - load data and show:
     return function(params) {
-      var id = parseInt(params);
+      var id = params;
       selectedMember = TeamRepository.findMember(id);
 
       $id.value = selectedMember.id;

@@ -22,9 +22,10 @@
       <label for="team-list">within:</label>
       <select class="team-list" name="team-list">
         <option value="-1">--all teams--</option>
-        {{#teams}}
-        <option value="{{id}}">{{name}}</option>
-        {{/teams}}
+        {{~it :team:index}}
+          <option value="{{=team.id}}">{{=team.name}}</option>
+        {{~}}
+
       </select>
       <input type="submit" name="ok" value="generate" class="button btn-default"/>
 
@@ -32,18 +33,18 @@
   </form>
 </header>
   <div id="teams-result">
-    {{#list}}
+    {{~it :team:idx}}
     <div class="team">
-      <h3>{{name}}</h3>
+      <h3>{{=team.name}}</h3>
       <ul class="teams" >
-        {{#members}}
-        <li>{{name}}</li>
-        {{/members}}
+        {{~team.members :member:idxm}}
+          <li>{{=member.name}}</li>
+        {{~}}
       </ul>
     </div>
-    {{/list}}
+    {{~}}
     <div>
-      <button class="btn-default">save</button>
+      <button class="btn-success">save</button>
     </div>
   </div>
 </div>

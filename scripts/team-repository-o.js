@@ -1,28 +1,37 @@
 //TODO object in memory
 (function(window){
 
-    var STORE_NAME = 'ttb';
+    var TEAM_STORE_REPOSITORY = {name: 'ttb-team', fields:['teams','members','name','id']} ;
+    var ARCHIVE_STORE_REPOSITORY = {name:'ttb-archive', fields: ['archives','teams','members', 'name','id','description']};
     //localStorage.clear();
-    var data = fetch() || { last_member_id: 0, last_team_id: 0, last_archive_id:0,  teams : [], archives: [] };
+    var Teams = fetch(TEAM_STORE_REPOSITORY.name) || { teams : [],  };
+    var Archives = fetch(ARCHIVE_STORE_REPOSITORY.name) || {  archives: [] };
 
-    //data.archives = null;
-    //archive patch
-    if (!data.archives){
-      data.archives= [];
-      data.last_archive_id=0;
+    var ALPHABET = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    var ID_LENGTH = 8;
+
+    var generateUID = function() {
+      var rtn = '';
+      for (var i = 0; i < ID_LENGTH; i++) {
+        rtn += ALPHABET.charAt(Math.floor(Math.random() * ALPHABET.length));
+      }
+      return rtn;
+  }
+
+
+    function store(storage, data){
+        var str = JSON.stringify(data, storage.fields);
+        localStorage.setItem(storage.name, str);
     }
 
-    function store(){
-        var str = JSON.stringify(data,['last_member_id','last_team_id','last_archive_id','teams','members','name','id','archives','description']);
-        localStorage.setItem(STORE_NAME, str);
-    }
-
-    function fetch(){
-      var teamsStr = localStorage.getItem(STORE_NAME);
+    function fetch(storageName){
+      var teamsStr = localStorage.getItem(storageName);
       return JSON.parse(teamsStr);
     }
 
+
     function findById(collection, id){
+      if (!collection) return null;
       for (var i = 0; i < collection.length; i++) {
         if (collection[i].id === id) {
           return collection[i];
@@ -33,88 +42,68 @@
 
 
 
-    function TeamRepository(){
-      console.log('TeamRepo called');
-
-    }
+    function TeamRepository(){}
 
     TeamRepository.findAll = function(){
-      return data.teams;
+      return Teams.teams;
     }
 
     TeamRepository.findById = function(id){
-      return findById(data.teams, id);
+      return findById(Teams.teams, id);
     }
 
 
 
 
-    TeamRepository.removeMember = function(memberId){
 
-      for (var i=0; i < data.teams.length; i++){
-        var members = data.teams[i].members;
-        for (var i=0; i < members.length; i++){
-            if (members[i].id === memberId){
-                members.splice(i, 1);
-                break;
-            }
-        }
-
-      }
-
-      store();
-    }
 
     TeamRepository.addTeam = function(team){
-      //add mode
-      data.last_team_id++;
-      team.id = data.last_team_id;
-      data.teams.push(team);
-      store();
+      team.id = generateUID();
+      team.members = [];
+      Teams.teams.push(team);
+      store(TEAM_STORE_REPOSITORY, Teams);
     }
 
     TeamRepository.removeTeam = function(teamId){
-      for (var i=0; i < data.teams.length; i++){
-        var team = data.teams[i];
+      for (var i=0; i < Teams.teams.length; i++){
+        var team = Teams.teams[i];
         if (team.id === teamId){
-            data.teams.splice(i, 1);
+            Teams.teams.splice(i, 1);
             break;
         }
       }
 
-      store();
+      store(TEAM_STORE_REPOSITORY, Teams);
     }
 
     TeamRepository.removeArchive = function(archiveId){
-      for (var i=0; i < data.archives.length; i++){
-        var archive = data.archives[i];
+      for (var i=0; i < Archives.archives.length; i++){
+        var archive = Archives.archives[i];
         if (archive.id === archiveId){
-            data.archives.splice(i, 1);
+            Archives.archives.splice(i, 1);
             break;
         }
       }
 
-      store();
+      store(ARCHIVE_STORE_REPOSITORY, Archives);
     }
 
     TeamRepository.addArchive = function(archive){
-      data.last_archive_id++;
-      archive.id = data.last_archive_id;
-
-      data.archives.push(archive);
-      store();
+      archive.id = generateUID();
+      Archives.archives.push(archive);
+      store(ARCHIVE_STORE_REPOSITORY, Archives);
     }
 
     TeamRepository.findArchives =function(){
-      return data.archives;
+      return Archives.archives;
     }
     TeamRepository.findArchive =function(archiveId){
-      return findById(data.archives,archiveId);
+      return findById(Archives.archives,archiveId);
     }
 
     TeamRepository.findMember = function(memberId){
-      for (var i=0; i < data.teams.length; i++){
-        var member = findById(data.teams[i].members, memberId );
+      for (var i=0; i < Teams.teams.length; i++){
+        var member = findById(Teams.teams[i].members, memberId );
         if (member){
           return member;
         }
@@ -125,26 +114,40 @@
 
     TeamRepository.addMember = function(teamId, member){
       //add mode
-      var team = findById(data.teams, teamId);
+      var team = findById(Teams.teams, teamId);
       if (!team){
         throw 'gloups, team does not exist';
       }
 
-      if (!team.members){
-        team.members = [];
-      }
 
       var members = team.members;
-      data.last_member_id++;
-      member.id = data.last_member_id;
+      member.id = generateUID();
       members.push(member);
 
 
-      store();
+      store(TEAM_STORE_REPOSITORY, Teams);
     }
 
-    TeamRepository.save = store;
+    TeamRepository.removeMember = function(memberId){
 
+      for (var i=0; i < Teams.teams.length; i++){
+        var members = Teams.teams[i].members;
+        if (members){
+          for (var j=0; j < members.length; j++){
+              if (members[j].id === memberId){
+                  members.splice(j, 1);
+                  break;
+              }
+          }
+        }
+      }
+
+      store(TEAM_STORE_REPOSITORY, Teams);
+    }
+
+    TeamRepository.save = function(){
+      store(TEAM_STORE_REPOSITORY, Teams);
+    }
 
 
     TeamRepository.updateMember = function(teamId, member){
@@ -160,7 +163,7 @@
       }
       //TODO exception
 
-      store();
+      store(TEAM_STORE_REPOSITORY, Teams);
     }
 
     window.TeamRepository = TeamRepository;

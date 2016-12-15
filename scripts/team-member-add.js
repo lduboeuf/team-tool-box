@@ -22,7 +22,7 @@ app.page("team-member-add", function()
   }
 
   return function(params) {
-    selectedTeamId = parseInt(params);
+    selectedTeamId = params;
     nameInput.value = "";
   }
 });

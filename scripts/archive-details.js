@@ -2,7 +2,7 @@ app.page("archive-details", function()
 {
 
   var $section = document.getElementById('archive-details');
-  var tpl= $section.innerHTML;
+  var tpl = doT.template($section.innerHTML);
 
   var currentArchiveId = null;
 
@@ -19,10 +19,9 @@ app.page("archive-details", function()
 
 
   return function(params) {
-    currentArchiveId = parseInt(params);
+    currentArchiveId = params;
     var archive = TeamRepository.findArchive(currentArchiveId);
-    var output = mustache(tpl,  archive );
-    $section.innerHTML = output;
+    $section.innerHTML = tpl(archive);
 
     $section.querySelector('.remove-link').onclick=remove;
 

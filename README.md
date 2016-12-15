@@ -1,6 +1,5 @@
-#Team Tool Box
-*Team Tool Box is a standalone offline mini js app*
-It helps you :
+#Team Tool Box, a sample standalone offline js app
+It helps you to:
  - build teams randomly
  - choose randomly members from a Team
 
@@ -14,7 +13,7 @@ It helps you :
  - open index.html in your favorite browser
 
 ##compressing for production
-  - need nodejs
+  - need nodejs, grunt `npm install -g grunt`
 ```
 npm install
 grunt # will output app in dist folder
