@@ -34,8 +34,64 @@ module.exports = function(grunt) {
       },
       server: '.tmp'
     },
-
-
+    connect: {
+      server: {
+        options: {
+          port: 8000,
+          base: {
+            path: '.',
+            options: {
+              index: 'index.html',
+              maxAge: 300000
+            }
+          }
+        }
+      }
+    },
+    nightwatch: {
+      options: {
+        "src_folders": [
+          "test/e2e"// Where you are storing your Nightwatch e2e tests
+        ],
+        "output_folder": "./test/e2e/reports", // reports (test outcome) output by nightwatch
+        "selenium": { // downloaded by selenium-download module (see readme)
+          "start_process": true, // tells nightwatch to start/stop the selenium process
+          "server_path": "./node_modules/nightwatch/bin/selenium.jar",
+          "host": "127.0.0.1",
+          "port": 4444, // standard selenium port
+          "cli_args": { // chromedriver is downloaded by selenium-download (see readme)
+            "webdriver.gecko.driver" : "./node_modules/nightwatch/bin/geckodriver",
+            "webdriver.chrome.driver" : "./node_modules/nightwatch/bin/chromedriver"
+          }
+        },
+        "test_settings": {
+          "default": {
+            "screenshots": {
+              "enabled": true, // if you want to keep screenshots
+              "path" : "./test/e2e/screenshots/" // save screenshots here
+            },
+            "globals": {
+              "waitForConditionTimeout": 10000 // sometimes internet is slow so wait.
+            },
+            "desiredCapabilities": { // use Chrome as the default browser for tests
+              "browserName": "chrome"
+            }
+          },
+          "chrome": {
+            "desiredCapabilities": {
+              "browserName": "chrome",
+              "javascriptEnabled": true // turn off to test progressive enhancement
+            }
+          },
+          "gecko": {
+            "desiredCapabilities": {
+              "browserName": "gecko",
+              "javascriptEnabled": true // turn off to test progressive enhancement
+            }
+          }
+        }
+      }
+    },
     jshint: {
       options: {
         curly: true,
@@ -116,6 +172,8 @@ module.exports = function(grunt) {
     'htmlmin:dist',
 
   ]);
+
+  grunt.registerTask('test', ['connect', 'nightwatch']);
 
   grunt.registerTask('default', [
     'build'

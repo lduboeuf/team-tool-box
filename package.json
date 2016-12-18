@@ -23,14 +23,19 @@
   },
   "homepage": "https://github.com/lduboeuf/team-tool-box#readme",
   "devDependencies": {
+    "env2": "^2.1.1",
     "grunt": "^1.0.1",
     "grunt-contrib-clean": "^1.0.0",
     "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-connect": "^1.0.2",
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-cssmin": "^1.0.2",
     "grunt-contrib-htmlmin": "^2.0.0",
     "grunt-contrib-uglify": "^2.0.0",
+    "grunt-nightwatch": "^0.5.4",
     "grunt-usemin": "^3.1.1",
-    "load-grunt-tasks": "^3.5.2"
+    "load-grunt-tasks": "^3.5.2",
+    "nightwatch": "^0.9.11",
+    "selenium-download": "^2.0.9"
   }
 }
