@@ -34,8 +34,74 @@ module.exports = function(grunt) {
       },
       server: '.tmp'
     },
+    connect: {
+      server: {
+        options: {
+          port: 8000,
+          base: {
+            path: '.',
+            options: {
+              index: 'index.html',
+              maxAge: 300000
+            }
+          }
+        }
+      }
+    },
+    selenium_standalone: {
+     options: {
+       stopOnExit: true
+     },
+     default: {
+       seleniumVersion: '3.0.0',
+       seleniumDownloadURL: 'http://selenium-release.storage.googleapis.com',
+       drivers: {
+         chrome: {
+           version: '2.9',
+           arch: process.arch,
+           baseURL: 'http://chromedriver.storage.googleapis.com'
+         }
+       }
+     }
+   } ,
+    nightwatch: {
+      options: {
+        "src_folders": [
+          "test/e2e"// Where you are storing your Nightwatch e2e tests
+        ],
+        "output_folder": "/tmp/nightwatch/ttb/reports", // reports (test outcome) output by nightwatch
 
-
+        "test_settings": {
+          "default": {
+            "launch_url" : "http://localhost",
+            "selenium_port"  : 4444,
+            "selenium_host"  : "localhost",
+            "screenshots": {
+              "enabled": true, // if you want to keep screenshots
+              "path" : "/tmp/nightwatch/ttb/screenshots/" // save screenshots here //L.D: does not seems to work
+            },
+            "globals": {
+              "waitForConditionTimeout": 4000 // sometimes internet is slow so wait.
+            },
+            "desiredCapabilities": { // use Chrome as the default browser for tests
+              "browserName": "chrome"
+            }
+          },
+          "chrome": {
+            "desiredCapabilities": {
+              "browserName": "chrome",
+              "javascriptEnabled": true // turn off to test progressive enhancement
+            }
+          },
+          "gecko": {
+            "desiredCapabilities": {
+              "browserName": "gecko",
+              "javascriptEnabled": true // turn off to test progressive enhancement
+            }
+          }
+        }
+      }
+    },
     jshint: {
       options: {
         curly: true,
@@ -116,6 +182,14 @@ module.exports = function(grunt) {
     'htmlmin:dist',
 
   ]);
+
+  grunt.registerTask('test', [
+    'selenium_standalone:default:install',
+    'connect',
+    'selenium_standalone:default:start',
+    'nightwatch',
+    'selenium_standalone:default:stop'
+   ]);
 
   grunt.registerTask('default', [
     'build'

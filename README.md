@@ -3,6 +3,7 @@ It helps you to:
  - build teams randomly
  - choose randomly members from a Team
 
+TTB can be used without any web servers.
 
 ##what is inside
  - use tiny MVC library borrowed and turned into native js from ( https://github.com/c-smile/spapp )
@@ -12,12 +13,22 @@ It helps you to:
 ##usage
  - open index.html in your favorite browser
 
-##compressing for production
-  - need nodejs, grunt `npm install -g grunt`
+##development
+  - need nodejs
+  - grunt: `npm install -g grunt`
+  ```
+  npm install
+  ```
+
+
+###compressing for publishing
 ```
-npm install
 grunt # will output app in dist/dev folder
 grunt --rev=prod #will output in dist folder
 ```
+###testings
+need chrome installed for instance
+```
+grunt test
 
- work in progress...
+```
