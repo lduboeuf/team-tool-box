@@ -48,30 +48,40 @@ module.exports = function(grunt) {
         }
       }
     },
+    selenium_standalone: {
+     options: {
+       stopOnExit: true
+     },
+     default: {
+       seleniumVersion: '3.0.0',
+       seleniumDownloadURL: 'http://selenium-release.storage.googleapis.com',
+       drivers: {
+         chrome: {
+           version: '2.9',
+           arch: process.arch,
+           baseURL: 'http://chromedriver.storage.googleapis.com'
+         }
+       }
+     }
+   } ,
     nightwatch: {
       options: {
         "src_folders": [
           "test/e2e"// Where you are storing your Nightwatch e2e tests
         ],
-        "output_folder": "./test/e2e/reports", // reports (test outcome) output by nightwatch
-        "selenium": { // downloaded by selenium-download module (see readme)
-          "start_process": true, // tells nightwatch to start/stop the selenium process
-          "server_path": "./node_modules/nightwatch/bin/selenium.jar",
-          "host": "127.0.0.1",
-          "port": 4444, // standard selenium port
-          "cli_args": { // chromedriver is downloaded by selenium-download (see readme)
-            "webdriver.gecko.driver" : "./node_modules/nightwatch/bin/geckodriver",
-            "webdriver.chrome.driver" : "./node_modules/nightwatch/bin/chromedriver"
-          }
-        },
+        "output_folder": "/tmp/nightwatch/ttb/reports", // reports (test outcome) output by nightwatch
+
         "test_settings": {
           "default": {
+            "launch_url" : "http://localhost",
+            "selenium_port"  : 4444,
+            "selenium_host"  : "localhost",
             "screenshots": {
               "enabled": true, // if you want to keep screenshots
-              "path" : "./test/e2e/screenshots/" // save screenshots here
+              "path" : "/tmp/nightwatch/ttb/screenshots/" // save screenshots here //L.D: does not seems to work
             },
             "globals": {
-              "waitForConditionTimeout": 10000 // sometimes internet is slow so wait.
+              "waitForConditionTimeout": 4000 // sometimes internet is slow so wait.
             },
             "desiredCapabilities": { // use Chrome as the default browser for tests
               "browserName": "chrome"
@@ -173,7 +183,13 @@ module.exports = function(grunt) {
 
   ]);
 
-  grunt.registerTask('test', ['connect', 'nightwatch']);
+  grunt.registerTask('test', [
+    'selenium_standalone:default:install',
+    'connect',
+    'selenium_standalone:default:start',
+    'nightwatch',
+    'selenium_standalone:default:stop'
+   ]);
 
   grunt.registerTask('default', [
     'build'

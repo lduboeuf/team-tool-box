@@ -33,9 +33,9 @@
     "grunt-contrib-htmlmin": "^2.0.0",
     "grunt-contrib-uglify": "^2.0.0",
     "grunt-nightwatch": "^0.5.4",
+    "grunt-selenium-standalone": "^1.0.1",
     "grunt-usemin": "^3.1.1",
     "load-grunt-tasks": "^3.5.2",
-    "nightwatch": "^0.9.11",
-    "selenium-download": "^2.0.9"
+    "nightwatch": "^0.9.11"
   }
 }
