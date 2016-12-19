@@ -171,6 +171,7 @@ module.exports = function(grunt) {
 
 
   grunt.registerTask('build', [
+    'test',
     'clean:dist',
     'copy:dist',
     //'jshint',

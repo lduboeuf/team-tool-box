@@ -5,10 +5,11 @@ It helps you to:
 
 TTB can be used without any web servers.
 
-##what is inside
+##what's inside
  - use tiny MVC library borrowed and turned into native js from ( https://github.com/c-smile/spapp )
  - use tiny templating engine (https://github.com/olado/doT)
  - use of `localStorage`
+ - use of nightwatch as test framework
 
 ##usage
  - open index.html in your favorite browser
@@ -26,7 +27,7 @@ TTB can be used without any web servers.
 grunt # will output app in dist/dev folder
 grunt --rev=prod #will output in dist folder
 ```
-###testings
+###tests
 need chrome installed for instance
 ```
 grunt test
