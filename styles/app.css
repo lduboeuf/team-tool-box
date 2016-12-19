@@ -186,8 +186,10 @@ ul.topnav li.icon {
   background-color: #fff;
 }
 
-#teams-result div{
-  padding-top:12px;
+#teams-result{
+  border: 1px solid #ddd;
+  padding:8px;
+  /*padding-top:12px;*/
 }
 
 section header{
@@ -279,9 +281,12 @@ div.team h3, .header-tbl{
   margin:0;
   padding:12px;
   background-color: #F0F0F0;
-  border: 1px solid #ddd;
+  /*border: 1px solid #ddd;*/
   border-bottom: 0;
   font-weight: 700;
+}
+.header-tbl{
+  text-align: right;
 }
 
 section ul {
