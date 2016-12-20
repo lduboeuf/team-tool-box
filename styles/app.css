@@ -25,6 +25,7 @@ body.team-member-add    > section#team-member-add,
 body.archive-save    > section#archive-save,
 body.archive-list    > section#archive-list,
 body.archive-details    > section#archive-details,
+body.sync   > section#sync,
 body.team-member-details > section#team-member-details { display:block; }
 
 /* nav highlightion rules */

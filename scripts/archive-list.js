@@ -9,7 +9,7 @@ app.page("archive-list", function()
 
   return function(params) {
 
-    var archives = TeamRepository.findArchives();
+    var archives = ArchiveRepository.findAll();
     $archiveList.innerHTML = tpl(archives);
 
   }

@@ -9,7 +9,7 @@ app.page("team-add", function()
   $submitBtn.onclick = function(e){
     e.preventDefault();
     if ($nameInput.value.length>0){
-      TeamRepository.addTeam({ "name": $nameInput.value});
+      TeamRepository.add({ "name": $nameInput.value});
 
       history.back();
 

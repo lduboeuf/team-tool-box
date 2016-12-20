@@ -12,7 +12,7 @@
 
     var remove = function(){
       if (confirm('sure you want to remove this team ?')){
-        TeamRepository.removeTeam(currentTeamId);
+        TeamRepository.remove(currentTeamId);
         history.back();
       }
       return false;

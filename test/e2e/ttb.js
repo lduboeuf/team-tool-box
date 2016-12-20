@@ -28,8 +28,19 @@ module.exports = { // adapted from: https://git.io/vodU0
     .setValue('input[name="name"]', 'team1')
     .click('input[name="add"]')
     .waitForElementVisible('ul.team-list li',1000)
-    //.assert.elementPresent("ul.team-list li") //should now have a team
     .saveScreenshot('/tmp/nightwatch/ttb/screenshots/team-list.png')
+    //test remove now
+    .click('ul.team-list li a') //click on first team
+    .waitForElementVisible('#team-list-details')
+    .click('#team-list-details a.remove-link')
+    .pause(1000)
+    .acceptAlert()
+    .waitForElementVisible('#team-list',1000)
+    .assert.elementNotPresent("ul.team-list li")
+    .saveScreenshot('/tmp/nightwatch/ttb/screenshots/team-list-removed.png')
+    //
+    //.assert.elementPresent("ul.team-list li") //should now have a team
+
 
   },
 
@@ -37,14 +48,22 @@ module.exports = { // adapted from: https://git.io/vodU0
     browser
     .url('http://localhost:8000/index.html#team-list')
     .waitForElementVisible('#team-list')
-    .click('ul.team-list li a') //click on first team
+    //add a team
+    .click('a[href="#team-add"]')
+    .waitForElementVisible('#team-add')
+    .setValue('input[name="name"]', 'team1')
+    .click('input[name="add"]')
+    .waitForElementVisible('#team-list',1000)
+    //
+    .click('#team-list ul.team-list li a') //click on first team
     .waitForElementVisible('#team-list-details')
+    .pause(1000)
     .perform(function(client, done){
       for (var i = 0; i <10; i++){
         client.click('#team-list-details a.add-link');
         client.waitForElementVisible('section#team-member-add',1000);
-        client.setValue('input[name="name"]', 'member'+i);
-        client.click('input[name="add"]');
+        client.setValue('#team-member-add input[name="name"]', 'member'+i);
+        client.click('#team-member-add input[name="add"]');
         client.waitForElementVisible('#team-list-details');
         done();
       }
@@ -89,11 +108,12 @@ module.exports = { // adapted from: https://git.io/vodU0
     .setValue('#archive-save input[name="name"]', 'archive1')
     .setValue('#archive-save textarea', 'description for archive1')
     .click('#archive-save input[type="submit"]')
+    .saveScreenshot('/tmp/nightwatch/ttb/screenshots/team-generation-save.png')
     .pause(500)
     .acceptAlert()
     .waitForElementVisible('#home',1000)
     .assert.cssClassNotPresent('#teams-result button', 'btn-success')
-    .saveScreenshot('/tmp/nightwatch/ttb/screenshots/team-generation-save.png')
+
     .pause(1000)
     .end();
   },

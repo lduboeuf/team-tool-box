@@ -21,7 +21,7 @@ app.page("archive-save", function()
       description: $desc.value,
       teams: currentOutput
     }
-    TeamRepository.addArchive(data);
+    ArchiveRepository.add(data);
     alert('cool, generated teams archived');
     app.back({event:'onSavedOutput'});
   }

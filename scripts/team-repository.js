@@ -1,11 +1,9 @@
 //TODO object in memory
 (function(window){
 
-    var TEAM_STORE_REPOSITORY = {name: 'ttb-team', fields:['teams','members','name','id']} ;
-    var ARCHIVE_STORE_REPOSITORY = {name:'ttb-archive', fields: ['archives','teams','members', 'name','id','description']};
+    var storage = {name: 'ttb-team', fields:['teams','members','name','id']} ;
     //localStorage.clear();
-    var Teams = fetch(TEAM_STORE_REPOSITORY.name) || { teams : [],  };
-    var Archives = fetch(ARCHIVE_STORE_REPOSITORY.name) || {  archives: [] };
+    var Teams = fetch(storage.name) || { teams : [],  };
 
     var ALPHABET = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     var ID_LENGTH = 8;
@@ -19,14 +17,14 @@
   }
 
 
-    function store(storage, data){
-        var str = JSON.stringify(data, storage.fields);
+    function store(){
+        var str = JSON.stringify(Teams, storage.fields);
         localStorage.setItem(storage.name, str);
     }
 
-    function fetch(storageName){
-      var teamsStr = localStorage.getItem(storageName);
-      return JSON.parse(teamsStr);
+    function fetch(){
+      var str = localStorage.getItem(storage.name);
+      return JSON.parse(str);
     }
 
 
@@ -44,6 +42,15 @@
 
     function TeamRepository(){}
 
+    TeamRepository.export = function(){
+      return localStorage.getItem(storage.name);
+    }
+
+    TeamRepository.import =function(str){
+      localStorage.setItem(storage.name, str);
+      Teams = fetch(storage.name)
+    }
+
     TeamRepository.findAll = function(){
       return Teams.teams;
     }
@@ -52,19 +59,14 @@
       return findById(Teams.teams, id);
     }
 
-
-
-
-
-
-    TeamRepository.addTeam = function(team){
+    TeamRepository.add = function(team){
       team.id = generateUID();
       team.members = [];
       Teams.teams.push(team);
-      store(TEAM_STORE_REPOSITORY, Teams);
+      store();
     }
 
-    TeamRepository.removeTeam = function(teamId){
+    TeamRepository.remove = function(teamId){
       for (var i=0; i < Teams.teams.length; i++){
         var team = Teams.teams[i];
         if (team.id === teamId){
@@ -73,33 +75,9 @@
         }
       }
 
-      store(TEAM_STORE_REPOSITORY, Teams);
+      store();
     }
 
-    TeamRepository.removeArchive = function(archiveId){
-      for (var i=0; i < Archives.archives.length; i++){
-        var archive = Archives.archives[i];
-        if (archive.id === archiveId){
-            Archives.archives.splice(i, 1);
-            break;
-        }
-      }
-
-      store(ARCHIVE_STORE_REPOSITORY, Archives);
-    }
-
-    TeamRepository.addArchive = function(archive){
-      archive.id = generateUID();
-      Archives.archives.push(archive);
-      store(ARCHIVE_STORE_REPOSITORY, Archives);
-    }
-
-    TeamRepository.findArchives =function(){
-      return Archives.archives;
-    }
-    TeamRepository.findArchive =function(archiveId){
-      return findById(Archives.archives,archiveId);
-    }
 
     TeamRepository.findMember = function(memberId){
       for (var i=0; i < Teams.teams.length; i++){
@@ -125,7 +103,7 @@
       members.push(member);
 
 
-      store(TEAM_STORE_REPOSITORY, Teams);
+      store();
     }
 
     TeamRepository.removeMember = function(memberId){
@@ -142,11 +120,11 @@
         }
       }
 
-      store(TEAM_STORE_REPOSITORY, Teams);
+      store();
     }
 
     TeamRepository.save = function(){
-      store(TEAM_STORE_REPOSITORY, Teams);
+      store();
     }
 
 
@@ -163,7 +141,7 @@
       }
       //TODO exception
 
-      store(TEAM_STORE_REPOSITORY, Teams);
+      store();
     }
 
     window.TeamRepository = TeamRepository;
