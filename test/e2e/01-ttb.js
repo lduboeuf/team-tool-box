@@ -18,46 +18,51 @@ module.exports = { // adapted from: https://git.io/vodU0
       .click('a[href="#about"]')
       .assert.visible("#about")
   },
-  'Team List ':function(browser){
+  'Add a team  ':function(browser){
     browser
     .url('http://localhost:8000/index.html#team-list')
     .waitForElementVisible('#team-list')
     .assert.elementNotPresent("ul.team-list li") //should have no team-list
-    .click('a[href="#team-add"]')
-    .waitForElementVisible('#team-add')
-    .setValue('input[name="name"]', 'team1')
-    .click('input[name="add"]')
-    .waitForElementVisible('ul.team-list li',1000)
+    .perform(function(client, done){
+      for (var i = 0; i <5; i++){
+        client.click('a[href="#team-add"]')
+        client.waitForElementVisible('#team-add')
+        client.setValue('input[name="name"]', 'team' +i)
+        client.click('input[name="add"]')
+        client.waitForElementVisible('ul.team-list li',1000)
+      }
+      done()
+    })
+    .elements('css selector', 'ul.team-list li', function (elements) {
+      var count = elements.value.length;
+      this.assert.equal(count,5, 'should have a list of 5 teams')
+    })
+
     .saveScreenshot('/tmp/nightwatch/ttb/screenshots/team-list.png')
-    //test remove now
+  },
+  'Remove a team  ':function(browser){
+    browser
+    .url('http://localhost:8000/index.html#team-list')
+    .waitForElementVisible('#team-list')
     .click('ul.team-list li a') //click on first team
     .waitForElementVisible('#team-list-details')
     .click('#team-list-details a.remove-link')
     .pause(1000)
     .acceptAlert()
     .waitForElementVisible('#team-list',1000)
-    .assert.elementNotPresent("ul.team-list li")
-    .saveScreenshot('/tmp/nightwatch/ttb/screenshots/team-list-removed.png')
-    //
-    //.assert.elementPresent("ul.team-list li") //should now have a team
-
+    .elements('css selector', 'ul.team-list li', function (elements) {
+      var count = elements.value.length;
+      this.assert.equal(count,4, 'should have a list of 4 teams')
+    })
+    .saveScreenshot('/tmp/nightwatch/ttb/screenshots/team-list-removed-one.png')
 
   },
-
-  'Team Members ':function(browser){
+  'Team Members Add ':function(browser){
     browser
     .url('http://localhost:8000/index.html#team-list')
     .waitForElementVisible('#team-list')
-    //add a team
-    .click('a[href="#team-add"]')
-    .waitForElementVisible('#team-add')
-    .setValue('input[name="name"]', 'team1')
-    .click('input[name="add"]')
-    .waitForElementVisible('#team-list',1000)
-    //add members
     .click('#team-list ul.team-list li a') //click on first team
     .waitForElementVisible('#team-list-details')
-    .pause(1000)
     .perform(function(client, done){
       for (var i = 0; i <11; i++){
         client.click('#team-list-details a.add-link');
@@ -71,6 +76,9 @@ module.exports = { // adapted from: https://git.io/vodU0
     })
     .assert.elementPresent("ul.team-members li")
     .saveScreenshot('/tmp/nightwatch/ttb/screenshots/team-members.png')
+  },
+  'Team Members Update ':function(browser){
+    browser
     //modify users
     .click("ul.team-members li a") //click on first element
     .waitForElementVisible('#team-member-details')
@@ -78,6 +86,9 @@ module.exports = { // adapted from: https://git.io/vodU0
     .click('#team-member-details input[type="submit"]')
     .waitForElementVisible('#team-list-details')
     .saveScreenshot('/tmp/nightwatch/ttb/screenshots/team-members-after-rename.png')
+  },
+  'Team Members Delete ':function(browser){
+    browser
     //remove a member
     .click("ul.team-members li:last-child a") //click on last element
     .waitForElementVisible('#team-member-details')
@@ -87,7 +98,6 @@ module.exports = { // adapted from: https://git.io/vodU0
     .waitForElementVisible('#team-list-details')
     .saveScreenshot('/tmp/nightwatch/ttb/screenshots/team-members-after-removeone.png')
   },
-
   'Generate Tool test ':function(browser){
     browser
     .url('http://localhost:8000/index.html')
@@ -130,7 +140,7 @@ module.exports = { // adapted from: https://git.io/vodU0
 
     .pause(1000)
     .end();
-  },
+  }
 
 
 };
