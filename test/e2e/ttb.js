@@ -1,7 +1,7 @@
 //var config = require('../../nightwatch.conf.BASIC.js');
 
 module.exports = { // adapted from: https://git.io/vodU0
-  'TTB Assert Home Page': function(browser) {
+  'TTB Assert Home Page, navigation': function(browser) {
     browser
       .url('http://localhost:8000/index.html')
       .waitForElementVisible('body')
@@ -54,12 +54,12 @@ module.exports = { // adapted from: https://git.io/vodU0
     .setValue('input[name="name"]', 'team1')
     .click('input[name="add"]')
     .waitForElementVisible('#team-list',1000)
-    //
+    //add members
     .click('#team-list ul.team-list li a') //click on first team
     .waitForElementVisible('#team-list-details')
     .pause(1000)
     .perform(function(client, done){
-      for (var i = 0; i <10; i++){
+      for (var i = 0; i <11; i++){
         client.click('#team-list-details a.add-link');
         client.waitForElementVisible('section#team-member-add',1000);
         client.setValue('#team-member-add input[name="name"]', 'member'+i);
@@ -70,8 +70,22 @@ module.exports = { // adapted from: https://git.io/vodU0
 
     })
     .assert.elementPresent("ul.team-members li")
-    //.assert.elementPresent("ul.team-list li") //should now have a team
     .saveScreenshot('/tmp/nightwatch/ttb/screenshots/team-members.png')
+    //modify users
+    .click("ul.team-members li a") //click on first element
+    .waitForElementVisible('#team-member-details')
+    .setValue('#team-member-details input[name="name"]', 'modified member')
+    .click('#team-member-details input[type="submit"]')
+    .waitForElementVisible('#team-list-details')
+    .saveScreenshot('/tmp/nightwatch/ttb/screenshots/team-members-after-rename.png')
+    //remove a member
+    .click("ul.team-members li:last-child a") //click on last element
+    .waitForElementVisible('#team-member-details')
+    .click('#team-member-details input[type="button"]')
+    .pause(500)
+    .acceptAlert()
+    .waitForElementVisible('#team-list-details')
+    .saveScreenshot('/tmp/nightwatch/ttb/screenshots/team-members-after-removeone.png')
   },
 
   'Generate Tool test ':function(browser){

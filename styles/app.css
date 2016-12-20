@@ -58,6 +58,10 @@ a {
   color: #4078c0;
 }
 
+.remove-link{
+  font-weight: 700;
+}
+
 body .brand {
   /*float: left;*/
   padding: 14px 12px;
@@ -281,8 +285,6 @@ section header {
 div.team h3, .header-tbl{
   margin:0;
   padding:12px;
-  background-color: #F0F0F0;
-  /*border: 1px solid #ddd;*/
   border-bottom: 0;
   font-weight: 700;
 }
