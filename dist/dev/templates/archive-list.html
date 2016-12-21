@@ -1,1 +1,1 @@
-<div><header><h2><a href="javascript:void(0);" onclick="history.back();" class="link-home">&#8592;</a>Archive List</h2></header><div><ul class="archive-list">{{#archives}}<li><a href="#archive-details:{{id}}">{{name}}</a></li>{{/archives}}</ul></div></div>
+<div><header><h2><a href="javascript:void(0);" onclick="history.back();" class="link-home">&#8592;</a>Archive List</h2></header><div><ul class="archive-list">{{ for(var prop in it) { }}<li><a href="#archive-details:{{=it[prop].id}}">{{=it[prop].name}}</a></li>{{ } }}</ul></div></div>
