@@ -22,9 +22,9 @@
       <label for="team-list">within:</label>
       <select class="team-list" name="team-list">
         <option value="-1">--all teams--</option>
-        {{ for(var prop in it) { }}
-        <option value="{{=it[prop].id}}">{{=it[prop].name}}</option>
-        {{ } }}
+        {{~it :team:index}}
+          <option value="{{=team.id}}">{{=team.name}}</option>
+        {{~}}
       </select>
       <input type="submit" name="ok" value="generate" class="button btn-default"/>
 
@@ -32,18 +32,18 @@
   </form>
 </header>
   <div id="teams-result">
-    {{ for(var prop in it) { }}
+    {{~it :team:idx}}
     <div class="team">
-      <h3>{{=it[prop].name}}</h3>
+      <h3>{{=team.name}}</h3>
       <ul class="teams" >
-        {{~it[prop].members :member:idx}}
-        <li>{{=member.name}}</li>
+        {{~team.members :member:idxm}}
+          <li>{{=member.name}}</li>
         {{~}}
       </ul>
     </div>
-    {{ } }}
+    {{~}}
     <div>
-      <button class="btn-default">save</button>
+      <button class="btn-success">save</button>
     </div>
   </div>
 </div>

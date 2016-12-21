@@ -1,16 +1,5 @@
 RemoteStorage.defineModule("teams", function (privateClient, publicClient) {
-/*
-  privateClient.declareType('member',{
-    "type": "object",
-    "properties": {
-      "id": {
-        "type": "string"
-      },
-      "name": {
-        "type": "string"
-    },
-    "required": [ "id", "name" ]
-  });*/
+
   privateClient.cache('', 'ALL');
   privateClient.declareType('team', {
     "type": "object",

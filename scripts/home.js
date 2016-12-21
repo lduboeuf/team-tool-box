@@ -1,23 +1,22 @@
 app.page("home", function()
 {
 
-  var section = document.getElementById('home');
-  var oSelect = section.querySelector("#nb");
-  var gen_teams = section.querySelector('#gen_teams');
-  var gen_members = section.querySelector('#gen_members');
-  var teamList = section.querySelector('.team-list');
-  var olist = section.querySelector('#teams-result');
-  var okBtn = section.querySelector('input[type="submit"]');
+  var $section = document.getElementById('home');
+  var $nb = $section.querySelector("#nb");
+  var $gen_teams = $section.querySelector('#gen_teams');
+  var $gen_members = $section.querySelector('#gen_members');
+  var $teamList = $section.querySelector('.team-list');
+  var $resultList = $section.querySelector('#teams-result');
+  var $okBtn = $section.querySelector('input[type="submit"]');
 
   //store template definition
-  var tpl = doT.template(teamList.innerHTML);
-  var tplResultList = doT.template(olist.innerHTML);
-  //var tplTeamList = teamList.innerHTML;
+  var tplTeamList = doT.template($teamList.innerHTML);
+  var tplResultList = doT.template($resultList.innerHTML);
 
   var currentOutput = null;
 
   var exec = function(){
-    var teamId = teamList.value;
+    var teamId = $teamList.value;
     //special case for all teams
     if (teamId==-1){
 
@@ -43,14 +42,16 @@ app.page("home", function()
 
     var members = team.members;
     if (members.length==0){
+        $resultList.innerHTML = null;
+        app.alert('alert-info','humm, no members found, you can add members by clicking on the "Team List" menu');
       return;
     }
     //define an array of indices
     var idxs = members.map(function (x, i) { return i });
 
-    var nbPers = parseInt(oSelect.value);
+    var nbPers = parseInt($nb.value);
     var teams = null;
-    if (gen_teams.checked){
+    if ($gen_teams.checked){
       teams = getRandomTeams(nbPers, members, idxs);
 
     }else{
@@ -120,9 +121,10 @@ app.page("home", function()
 
     var displayTeams = function(teams) {
         currentOutput = teams;
-        olist.innerHTML = tplResultList(teams);
-        var btnSave = olist.querySelector('button');
-        btnSave.onclick = function(){
+
+        $resultList.innerHTML = tplResultList(teams);
+        var $btnSave = $resultList.querySelector('button');
+        $btnSave.onclick = function(){
           if (currentOutput){
             app("archive-save", currentOutput);
           }
@@ -130,10 +132,10 @@ app.page("home", function()
     }
 
     //empty tpl by default
-    olist.innerHTML = null;
+    $resultList.innerHTML = null;
 
 
-    okBtn.onclick = function(e){
+    $okBtn.onclick = function(e){
       e.preventDefault();
       exec();
     }
@@ -144,33 +146,23 @@ app.page("home", function()
 
 
   return function(params) {
-    var teams = TeamRepository.findAll();
+
     remoteStorage.teams.findAll().then(
       function(teams){
 
         if (teams.length==0){
           app.alert('alert-info','hello, no members found, you can add members by clicking on the "Team List" menu');
-        //  olist.innerHTML = '''<p class="alert-info"> no members found, you can add members by clicking on the "Team List" menu</p>'
         }
-
-        teamList.innerHTML = tpl(teams);;
-        /*
-        var output = mustache(tplTeamList,{data: teams });
-        teamList.innerHTML = output;
-        */
+        $teamList.innerHTML = tplTeamList(teams);
 
       }
     );
 
-
-
-
-
     //list already saved ?
     if (params && params.event =='onSavedOutput'){
-      var btnSave = olist.querySelector('button');
-      btnSave.classList.toggle('btn-default');
-      btnSave.onclick = null;
+      var $btnSave = $resultList.querySelector('button');
+      $btnSave.classList.toggle('btn-success');
+      $btnSave.onclick = null;
     }
 
   }

@@ -4,20 +4,20 @@
     <div class="form-group">
       <input name="name" type="text" placeholder="archive name" required="required"/>
       <textarea name="description" placeholder="description"></textarea>
-      <input type="submit" name="add-member" value="save" class="button btn-default"/>
+      <input type="submit" name="add-member" value="save" class="button btn-success"/>
     </div>
   </form>
   <br/>
   <div class="team-list">
-    {{#list}}
+    {{~it :team:idx}}
     <div class="team">
-      <h3>{{name}}</h3>
+      <h3>{{=team.name}}</h3>
       <ul class="teams" >
-        {{#members}}
-        <li>{{name}}</li>
-        {{/members}}
+        {{~team.members :member:idxm}}
+          <li>{{=member.name}}</li>
+        {{~}}
       </ul>
     </div>
-    {{/list}}
+    {{~}}
   </div>
 </div>

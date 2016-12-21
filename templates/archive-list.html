@@ -4,13 +4,14 @@
   </header>
   <div>
   <ul class="archive-list" >
-    {{#archives}}
+
+    {{ for(var prop in it) { }}
     <li>
-        <a href="#archive-details:{{id}}">
-          {{name}}
+        <a href="#archive-details:{{=it[prop].id}}">
+          {{=it[prop].name}}
         </a>
     </li>
-    {{/archives}}
+    {{ } }}
   </ul>
 </div>
 </div>

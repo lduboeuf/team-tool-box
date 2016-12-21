@@ -7,9 +7,9 @@ app.page("archive-save", function()
   var $save = $form.querySelector('.button');
   var $teamList = document.querySelector('#archive-save .team-list');
 
-  var tplTeamList = $teamList.innerHTML;
+  var tplTeamList = doT.template($teamList.innerHTML);
 
-  var $currentOutput;
+  var currentOutput;
 
   $save.onclick = function(e){
     e.preventDefault();
@@ -19,17 +19,19 @@ app.page("archive-save", function()
     var data = {
       name: $name.value,
       description: $desc.value,
-      teams: $currentOutput
+      teams: currentOutput
     }
-    TeamRepository.addArchive(data);
-    alert('cool, generated teams archived');
-    app.back({event:'onSavedOutput'});
+    remoteStorage.archives.store(data).then(function(){
+      alert('cool, generated teams archived');
+      app.back({event:'onSavedOutput'});
+    });
+    
   }
 
   return function(params) {
-    $currentOutput = params;
-    var output = mustache(tplTeamList, { list: $currentOutput});
-    $teamList.innerHTML = output;
+    currentOutput = params;
+
+    $teamList.innerHTML = tplTeamList(currentOutput);
     $name.value ="";
     $desc.value="";
   }

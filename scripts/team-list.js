@@ -17,9 +17,6 @@
           $teamList.innerHTML = tpl(teams);
         }
       );
-      /*
-      var output = mustache(tplTeamList, { teams: teams} );
-      $teamList.innerHTML = output;
-*/
+
     }
   });

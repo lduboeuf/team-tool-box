@@ -25,6 +25,7 @@ body.team-member-add    > section#team-member-add,
 body.archive-save    > section#archive-save,
 body.archive-list    > section#archive-list,
 body.archive-details    > section#archive-details,
+body.sync   > section#sync,
 body.team-member-details > section#team-member-details { display:block; }
 
 /* nav highlightion rules */
@@ -55,6 +56,10 @@ table td{
 a {
   text-decoration: none;
   color: #4078c0;
+}
+
+.remove-link{
+  font-weight: 700;
 }
 
 body .brand {
@@ -118,7 +123,8 @@ ul.topnav li.icon {
     display: inline-block;
   }
   #remotestorage-widget{
-    display: none;
+    right: 50px !important;
+    top: 0px !important;
   }
 }
 
@@ -189,8 +195,10 @@ ul.topnav li.icon {
   background-color: #fff;
 }
 
-#teams-result div{
-  padding-top:12px;
+#teams-result{
+  border: 1px solid #ddd;
+  padding:8px;
+  /*padding-top:12px;*/
 }
 
 section header{
@@ -217,10 +225,13 @@ input[type=text], input[type=url], input[type=email], input[type=password], inpu
   border: 1px solid #dbdbdb;
 }
 .btn-danger{
-  background-color: #e06c85;
+  background-color: #D9534F;
 }
 .btn-default{
-  background-color: #6caee0;
+  background-color: #337AB7;
+}
+.btn-success{
+  background-color: #5CB85C;
 }
 
 button, input[type=submit],input[type=button]  {
@@ -248,11 +259,10 @@ button, input[type=submit], input[type=button]:hover {
 textarea{
   color: #5f5f5f;
   box-sizing: border-box;
-  width: 240px;
+  width: 50%;
   height: 80px;
   box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.08);
   font: normal 13px sans-serif;
-  padding: 12px;
   border: 1px solid #dbdbdb;
   resize: vertical;
   display:block;
@@ -260,7 +270,7 @@ textarea{
 
 /*forms for mobiles*/
 @media screen and (max-width:680px) {
-  input, select, textarea, button {
+  input, select, textarea, button, form {
     width: 100%;
   }
   input[type="radio"] {
@@ -279,9 +289,11 @@ section header {
 div.team h3, .header-tbl{
   margin:0;
   padding:12px;
-  background-color: #E7E7E7;
-  border: 1px solid #ddd;
   border-bottom: 0;
+  font-weight: 700;
+}
+.header-tbl{
+  text-align: right;
 }
 
 section ul {

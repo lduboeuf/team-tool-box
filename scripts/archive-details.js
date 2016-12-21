@@ -2,7 +2,7 @@ app.page("archive-details", function()
 {
 
   var $section = document.getElementById('archive-details');
-  var tpl= $section.innerHTML;
+  var tpl = doT.template($section.innerHTML);
 
   var currentArchiveId = null;
 
@@ -11,20 +11,24 @@ app.page("archive-details", function()
 
   var remove = function(){
     if (confirm('sure you want to remove this archive ?')){
-      TeamRepository.removeArchive(currentArchiveId);
-      history.back();
+      remoteStorage.archives.remove(currentArchiveId).then(function(){
+        history.back();
+      })
+
     }
     return false;
   }
 
 
   return function(params) {
-    currentArchiveId = parseInt(params);
-    var archive = TeamRepository.findArchive(currentArchiveId);
-    var output = mustache(tpl,  archive );
-    $section.innerHTML = output;
+    currentArchiveId = params;
+    remoteStorage.archives.find(currentArchiveId).then(
+      function(archive){
+        $section.innerHTML = tpl(archive);
+        $section.querySelector('.remove-link').onclick=remove;
+      }
+    )
 
-    $section.querySelector('.remove-link').onclick=remove;
 
   }
 });

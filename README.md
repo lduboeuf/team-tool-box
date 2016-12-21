@@ -1,23 +1,35 @@
-#Team Tool Box
-*Team Tool Box is a standalone offline mini js app*
-It helps you :
+#Team Tool Box, a sample standalone offline js app
+It helps you to:
  - build teams randomly
  - choose randomly members from a Team
 
+TTB can be used without any web servers but will not be able to use remotestorage
 
-##what is inside
- - use tiny MVC library borrowed and turned into native js from ( https://github.com/c-smile/spapp )
- - use tiny templating engine (https://github.com/aishikaty/tiny-mustache)
- - use of `localStorage`
+##what's inside
+ - `spapp` MVC library borrowed and turned into native js from ( https://github.com/c-smile/spapp )
+ - `doT` templating engine (https://github.com/olado/doT)
+ - `remoteStorage` (https://remotestorage.io/)
+ - `nightwatch` as test framework (http://nightwatchjs.org/)
 
 ##usage
  - open index.html in your favorite browser
 
-##compressing for production
+##development
   - need nodejs
-```
-npm install
-grunt # will output app in dist folder
-```
+  - grunt: `npm install -g grunt`
+  ```
+  npm install
+  ```
 
- work in progress...
+
+###compressing for publishing
+```
+grunt # will output app in dist/dev folder
+grunt --rev=prod #will output in dist folder
+```
+###tests
+need chrome installed for instance
+```
+grunt test
+
+```
