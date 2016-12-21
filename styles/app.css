@@ -117,6 +117,9 @@ ul.topnav li.icon {
     float: right;
     display: inline-block;
   }
+  #remotestorage-widget{
+    display: none;
+  }
 }
 
 @media screen and (max-width:680px) {

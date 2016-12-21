@@ -32,16 +32,16 @@
   </form>
 </header>
   <div id="teams-result">
-    {{#list}}
+    {{ for(var prop in it) { }}
     <div class="team">
-      <h3>{{name}}</h3>
+      <h3>{{=it[prop].name}}</h3>
       <ul class="teams" >
-        {{#members}}
-        <li>{{name}}</li>
-        {{/members}}
+        {{~it[prop].members :member:idx}}
+        <li>{{=member.name}}</li>
+        {{~}}
       </ul>
     </div>
-    {{/list}}
+    {{ } }}
     <div>
       <button class="btn-default">save</button>
     </div>

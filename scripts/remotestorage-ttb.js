@@ -11,7 +11,7 @@ RemoteStorage.defineModule("teams", function (privateClient, publicClient) {
     },
     "required": [ "id", "name" ]
   });*/
-
+  privateClient.cache('', 'ALL');
   privateClient.declareType('team', {
     "type": "object",
     "properties": {
@@ -103,22 +103,15 @@ RemoteStorage.defineModule("teams", function (privateClient, publicClient) {
           })
         },
         remove: function(teamId){
-              return privateClient.remove('team/' + teamId);
-
+          return privateClient.remove('team/' + teamId);
         },
-        find: function find(id) {
+        find: function(id) {
           var path = "team/" + id;
-
-          return privateClient.getObject(path).then(function (team) {
-            return team;
-          });
+          return privateClient.getObject(path);
         },
         findAll: function(){
-          return privateClient.getAll("team/").
-            then(function(teams) {
-              return teams;
-            });
-          }
+          return privateClient.getAll("team/");
+        }
   };
 
   var ALPHABET = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';

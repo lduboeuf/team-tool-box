@@ -11,26 +11,35 @@ app.page("home", function()
 
   //store template definition
   var tpl = doT.template(teamList.innerHTML);
+  var tplResultList = doT.template(olist.innerHTML);
   //var tplTeamList = teamList.innerHTML;
 
   var currentOutput = null;
 
-
   var exec = function(){
-
-    var teamId = parseInt(teamList.value);
-    var team = null;
+    var teamId = teamList.value;
     //special case for all teams
     if (teamId==-1){
-      team = {members: []};
-      var teams = TeamRepository.findAll();
-      for (var i = 0; i < teams.length;i++){
-        team.members.push.apply(team.members, teams[i].members);
-      }
 
-    }else{
-     team = TeamRepository.findById(teamId);
-    }
+        remoteStorage.teams.findAll().then(
+          function(teams){
+            var team = {members:[]};
+            for (var t_id in teams){
+              team.members.push.apply(team.members, teams[t_id].members);
+            }
+
+            generate(team);
+          }
+        );
+
+      }else{
+        //team = TeamRepository.findById(teamId);
+        remoteStorage.teams.find(teamId).then(generate);
+      }
+  }
+
+  var generate = function(team){
+
 
     var members = team.members;
     if (members.length==0){
@@ -110,9 +119,8 @@ app.page("home", function()
 
 
     var displayTeams = function(teams) {
-        var output = mustache(tpl, { list: teams} );
         currentOutput = teams;
-        olist.innerHTML = output;
+        olist.innerHTML = tplResultList(teams);
         var btnSave = olist.querySelector('button');
         btnSave.onclick = function(){
           if (currentOutput){
