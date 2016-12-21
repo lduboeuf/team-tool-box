@@ -150,7 +150,7 @@ app.page("home", function()
     remoteStorage.teams.findAll().then(
       function(teams){
 
-        if (teams.length==0){
+        if (Object.keys(teams).length === 0){
           app.alert('alert-info','hello, no members found, you can add members by clicking on the "Team List" menu');
         }
         $teamList.innerHTML = tplTeamList(teams);

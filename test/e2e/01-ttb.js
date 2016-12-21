@@ -6,6 +6,7 @@ module.exports = { // adapted from: https://git.io/vodU0
       .url('http://localhost:8000/index.html')
       .waitForElementVisible('body')
       .assert.title('Team Tool Box')
+      .pause(1000)
       .assert.visible(".alert-info")
       .saveScreenshot('/tmp/nightwatch/ttb/screenshots/home.png')
       //test links
@@ -29,10 +30,11 @@ module.exports = { // adapted from: https://git.io/vodU0
         client.waitForElementVisible('#team-add')
         client.setValue('input[name="name"]', 'team' +i)
         client.click('input[name="add"]')
-        client.waitForElementVisible('ul.team-list li',1000)
+        client.waitForElementVisible('ul.team-list li')
       }
       done()
     })
+    .pause(1000)
     .elements('css selector', 'ul.team-list li', function (elements) {
       var count = elements.value.length;
       this.assert.equal(count,5, 'should have a list of 5 teams')
@@ -43,8 +45,9 @@ module.exports = { // adapted from: https://git.io/vodU0
   'Remove a team  ':function(browser){
     browser
     .url('http://localhost:8000/index.html#team-list')
-    .waitForElementVisible('#team-list')
+    .waitForElementVisible('#team-list ul.team-list li')
     .click('ul.team-list li a') //click on first team
+    .pause(1000)
     .waitForElementVisible('#team-list-details')
     .click('#team-list-details a.remove-link')
     .pause(1000)
@@ -60,7 +63,7 @@ module.exports = { // adapted from: https://git.io/vodU0
   'Team Members Add ':function(browser){
     browser
     .url('http://localhost:8000/index.html#team-list')
-    .waitForElementVisible('#team-list')
+    .waitForElementVisible('#team-list ul.team-list li')
     .click('#team-list ul.team-list li a') //click on first team
     .waitForElementVisible('#team-list-details')
     .perform(function(client, done){
@@ -103,8 +106,10 @@ module.exports = { // adapted from: https://git.io/vodU0
     .url('http://localhost:8000/index.html')
     .waitForElementVisible('#home')
     //----
+    .setValue('#home select#nb', 1)
     .click('input[type="submit"]')
     .waitForElementVisible('#home div.team')
+    .pause(500)
     .assert.elementPresent("ul.teams li")
     .elements('css selector', '.team h3', function (elements) {
       var count = elements.value.length;
