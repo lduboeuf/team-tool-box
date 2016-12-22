@@ -114,31 +114,46 @@ ul.topnav li.icon {
 @media screen and (max-width:680px) {
   ul.topnav {
     position: absolute;
-    right: 0;
     top: 0;
   }
   ul.topnav li {display: none;}
   ul.topnav li.icon {
-    float: right;
+
     display: inline-block;
   }
+
+  body .brand {
+    /*float: left;*/
+    padding: 14px 0px 30px 50px;
+    text-align: left;
+  }
+  .brand span{
+    display: none;
+  }
+
   #remotestorage-widget{
-    right: 50px !important;
-    top: 0px !important;
+    right: 8px !important;
+    top: 20px !important;
+    opacity: 0.8;
+  }
+  #remotestorage-widget .rs-bubble-text{
+    color:grey;
+  }
+  #remotestorage-widget .rs-hidden{
+    background-color: inherit !important;
   }
 }
 
 @media screen and (max-width:680px) {
   ul.topnav.responsive {
     position: absolute;
-    right: 0;
+    left: 0;
     top: 0;
     padding-right: 30px;
   }
   ul.topnav.responsive li.icon {
     position: absolute;
     right: 0;
-    top: 0;
   }
   ul.topnav.responsive li {
     float: none;
