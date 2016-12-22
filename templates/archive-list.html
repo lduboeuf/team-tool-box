@@ -4,13 +4,14 @@
   </header>
   <div>
   <ul class="archive-list" >
-    {{~it :archive:index}}
+
+    {{ for(var prop in it) { }}
     <li>
-        <a href="#archive-details:{{=archive.id}}">
-          {{=archive.name}}
+        <a href="#archive-details:{{=it[prop].id}}">
+          {{=it[prop].name}}
         </a>
     </li>
-    {{~}}
+    {{ } }}
   </ul>
 </div>
 </div>

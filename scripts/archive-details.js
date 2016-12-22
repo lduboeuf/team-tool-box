@@ -11,8 +11,10 @@ app.page("archive-details", function()
 
   var remove = function(){
     if (confirm('sure you want to remove this archive ?')){
-      ArchiveRepository.remove(currentArchiveId);
-      history.back();
+      remoteStorage.archives.remove(currentArchiveId).then(function(){
+        history.back();
+      })
+
     }
     return false;
   }
@@ -20,10 +22,13 @@ app.page("archive-details", function()
 
   return function(params) {
     currentArchiveId = params;
-    var archive = ArchiveRepository.findById(currentArchiveId);
-    $section.innerHTML = tpl(archive);
+    remoteStorage.archives.find(currentArchiveId).then(
+      function(archive){
+        $section.innerHTML = tpl(archive);
+        $section.querySelector('.remove-link').onclick=remove;
+      }
+    )
 
-    $section.querySelector('.remove-link').onclick=remove;
 
   }
 });

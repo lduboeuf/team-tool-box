@@ -9,8 +9,13 @@ app.page("archive-list", function()
 
   return function(params) {
 
-    var archives = ArchiveRepository.findAll();
-    $archiveList.innerHTML = tpl(archives);
+    remoteStorage.archives.findAll().then(
+      function(archives){
+        $archiveList.innerHTML = tpl(archives);
+      }
+    );
+    
+
 
   }
 });

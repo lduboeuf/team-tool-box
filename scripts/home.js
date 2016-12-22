@@ -13,28 +13,37 @@ app.page("home", function()
   var tplTeamList = doT.template($teamList.innerHTML);
   var tplResultList = doT.template($resultList.innerHTML);
 
-
   var currentOutput = null;
 
-
   var exec = function(){
-
     var teamId = $teamList.value;
-    var team = null;
     //special case for all teams
     if (teamId==-1){
-      team = {members: []};
-      var teams = TeamRepository.findAll();
-      for (var i = 0; i < teams.length;i++){
-        team.members.push.apply(team.members, teams[i].members);
-      }
 
-    }else{
-     team = TeamRepository.findById(teamId);
-    }
+        remoteStorage.teams.findAll().then(
+          function(teams){
+            var team = {members:[]};
+            for (var t_id in teams){
+              team.members.push.apply(team.members, teams[t_id].members);
+            }
+
+            generate(team);
+          }
+        );
+
+      }else{
+        //team = TeamRepository.findById(teamId);
+        remoteStorage.teams.find(teamId).then(generate);
+      }
+  }
+
+  var generate = function(team){
+
 
     var members = team.members;
     if (members.length==0){
+        $resultList.innerHTML = null;
+        app.alert('alert-info','humm, no members found, you can add members by clicking on the "Team List" menu');
       return;
     }
     //define an array of indices
@@ -112,6 +121,7 @@ app.page("home", function()
 
     var displayTeams = function(teams) {
         currentOutput = teams;
+
         $resultList.innerHTML = tplResultList(teams);
         var $btnSave = $resultList.querySelector('button');
         $btnSave.onclick = function(){
@@ -136,15 +146,17 @@ app.page("home", function()
 
 
   return function(params) {
-    console.log('kikou');
-    var teams = TeamRepository.findAll();
-    if (teams.length==0){
-      app.alert('alert-info','hello, no members found, you can add members by clicking on the "Team List" menu');
-    //  olist.innerHTML = '''<p class="alert-info"> no members found, you can add members by clicking on the "Team List" menu</p>'
-    }
 
+    remoteStorage.teams.findAll().then(
+      function(teams){
 
-    $teamList.innerHTML = tplTeamList(teams);
+        if (Object.keys(teams).length === 0){
+          app.alert('alert-info','hello, no members found, you can add members by clicking on the "Team List" menu');
+        }
+        $teamList.innerHTML = tplTeamList(teams);
+
+      }
+    );
 
     //list already saved ?
     if (params && params.event =='onSavedOutput'){

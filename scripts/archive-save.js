@@ -21,9 +21,11 @@ app.page("archive-save", function()
       description: $desc.value,
       teams: currentOutput
     }
-    ArchiveRepository.add(data);
-    alert('cool, generated teams archived');
-    app.back({event:'onSavedOutput'});
+    remoteStorage.archives.store(data).then(function(){
+      alert('cool, generated teams archived');
+      app.back({event:'onSavedOutput'});
+    });
+    
   }
 
   return function(params) {

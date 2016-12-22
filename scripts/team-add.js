@@ -9,12 +9,15 @@ app.page("team-add", function()
   $submitBtn.onclick = function(e){
     e.preventDefault();
     if ($nameInput.value.length>0){
-      TeamRepository.add({ "name": $nameInput.value});
 
-      history.back();
+      remoteStorage.teams.store({ "name": $nameInput.value}).then(function(){
+        history.back();
+      });
+
 
     }else {
       //handle error msg
+
     }
 
 

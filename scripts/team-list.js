@@ -11,8 +11,12 @@
 
     return function(params) {
 
-      var teams = TeamRepository.findAll();
-      $teamList.innerHTML = tpl(teams);
-      console.log('hellow');
+      //var teams = TeamRepository.findAll();
+      remoteStorage.teams.findAll().then(
+        function(teams){
+          $teamList.innerHTML = tpl(teams);
+        }
+      );
+
     }
   });

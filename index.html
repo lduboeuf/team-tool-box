@@ -6,13 +6,15 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- build:js scripts/vendors.js -->
-    <script type="text/javascript" src="scripts/vendors/doT.min.js"></script>
-    <script type="text/javascript" src="scripts/vendors/lz-string.min.js"></script>
+    <script src="scripts/vendors/remotestorage.min.js"></script>
+    <script src="scripts/vendors/doT.min.js"></script>
     <!-- endbuild -->
+
     <!-- build:js scripts/scripts.js -->
+    <script src="scripts/remotestorage-ttb-teams.js"></script>
+    <script src="scripts/remotestorage-ttb-archives.js"></script>
     <script type="text/javascript" src="scripts/spapp.js"></script>
-    <script type="text/javascript" src="scripts/team-repository.js"></script>
-    <script type="text/javascript" src="scripts/archive-repository.js"></script>
+
     <script type="text/javascript" src="scripts/app-utils.js"></script>
 
     <script type="text/javascript" src="scripts/team-list.js"></script>
@@ -24,7 +26,6 @@
     <script type="text/javascript" src="scripts/archive-save.js"></script>
     <script type="text/javascript" src="scripts/archive-list.js"></script>
     <script type="text/javascript" src="scripts/archive-details.js"></script>
-    <script type="text/javascript" src="scripts/sync.js"></script>
     <!-- endbuild -->
     <!-- build:css styles/main.css -->
     <link rel="stylesheet" href="styles/app.css">
@@ -42,7 +43,6 @@
     <li><a href="#home">Home</a></li>
      <li><a href="#team-list">Team List</a></li>
      <li><a href="#archive-list">Archives</a></li>
-     <li><a href="#sync">Sync</a></li>
      <li><a href="#about">About</a></li>
      <li class="icon">
        <a href="javascript:void(0);" onclick="menuHandler()">&#9776;</a>
@@ -58,7 +58,7 @@
         <label for="nb">find:</label><br/>
           <select id="nb">
               <option value="1">1</option>
-              <option value="2">2</option>
+              <option value="2" selected="selected">2</option>
               <option value="3">3</option>
               <option value="4">4</option>
               <option value="5">5</option>
@@ -75,9 +75,10 @@
           <label for="team-list">within:</label>
           <select class="team-list" name="team-list">
             <option value="-1">--all teams--</option>
-            {{~it :team:index}}
-              <option value="{{=team.id}}">{{=team.name}}</option>
-            {{~}}
+            {{ for(var prop in it) { }}
+
+              <option value="{{=it[prop].id}}">{{=it[prop].name}}</option>
+            {{ } }}
 
           </select>
           <input type="submit" name="ok" value="generate" class="button btn-default"/>
@@ -155,7 +156,12 @@
 
     app.start();
 
-    //document.writeln(localStorage.getItem('ttb'));
+    //remotestorage
+    remoteStorage.access.claim('teams', 'rw');
+    remoteStorage.access.claim('archives', 'rw');
+    
+
+    remoteStorage.displayWidget();
   </script>
 </body>
 </html>
