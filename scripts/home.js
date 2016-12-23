@@ -43,7 +43,7 @@ app.page("home", function()
     var members = team.members;
     if (members.length==0){
         $resultList.innerHTML = null;
-        app.alert('alert-info','humm, no members found, you can add members by clicking on the "Team List" menu');
+        app.alert('alert-info','humm, no members found, you can add members by clicking on the "My Groups" menu');
       return;
     }
     //define an array of indices
@@ -151,7 +151,7 @@ app.page("home", function()
       function(teams){
 
         if (Object.keys(teams).length === 0){
-          app.alert('alert-info','hello, no members found, you can add members by clicking on the "Team List" menu');
+          app.alert('alert-info','hi there ;-), no members found, you can add members by clicking on the "My Groups" menu. If it is your first time, you can have a look to "About" section');
         }
         $teamList.innerHTML = tplTeamList(teams);
 
