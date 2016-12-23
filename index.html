@@ -132,12 +132,6 @@
 
     //handle click on nav a, make it selected style
     function setSelected(){
-      /*
-      for(i=0;i<links.length;i++) {
-        links[i].classList.remove('selected');
-      }
-      this.classList.add('selected');
-      */
       //toggle menu when a menu item is clicked
       if (this.parentNode.className!=='icon'){
         menu.className = "topnav";
@@ -153,13 +147,17 @@
     }
     document.querySelector('div.brand a').onclick = setSelected;
 
+    document.querySelector('body>section').onclick = function(){
+      menu.className = "topnav";
+    }
+
 
     app.start();
 
     //remotestorage
     remoteStorage.access.claim('teams', 'rw');
     remoteStorage.access.claim('archives', 'rw');
-    
+
 
     remoteStorage.displayWidget();
   </script>

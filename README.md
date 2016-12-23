@@ -1,9 +1,9 @@
-#Team Tool Box, a sample standalone offline js app
-It helps you to:
+#Welcome to Team Tool Box!
+A web app that helps you to:
  - build teams randomly
  - choose randomly members from a Team
 
-TTB can be used without any web servers but will not be able to use remotestorage
+TTB can be used without any web servers but you will not be able to use remote storage
 
 ##what's inside
  - `spapp` MVC library borrowed and turned into native js from ( https://github.com/c-smile/spapp )
@@ -17,8 +17,9 @@ TTB can be used without any web servers but will not be able to use remotestorag
 ##development
   - need nodejs
   - grunt: `npm install -g grunt`
+
   ```
-  npm install
+  npm install #install dev dependencies
   ```
 
 

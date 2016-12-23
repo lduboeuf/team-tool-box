@@ -43,7 +43,7 @@ body.home #menu a[href="#home"] { background-color: #555; }
 
 /*header*/
 body> header {
-  background-color: #333;
+  background-color: #04102A;
   color: #f2f2f2;
   box-shadow: 0px 5px 8px #ccc;
   top:0;
@@ -87,7 +87,7 @@ ul.topnav {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #333;
+  background-color: #04102A;
 }
 
 ul.topnav li {
@@ -124,7 +124,7 @@ ul.topnav li.icon {
 
   body .brand {
     /*float: left;*/
-    padding: 14px 0px 30px 50px;
+    padding: 14px 0px 14px 50px;
     text-align: left;
   }
   .brand span{
@@ -133,18 +133,21 @@ ul.topnav li.icon {
 
   #remotestorage-widget{
     right: 8px !important;
-    top: 20px !important;
+    top: 0px !important;
     opacity: 0.8;
   }
   #remotestorage-widget .rs-bubble-text{
     color:grey;
+    display:none;
   }
+  #remotestorage-widget .rs-bubble{
+    width:250px;
+  }
+
   #remotestorage-widget .rs-hidden{
     background-color: inherit !important;
   }
-}
 
-@media screen and (max-width:680px) {
   ul.topnav.responsive {
     position: absolute;
     left: 0;

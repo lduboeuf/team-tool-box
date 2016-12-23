@@ -22,10 +22,10 @@ app.page("archive-save", function()
       teams: currentOutput
     }
     remoteStorage.archives.store(data).then(function(){
-      alert('cool, generated teams archived');
+      alert('cool, generated teams archived, you can retrieve it in Archives menu');
       app.back({event:'onSavedOutput'});
     });
-    
+
   }
 
   return function(params) {
