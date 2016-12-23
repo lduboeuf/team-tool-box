@@ -3,12 +3,13 @@
   <header>
     <div>
       <h2><a href="javascript:void(0);" onclick="history.back();" class="link-home">&#8592;</a>Group "{{=it.name}}"</h2>
+      <a href="#" class="remove-link">&#10006; remove</a>
     </div>
-    <div> <span>-</span><a href="#" class="remove-link"> Remove</a></div>
+    <div></div>
   </header>
   <div>
     <div class="header-tbl">
-        <span>+</span><a href="#team-member-add:{{=it.id}}" class="add-link"> Add a member</a>
+        <a href="#team-member-add:{{=it.id}}" class="add-link btn-default">+ Add a member</a>
     </div>
   <ul class="team-members" >
     {{~it.members :member:index}}

@@ -57,9 +57,14 @@ a {
   text-decoration: none;
   color: #4078c0;
 }
+header h2{
+  display: inline-block;
+}
 
 .remove-link{
-  font-weight: 700;
+  margin:0;
+  color: #D9534F;
+  font-size: 1em;
 }
 
 body .brand {
@@ -252,7 +257,7 @@ input[type=text], input[type=url], input[type=email], input[type=password], inpu
   background-color: #5CB85C;
 }
 
-button, input[type=submit],input[type=button]  {
+button, input[type=submit],input[type=button] {
   display: inline-block;
   margin-top:12px;
   border-radius: 2px;
@@ -260,6 +265,14 @@ button, input[type=submit],input[type=button]  {
   font-weight: bold;
   box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.08);
   padding: 8px 12px;
+  border: 0;
+}
+
+a.add-link{
+  border-radius: 2px;
+  color: #ffffff;
+  box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.08);
+  padding: 6px 8px;
   border: 0;
 }
 
@@ -306,7 +319,7 @@ section header {
 }
 div.team h3, .header-tbl{
   margin:0;
-  padding:12px;
+  padding:12px 0px;
   border-bottom: 0;
   font-weight: 700;
 }
