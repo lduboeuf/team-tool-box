@@ -158,7 +158,7 @@ app.page("home", function()
       function(teams){
 
         if (Object.keys(teams).length === 0){
-          app.alert('alert-info','hi there ;-), no members found, you can add members by clicking on the "My Groups" menu. If it is your first time, you can have a look to "About" section');
+          app.alert('alert-info','hi there ;-), no members found, you can add members by clicking on the "My Groups" menu. If it is your first time, you can have a look to the "About" section');
         }
         $teamList.innerHTML = tplTeamList(teams);
       }
@@ -167,7 +167,7 @@ app.page("home", function()
     //list already saved ?
     if (params && params.event =='onSavedOutput'){
       var $btnSave = $resultList.querySelector('button');
-      $btnSave.classList.toggle('btn-success');
+      $btnSave.classList.toggle('btn-default');
       $btnSave.onclick = null;
     }
 
