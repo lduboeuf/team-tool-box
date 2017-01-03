@@ -57,8 +57,9 @@ app.page("home", function()
     }else{
       teams = getRandomMembers(nbPers, members, idxs);
     }
-    if (teams)
+    if (teams) {
       displayTeams(teams);
+    }
 
   }
 
@@ -89,31 +90,34 @@ app.page("home", function()
 
       var idx, n;
       var teams = [];
-      for (var i = 0; i < nbTeam; i++) {
-        var team = { name : 'Team ' + i + ':'};
-        var members = [nbPers];
-        for (var j = 0; j < nbPers; j++) {
-          n = Math.floor(Math.random() * idxs.length);
-          //n = Math.floor(Math.random() * (idxs.length - 1));
-          idx = idxs.splice(n, 1);
-          members[j] = teamMembers[idx];
+      if (nbTeam==0){
+        teams.push({ name: 'Team 0', members: teamMembers});
+      }else{
+        for (var i = 0; i < nbTeam; i++) {
+          var team = { name : 'Team ' + i + ':'};
+          var members = [nbPers];
+          for (var j = 0; j < nbPers; j++) {
+            n = Math.floor(Math.random() * idxs.length);
+            idx = idxs.splice(n, 1);
+            members[j] = teamMembers[idx];
+          }
+          team.members = members;
+          teams[i] = team;
+
         }
-        team.members = members;
-        teams[i] = team;
+
+        //handle orphans ?
+        var i = 0;
+        while (idxs.length>0){
+          teams[i].members.push(teamMembers[idxs.pop()]);
+          (i < nbTeam-1) ? i++: i = 0;
+        }
+
+
 
       }
 
-      //any orphans ?
-      if (idxs.length>0) {
-          //add them to first team and so on
-          var members = idxs.map(function (x, i) { return teamMembers[x] });
-          var team = {
-            name : 'Team Orphan(s)',
-            members : members
-          };
-          teams.push(team);
 
-      }
 
       return teams;
     }
@@ -132,7 +136,10 @@ app.page("home", function()
     }
 
     //empty tpl by default
+    $teamList.innerHTML = '<option value="-1">--all groups--</option>';
+    //$teamList.classList.add('spinner');
     $resultList.innerHTML = null;
+
 
 
     $okBtn.onclick = function(e){
@@ -154,7 +161,6 @@ app.page("home", function()
           app.alert('alert-info','hi there ;-), no members found, you can add members by clicking on the "My Groups" menu. If it is your first time, you can have a look to "About" section');
         }
         $teamList.innerHTML = tplTeamList(teams);
-
       }
     );
 

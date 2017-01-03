@@ -85,6 +85,12 @@ body .brand {
   font-size: 0.7em;
 }
 
+select.spinner {
+    background-image:url('loader.gif');
+    background-repeat:no-repeat;
+    background-position:5px 5px;
+}
+
 
 ul.topnav {
   text-align: right;
@@ -323,6 +329,11 @@ div.team h3, .header-tbl{
   border-bottom: 0;
   font-weight: 700;
 }
+
+div.team li:first-child {
+  color: green;
+}
+
 .header-tbl{
   text-align: right;
 }
