@@ -26,9 +26,7 @@ app.page("archive-details", function()
     if ($comment.value.length==0){
       return false;
     }
-    if (!currentArchive.comment) currentArchive.comment = $comment.value;
-    else currentArchive.comment += $comment.value;
-
+    currentArchive.comment = $comment.value;
 
     remoteStorage.archives.store(currentArchive).then(function(){
       history.back();
