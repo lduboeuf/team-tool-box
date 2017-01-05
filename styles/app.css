@@ -219,7 +219,7 @@ ul.topnav li.icon {
 
 /***forms***/
 
-#home  form{
+#tool-build-teams,#tool-find-members, #tool-next-member   form{
   border: 1px solid #dbdbdb;
   border-radius: 4px;
   padding:8px;
