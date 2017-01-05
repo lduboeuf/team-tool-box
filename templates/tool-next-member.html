@@ -9,7 +9,7 @@
       {{ for(var prop in it) { }}
         <option value="{{=it[prop].id}}">{{=it[prop].name}} ({{=it[prop].members.length}})</option>
       {{ } }}
-
+      <option value="-1">--all groups--</option>
     </select>
 
 </form>

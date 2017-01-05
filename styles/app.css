@@ -9,10 +9,19 @@ body {
 h2 { font-size: 1.10em; margin-top: 0;}
 h3 { font-size: 1em; }
 
+a {
+  text-decoration: none;
+}
+
 /* all sections are off by default */
 body > section {
-  margin: 1em;
+  margin:1em;
   display:none;
+}
+
+section > div {
+  width:50%;
+  margin:auto;
 }
 
 
@@ -52,14 +61,8 @@ body> header {
   top:0;
   width: 100%;
 }
-table td{
-  padding:0;
-}
 
-a {
-  text-decoration: none;
-  /*color: #4078c0;*/
-}
+
 header h2{
   display: inline-block;
 }
@@ -71,7 +74,6 @@ header h2{
 }
 
 body .brand {
-  /*float: left;*/
   padding: 14px 12px;
   text-align: left;
 }
@@ -144,6 +146,12 @@ ul.topnav li.icon {
   .brand span{
     display: none;
   }
+
+  section > div {
+    width:100%;
+    margin:auto;
+  }
+
 
   #remotestorage-widget{
     right: 8px !important;
@@ -219,7 +227,7 @@ ul.topnav li.icon {
 
 /***forms***/
 
-#tool-build-teams,#tool-find-members, #tool-next-member   form{
+#tool-build-teams form ,#tool-find-members form, #tool-next-member  form{
   border: 1px solid #dbdbdb;
   border-radius: 4px;
   padding:8px;
@@ -241,7 +249,7 @@ ul.topnav li.icon {
   padding:8px;
   font-weight: 700;
   box-shadow: 1px 1px 0px #dbdbdb;
-  background-color: #727F9B;
+  background-color: #495A80;
   text-align: center;
 }
 
@@ -339,7 +347,8 @@ textarea{
 
 /*forms for mobiles*/
 @media screen and (max-width:680px) {
-  input[type=text], select, textarea, button, form {
+
+  input[type=text], select, textarea, button {
     width: 100%;
   }
   input[type="radio"] {
@@ -351,6 +360,7 @@ textarea{
   .actions {
     width:100%;
   }
+
 }
 
 

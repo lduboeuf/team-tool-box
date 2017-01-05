@@ -74,7 +74,7 @@
           url += ':' + param;
 
         if (location.hash=="" || location.hash!==url){
-          history.pushState(null, null, "#" + pageName);
+          history.pushState(null, null, url);
         }
       }
     }
