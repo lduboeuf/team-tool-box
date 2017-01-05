@@ -83,7 +83,9 @@
   function app(pageName,param) {
 
     var $page = document.body.querySelector("section#" + pageName);
-
+    if(!$page){
+      console.error('page' + pageName + ' is not declared has a section');
+    }
     var src = $page.getAttribute("src");
     if( src && !$page.hasChildNodes()) { // it has src and is empty
       app.get(src, $page, pageName, param);

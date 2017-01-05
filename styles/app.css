@@ -25,6 +25,9 @@ body.team-member-add    > section#team-member-add,
 body.archive-save    > section#archive-save,
 body.archive-list    > section#archive-list,
 body.archive-details    > section#archive-details,
+body.tool-build-teams    > section#tool-build-teams ,
+body.tool-find-members    > section#tool-find-members  ,
+body.tool-next-member    > section#tool-next-member  ,
 body.sync   > section#sync,
 body.team-member-details > section#team-member-details { display:block; }
 
@@ -55,7 +58,7 @@ table td{
 
 a {
   text-decoration: none;
-  color: #4078c0;
+  /*color: #4078c0;*/
 }
 header h2{
   display: inline-block;
@@ -194,7 +197,7 @@ ul.topnav li.icon {
   display:none;
   background-color: #D9EDF7;
   color:#31708f;
-  border: 1px solid #31708f;
+  border: 1px solid #b2cedd;
   border-radius: 4px;
 }
 .alert-closebtn {
@@ -216,7 +219,7 @@ ul.topnav li.icon {
 
 /***forms***/
 
-#home form{
+#home  form{
   border: 1px solid #dbdbdb;
   border-radius: 4px;
   padding:8px;
@@ -224,10 +227,32 @@ ul.topnav li.icon {
   background-color: #fff;
 }
 
+.actions {
+  text-align: center;
+  margin-top: 50px;
+  margin-left: auto;
+  width: 50%;
+  margin-right: auto;
+}
+#home a{
+  display:block;
+  margin-top:8px;
+  padding:8px;
+  font-weight: 700;
+  box-shadow: 1px 1px 0px #dbdbdb;
+  text-align: center;
+}
+
 #teams-result{
   border: 1px solid #ddd;
   padding:8px;
   /*padding-top:12px;*/
+}
+#tool-next-member li label{
+  display:block;
+}
+#tool-next-member li input{
+  float:right;
 }
 
 section header{
@@ -258,6 +283,11 @@ input[type=text], input[type=url], input[type=email], input[type=password], inpu
 }
 .btn-default{
   background-color: #337AB7;
+  border-radius: 2px;
+  color: #ffffff;
+  box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.08);
+  padding: 6px 8px;
+  border: 0;
 }
 .btn-success{
   background-color: #5CB85C;
@@ -307,7 +337,7 @@ textarea{
 
 /*forms for mobiles*/
 @media screen and (max-width:680px) {
-  input, select, textarea, button, form {
+  input[type=text], select, textarea, button, form {
     width: 100%;
   }
   input[type="radio"] {
@@ -315,6 +345,9 @@ textarea{
   }
   .radio-group {
     display: block;
+  }
+  .actions {
+    width:100%;
   }
 }
 
