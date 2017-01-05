@@ -233,6 +233,7 @@ ul.topnav li.icon {
   margin-left: auto;
   width: 50%;
   margin-right: auto;
+
 }
 #home a{
   display:block;
@@ -240,6 +241,7 @@ ul.topnav li.icon {
   padding:8px;
   font-weight: 700;
   box-shadow: 1px 1px 0px #dbdbdb;
+  background-color: #727F9B;
   text-align: center;
 }
 
