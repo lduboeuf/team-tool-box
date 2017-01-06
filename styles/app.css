@@ -236,7 +236,6 @@ ul.topnav li.icon {
 }
 
 .actions {
-  text-align: center;
   margin-top: 50px;
   margin-left: auto;
   width: 50%;
@@ -246,11 +245,11 @@ ul.topnav li.icon {
 #home a{
   display:block;
   margin-top:8px;
-  padding:8px;
+  padding:12px;
   font-weight: 700;
   box-shadow: 1px 1px 0px #dbdbdb;
   background-color: #495A80;
-  text-align: center;
+  border: 1px solid #cccccc;
 }
 
 #teams-result{
@@ -296,7 +295,6 @@ input[type=text], input[type=url], input[type=email], input[type=password], inpu
   border-radius: 2px;
   color: #ffffff;
   box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.08);
-  padding: 6px 8px;
   border: 0;
 }
 .btn-success{
@@ -348,7 +346,7 @@ textarea{
 /*forms for mobiles*/
 @media screen and (max-width:680px) {
 
-  input[type=text], select, textarea, button {
+  input[type=text], input[type=submit], select, textarea, button {
     width: 100%;
   }
   input[type="radio"] {
