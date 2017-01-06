@@ -11,10 +11,15 @@ app.page("archive-list", function()
 
     remoteStorage.archives.findAll().then(
       function(archives){
-        $archiveList.innerHTML = tpl(archives);
+        if (Object.keys(archives).length === 0){
+          $archiveList.innerHTML = 'no archives found';
+        }else{
+          $archiveList.innerHTML = tpl(archives);
+        }
+
       }
     );
-    
+
 
 
   }

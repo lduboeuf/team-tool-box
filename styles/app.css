@@ -9,10 +9,19 @@ body {
 h2 { font-size: 1.10em; margin-top: 0;}
 h3 { font-size: 1em; }
 
+a {
+  text-decoration: none;
+}
+
 /* all sections are off by default */
 body > section {
-  margin: 1em;
+  margin:1em;
   display:none;
+}
+
+section > div {
+  width:50%;
+  margin:auto;
 }
 
 
@@ -25,6 +34,9 @@ body.team-member-add    > section#team-member-add,
 body.archive-save    > section#archive-save,
 body.archive-list    > section#archive-list,
 body.archive-details    > section#archive-details,
+body.tool-build-teams    > section#tool-build-teams ,
+body.tool-find-members    > section#tool-find-members  ,
+body.tool-next-member    > section#tool-next-member  ,
 body.sync   > section#sync,
 body.team-member-details > section#team-member-details { display:block; }
 
@@ -49,14 +61,8 @@ body> header {
   top:0;
   width: 100%;
 }
-table td{
-  padding:0;
-}
 
-a {
-  text-decoration: none;
-  color: #4078c0;
-}
+
 header h2{
   display: inline-block;
 }
@@ -68,7 +74,6 @@ header h2{
 }
 
 body .brand {
-  /*float: left;*/
   padding: 14px 12px;
   text-align: left;
 }
@@ -83,6 +88,12 @@ body .brand {
 
 #archive-save .team-list{
   font-size: 0.7em;
+}
+
+select.spinner {
+    background-image:url('loader.gif');
+    background-repeat:no-repeat;
+    background-position:5px 5px;
 }
 
 
@@ -136,6 +147,12 @@ ul.topnav li.icon {
     display: none;
   }
 
+  section > div {
+    width:100%;
+    margin:auto;
+  }
+
+
   #remotestorage-widget{
     right: 8px !important;
     top: 0px !important;
@@ -188,7 +205,7 @@ ul.topnav li.icon {
   display:none;
   background-color: #D9EDF7;
   color:#31708f;
-  border: 1px solid #31708f;
+  border: 1px solid #b2cedd;
   border-radius: 4px;
 }
 .alert-closebtn {
@@ -210,7 +227,7 @@ ul.topnav li.icon {
 
 /***forms***/
 
-#home form{
+#tool-build-teams form ,#tool-find-members form, #tool-next-member  form{
   border: 1px solid #dbdbdb;
   border-radius: 4px;
   padding:8px;
@@ -218,10 +235,36 @@ ul.topnav li.icon {
   background-color: #fff;
 }
 
+.actions {
+  margin-top: 50px;
+  margin-left: auto;
+  width: 50%;
+  margin-right: auto;
+
+}
+#home a{
+  display:block;
+  margin-top:8px;
+  padding:12px;
+  font-weight: 700;
+  box-shadow: 1px 1px 0px #dbdbdb;
+  background-color: #293142;
+  border: 1px solid #cccccc;
+}
+#home a:hover{
+  background-color: #555555;
+}
+
 #teams-result{
   border: 1px solid #ddd;
   padding:8px;
   /*padding-top:12px;*/
+}
+#tool-next-member li label{
+  display:block;
+}
+#tool-next-member li input{
+  float:right;
 }
 
 section header{
@@ -252,6 +295,10 @@ input[type=text], input[type=url], input[type=email], input[type=password], inpu
 }
 .btn-default{
   background-color: #337AB7;
+  border-radius: 2px;
+  color: #ffffff;
+  box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.08);
+  border: 0;
 }
 .btn-success{
   background-color: #5CB85C;
@@ -301,7 +348,8 @@ textarea{
 
 /*forms for mobiles*/
 @media screen and (max-width:680px) {
-  input, select, textarea, button, form {
+
+  input[type=text], input[type=submit], select, textarea, button {
     width: 100%;
   }
   input[type="radio"] {
@@ -310,6 +358,10 @@ textarea{
   .radio-group {
     display: block;
   }
+  .actions {
+    width:100%;
+  }
+
 }
 
 
@@ -323,6 +375,11 @@ div.team h3, .header-tbl{
   border-bottom: 0;
   font-weight: 700;
 }
+
+div.team li:first-child {
+  color: green;
+}
+
 .header-tbl{
   text-align: right;
 }

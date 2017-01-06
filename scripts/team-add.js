@@ -10,8 +10,8 @@ app.page("team-add", function()
     e.preventDefault();
     if ($nameInput.value.length>0){
 
-      remoteStorage.teams.store({ "name": $nameInput.value}).then(function(){
-        history.back();
+      remoteStorage.teams.store({ "name": $nameInput.value}).then(function(team){
+        app('team-list-details',team.id);
       });
 
 

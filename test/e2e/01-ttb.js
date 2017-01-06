@@ -101,14 +101,13 @@ module.exports = { // adapted from: https://git.io/vodU0
     .waitForElementVisible('#team-list-details')
     .saveScreenshot('/tmp/nightwatch/ttb/screenshots/team-members-after-removeone.png')
   },
-  'Generate Tool test ':function(browser){
+  'Random Teams test ':function(browser){
     browser
-    .url('http://localhost:8000/index.html')
-    .waitForElementVisible('#home')
-    //----
-    .setValue('#home select#nb', 1)
+    .url('http://localhost:8000/index.html#tool-build-teams')
+    .waitForElementVisible('#tool-build-teams')
+    .setValue('#tool-build-teams .nb-members', 1)
     .click('input[type="submit"]')
-    .waitForElementVisible('#home div.team')
+    .waitForElementVisible('#tool-build-teams div.team')
     .pause(500)
     .assert.elementPresent("ul.teams li")
     .elements('css selector', '.team h3', function (elements) {
@@ -117,9 +116,9 @@ module.exports = { // adapted from: https://git.io/vodU0
     })
     .pause(1000)
     //------
-    .setValue('#home select#nb', 2)
+    .setValue('#tool-build-teams .nb-members', 2)
     .click('input[type="submit"]')
-    .waitForElementVisible('#home div.team')
+    .waitForElementVisible('#tool-build-teams div.team')
     .assert.elementPresent("ul.teams li")
     .elements('css selector', '.team h3', function (elements) {
       var count = elements.value.length;
@@ -127,7 +126,7 @@ module.exports = { // adapted from: https://git.io/vodU0
     })
     .pause(1000)
 
-    .click('#teams-result button')
+    .click('#tool-build-teams .teams-result button')
     .waitForElementVisible('#archive-save',1000)
     //test for name empty
     .setValue('#archive-save input[name="name"]', '')
@@ -140,8 +139,8 @@ module.exports = { // adapted from: https://git.io/vodU0
     .saveScreenshot('/tmp/nightwatch/ttb/screenshots/team-generation-save.png')
     .pause(500)
     .acceptAlert()
-    .waitForElementVisible('#home',1000)
-    .assert.cssClassNotPresent('#teams-result button', 'btn-success')
+    .waitForElementVisible('#tool-build-teams',1000)
+    .assert.cssClassNotPresent('#tool-build-teams .teams-result button', 'btn-success')
 
     .pause(1000)
     .end();

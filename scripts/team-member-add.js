@@ -14,9 +14,6 @@ app.page("team-member-add", function()
         function(){
           history.back();
       });
-      //TeamRepository.addMember(selectedTeamId, { name: nameInput.value});
-
-
 
     }else {
       //handle error msg
