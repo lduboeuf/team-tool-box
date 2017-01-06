@@ -32,9 +32,17 @@ app.page("tool-next-member", function()
 
   var displayTeams =function(teams){
     $resultList.innerHTML =  tplResultList(teams);
+    $checkbox_members = $section.querySelectorAll('input[name="member_name"]');
+    //handle tick all
+    $section.querySelector('input[name="tick_all"]').onclick = function(){
+      var checked = this.checked;
+      for (var i=0; i < $checkbox_members.length; i++){
+        $checkbox_members[i].checked = checked;
+      }
+    }
     $section.querySelector('input[type="submit"]').onclick = function(e){
       e.preventDefault();
-      $checkbox_members = $section.querySelectorAll('input[name="member_name"]');
+
       var members = [];
       for (var i=0; i < $checkbox_members.length; i++){
         if ($checkbox_members[i].checked){
@@ -43,6 +51,8 @@ app.page("tool-next-member", function()
       }
       shuffle(members);
       $shuffleResult.innerHTML = tplShuffleResult(members);
+
+
     }
   }
 
