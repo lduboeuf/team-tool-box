@@ -44,8 +44,15 @@ app.start = function(){
   //remotestorage
   remoteStorage.access.claim('teams', 'rw');
   remoteStorage.access.claim('archives', 'rw');
+  remoteStorage.access.claim('config', 'rw');
+
 
   remoteStorage.displayWidget();
+
+  // remoteStorage.config.get().then(function(config){
+  //   console.log(config);
+  // });
+
   //simulate a hash change at startup
   window.dispatchEvent(new CustomEvent('hashchange'));
 

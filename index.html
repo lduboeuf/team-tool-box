@@ -13,6 +13,7 @@
     <!-- build:js scripts/scripts.js -->
     <script src="scripts/remotestorage-ttb-teams.js"></script>
     <script src="scripts/remotestorage-ttb-archives.js"></script>
+    <script src="scripts/remotestorage-ttb-config.js"></script>
     <script src="scripts/spapp.js"></script>
 
     <script src="scripts/app-utils.js"></script>
@@ -29,6 +30,7 @@
     <script src="scripts/tool-build-teams.js"></script>
     <script src="scripts/tool-find-members.js"></script>
     <script src="scripts/tool-next-member.js"></script>
+    <script src="scripts/settings.js"></script>
     <!-- endbuild -->
     <!-- build:css styles/main.css -->
     <link rel="stylesheet" href="styles/app.css">
@@ -46,6 +48,7 @@
     <li><a href="#home">Home</a></li>
      <li><a href="#team-list">My Groups</a></li>
      <li><a href="#archive-list">Archives</a></li>
+     <li><a href="#settings">Settings</a></li>
      <li><a href="#about">About</a></li>
      <li class="icon">
        <a href="javascript:void(0);" onclick="menuHandler()">&#9776;</a>
@@ -75,13 +78,14 @@
   <section id="archive-save" src="templates/archive-save.html"></section>
   <section id="archive-list" src="templates/archive-list.html"></section>
   <section id="archive-details" src="templates/archive-details.html"></section>
+  <section id="settings" src="templates/settings.html"></section>
   <section id="sync" src="templates/sync.html"></section>
   <div class="alert-info">
     <span onclick="this.parentElement.style.display='none'" class="alert-closebtn">&times;</span>
     <p class="alert-msg"></p>
   </div>
   <script>
-    
+
     app.start();
   </script>
 </body>

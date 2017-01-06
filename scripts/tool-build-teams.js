@@ -12,6 +12,7 @@ app.page("tool-build-teams", function()
   var tplResultList = doT.template($resultList.innerHTML);
 
   var currentOutput = null;
+  var config = null;
 
   var exec = function(){
     var teamId = $teamList.value;
@@ -37,6 +38,7 @@ app.page("tool-build-teams", function()
 
   var generate = function(team){
 
+    var team_names = config.team_names || [1,2,3,4,5,6,7,8,9,10];
 
     var members = team.members;
     if (members.length==0){
@@ -54,10 +56,10 @@ app.page("tool-build-teams", function()
     var idx, n;
     var teams = [];
     if (nbTeam==0){
-      teams.push({ name: 'Team 0', members: members});
+      teams.push({ name: 'Team ' + team_names[0], members: members});
     }else{
       for (var i = 0; i < nbTeam; i++) {
-        var team = { name : 'Team ' + i + ':'};
+        var team = { name : 'Team ' +team_names[i] + ':'};
         var tmp_members = [nbPers];
         for (var j = 0; j < nbPers; j++) {
           n = Math.floor(Math.random() * idxs.length);
@@ -131,6 +133,10 @@ app.page("tool-build-teams", function()
         $teamList.innerHTML = tplTeamList(teams);
       }
     );
+
+    remoteStorage.config.get().then(function(conf){
+      config = conf;
+    });
 
     //list already saved ?
     if (params && params.event =='onSavedOutput'){

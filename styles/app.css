@@ -38,6 +38,7 @@ body.tool-build-teams    > section#tool-build-teams ,
 body.tool-find-members    > section#tool-find-members  ,
 body.tool-next-member    > section#tool-next-member  ,
 body.sync   > section#sync,
+body.settings   > section#settings,
 body.team-member-details > section#team-member-details { display:block; }
 
 /* nav highlightion rules */
@@ -50,6 +51,7 @@ body.team-member-details #menu a[href="#team-list"],
 body.archive-list  #menu a[href="#archive-list "],
 body.archive-save  #menu a[href="#archive-list "],
 body.archive-details  #menu a[href="#archive-list "],
+body.settings #menu a[href="#settings"],
 body.home #menu a[href="#home"] { background-color: #555; }
 
 
