@@ -1,1 +1,32 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><title>Team Tool Box</title><meta name="viewport" content="width=device-width,initial-scale=1"><script src="scripts/vendors.js"></script><script src="scripts/scripts.js"></script><link rel="stylesheet" href="styles/main.css"></head><body><!--[if lt IE 10]> <p class="browserupgrade"><strong>Ohlala, so sorry!</strong>, developping apps for old browser is so painfull and time consuming that i choosed not to support them ... Please <a href="http://browsehappy.com/">upgrade your browser</a> .</p> <![endif]--><header><div class="brand"><a href="#home">Team Tool Box</a> <span>Build your teams randomly!</span></div><ul class="topnav" id="menu"><li><a href="#home">Home</a></li><li><a href="#team-list">My Groups</a></li><li><a href="#archive-list">Archives</a></li><li><a href="#settings">Settings</a></li><li><a href="#about">About</a></li><li class="icon"><a href="javascript:void(0);" onclick="menuHandler()">&#9776;</a></li></ul></header><section id="home" default><div class="actions"><ul><li><a href="#tool-build-teams" class="btn-default">build teams</a></li><li><a href="#tool-find-members" class="btn-default">find members</a></li><li><a href="#tool-next-member" class="btn-default">who's next</a></li></ul></div></section><section id="tool-build-teams" src="templates/tool-build-teams.html"></section><section id="tool-find-members" src="templates/tool-find-members.html"></section><section id="tool-next-member" src="templates/tool-next-member.html"></section><section id="team-list" src="templates/team-list.html"></section><section id="team-list-details" src="templates/team-list-details.html"></section><section id="team-add" src="templates/team-add.html"></section><section id="team-member-add" src="templates/team-member-add.html"></section><section id="team-member-details" src="templates/team-member-details.html"></section><section id="about" src="templates/about.html"></section><section id="archive-save" src="templates/archive-save.html"></section><section id="archive-list" src="templates/archive-list.html"></section><section id="archive-details" src="templates/archive-details.html"></section><section id="settings" src="templates/settings.html"></section><section id="sync" src="templates/sync.html"></section><div class="alert-info"><span onclick="this.parentElement.style.display='none'" class="alert-closebtn">&times;</span><p class="alert-msg"></p></div><script>app.start();</script></body></html>
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Team Tool Box</title><meta name="viewport" content="width=device-width,initial-scale=1"><script src="scripts/vendors.js"></script><script src="scripts/scripts.js"></script><link rel="stylesheet" href="styles/main.css"></head><body><!--[if lt IE 10]> <p class="browserupgrade"><strong>Ohlala, so sorry!</strong>, developping apps for old browser is so painfull and time consuming that i choosed not to support them ... Please <a href="http://browsehappy.com/">upgrade your browser</a> .</p> <![endif]--><header><div class="brand"><a href="#home">Team Tool Box</a> <span>Build your teams randomly!</span></div><ul class="topnav" id="menu"><li><a href="#home">Home</a></li><li><a href="#team-list">My Groups</a></li><li><a href="#archive-list">Archives</a></li><li><a href="#settings">Settings</a></li><li><a href="#about">About</a></li><li class="icon"><a href="javascript:void(0);" onclick="menuHandler()">&#9776;</a></li></ul></header><section id="home" default><div class="actions"><ul><li><a href="#tool-build-teams" class="btn-default">build teams</a></li><li><a href="#tool-find-members" class="btn-default">find members</a></li><li><a href="#tool-next-member" class="btn-default">who's next</a></li></ul></div></section><section id="tool-build-teams" src="templates/tool-build-teams.html"></section><section id="tool-find-members" src="templates/tool-find-members.html"></section><section id="tool-next-member" src="templates/tool-next-member.html"></section><section id="team-list" src="templates/team-list.html"></section><section id="team-list-details" src="templates/team-list-details.html"></section><section id="team-add" src="templates/team-add.html"></section><section id="team-member-add" src="templates/team-member-add.html"></section><section id="team-member-details" src="templates/team-member-details.html"></section><section id="about" src="templates/about.html"></section><section id="archive-save" src="templates/archive-save.html"></section><section id="archive-list" src="templates/archive-list.html"></section><section id="archive-details" src="templates/archive-details.html"></section><section id="settings" src="templates/settings.html"></section><section id="sync" src="templates/sync.html"></section><div class="alert-info"><span onclick="this.parentElement.style.display='none'" class="alert-closebtn">&times;</span><p class="alert-msg"></p></div><script>var menu = document.getElementById("menu");
+    var links = document.querySelectorAll('header ul li a');
+    //menu for mobile click handler
+    function menuHandler() {
+        if (menu.className === "topnav") {
+            menu.className += " responsive";
+        } else {
+            menu.className = "topnav";
+        }
+    }
+
+    function setSelected(){
+      //toggle menu when a menu item is clicked
+      if (this.parentNode.className!=='icon'){
+        menu.className = "topnav";
+      }
+
+      //make sure every alert box is hidden
+      document.querySelector('.alert-info').style.display = 'none';
+
+    }
+
+    for(i=0;i<links.length;i++) {
+      links[i].addEventListener('click',setSelected);
+    }
+    document.querySelector('div.brand a').onclick = setSelected;
+
+    //when clicking outside of menu, toggle menu
+    document.querySelector('body>section').onclick = function(){
+      menu.className = "topnav";
+    }
+    app.start();</script></body></html>
