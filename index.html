@@ -51,7 +51,7 @@
      <li><a href="#settings">Settings</a></li>
      <li><a href="#about">About</a></li>
      <li class="icon">
-       <a href="javascript:void(0);" onclick="menuHandler()">&#9776;</a>
+       <a href="javascript:void(0);">&#9776;</a>
      </li>
    </ul>
  </header>
@@ -60,9 +60,9 @@
 
     <div class="actions">
       <ul>
-      <li><a href="#tool-build-teams" class="btn-default">build teams</a></li>
-      <li><a href="#tool-find-members" class="btn-default">find members</a></li>
-      <li><a href="#tool-next-member" class="btn-default">who's next</a></li>
+      <li><a href="#tool-build-teams">build teams</a></li>
+      <li><a href="#tool-find-members">find members</a></li>
+      <li><a href="#tool-next-member">who's next</a></li>
       </ul>
     </div>
   </section>
@@ -80,42 +80,13 @@
   <section id="archive-details" src="templates/archive-details.html"></section>
   <section id="settings" src="templates/settings.html"></section>
   <section id="sync" src="templates/sync.html"></section>
-  <div class="alert-info">
+  <div class="alert alert-info">
     <span onclick="this.parentElement.style.display='none'" class="alert-closebtn">&times;</span>
     <p class="alert-msg"></p>
   </div>
   <script>
-    var menu = document.getElementById("menu");
-    var links = document.querySelectorAll('header ul li a');
-    //menu for mobile click handler
-    function menuHandler() {
-        if (menu.className === "topnav") {
-            menu.className += " responsive";
-        } else {
-            menu.className = "topnav";
-        }
-    }
 
-    function setSelected(){
-      //toggle menu when a menu item is clicked
-      if (this.parentNode.className!=='icon'){
-        menu.className = "topnav";
-      }
-
-      //make sure every alert box is hidden
-      document.querySelector('.alert-info').style.display = 'none';
-
-    }
-
-    for(i=0;i<links.length;i++) {
-      links[i].addEventListener('click',setSelected);
-    }
-    document.querySelector('div.brand a').onclick = setSelected;
-
-    //when clicking outside of menu, toggle menu
-    document.querySelector('body>section').onclick = function(){
-      menu.className = "topnav";
-    }
+    //@see app-utils.js
     app.start();
   </script>
 </body>
