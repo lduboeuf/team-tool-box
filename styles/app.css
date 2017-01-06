@@ -19,10 +19,11 @@ body > section {
   display:none;
 }
 
-section > div {
+section > div, .alert  {
   width:50%;
   margin:auto;
 }
+
 
 
 body.about           > section#about,
@@ -149,8 +150,8 @@ ul.topnav li.icon {
     display: none;
   }
 
-  section > div {
-    width:100%;
+  section > div, .alert {
+    width:94%;
     margin:auto;
   }
 
@@ -202,13 +203,15 @@ ul.topnav li.icon {
 /***end header style**/
 
 /*alert box*/
-.alert-info {
-  margin: 10px;
+.alert{
   display:none;
-  background-color: #D9EDF7;
-  color:#31708f;
   border: 1px solid #b2cedd;
   border-radius: 4px;
+}
+
+.alert-info {
+  background-color: #E0E3E4;
+  color:#31708f;
 }
 .alert-closebtn {
     margin:2px;
@@ -240,21 +243,20 @@ ul.topnav li.icon {
 .actions {
   margin-top: 50px;
   margin-left: auto;
-  width: 50%;
   margin-right: auto;
 
 }
-#home a{
+.actions a{
   display:block;
   margin-top:8px;
   padding:12px;
   font-weight: 700;
+  color:#555555;
   box-shadow: 1px 1px 0px #dbdbdb;
-  background-color: #04102A;
   border: 1px solid #cccccc;
 }
-#home a:hover{
-  background-color: #555555;
+.actions a:hover{
+  background-color: #F5F5F5;
 }
 
 #teams-result{

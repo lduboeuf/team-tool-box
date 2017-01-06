@@ -7,7 +7,7 @@ app.page("home", function()
       function(teams){
 
         if (Object.keys(teams).length === 0){
-          app.alert('alert-info','hello ;-). Welcome to Team Tool Box!. Maybe the first time here, please have a look to the <a href="#about">About</a> section');
+          app.alert('alert-info','<strong>hello ;-)</strong>. Welcome to <strong>Team Tool Box!</strong>. Maybe your first time here, please have a look to the <a href="#about">About</a> section');
         }
       }
     );
