@@ -32,6 +32,7 @@
     "grunt-contrib-cssmin": "^1.0.2",
     "grunt-contrib-htmlmin": "^2.0.0",
     "grunt-contrib-uglify": "^2.0.0",
+    "grunt-manifest": "^0.4.4",
     "grunt-nightwatch": "^0.5.4",
     "grunt-selenium-standalone": "^1.0.1",
     "grunt-usemin": "^3.1.1",

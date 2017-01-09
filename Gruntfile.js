@@ -164,7 +164,31 @@ module.exports = function(grunt) {
           dest:'<%= appConfig.dist %>',
         }]
       }
+    },
+    pkg: grunt.file.readJSON('package.json'),
+    manifest: {
+    generate: {
+      options: {
+        basePath: '',
+        network: ['http://*', 'https://*'],
+        preferOnline: true,
+        headcomment: " <%= pkg.name %> v<%= pkg.version %>",
+        verbose: true,
+        timestamp: true,
+        hash: true,
+        master: ['dist/index.html'],
+        process: function(path) {
+          return path.substring('dist/'.length);
+        }
+      },
+      src: [
+        'dist/templates/*.html',
+          'dist/scripts/*.js',
+          'dist/styles/*.css'
+      ],
+      dest: 'dist/manifest.appcache'
     }
+  }
 
 
   });
@@ -181,6 +205,7 @@ module.exports = function(grunt) {
     'cssmin',
     'usemin',
     'htmlmin:dist',
+    'manifest'
 
   ]);
 
