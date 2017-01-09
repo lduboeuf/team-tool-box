@@ -51,7 +51,7 @@ app.page("tool-next-member", function()
       }
       shuffle(members);
       $shuffleResult.innerHTML = tplShuffleResult(members);
-
+      window.scrollTo(0,document.body.scrollHeight);
 
     }
   }
