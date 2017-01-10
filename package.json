@@ -35,6 +35,7 @@
     "grunt-manifest": "^0.4.4",
     "grunt-nightwatch": "^0.5.4",
     "grunt-selenium-standalone": "^1.0.1",
+    "grunt-string-replace": "^1.3.1",
     "grunt-usemin": "^3.1.1",
     "load-grunt-tasks": "^3.5.2",
     "nightwatch": "^0.9.11"

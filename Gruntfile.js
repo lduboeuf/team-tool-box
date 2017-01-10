@@ -8,7 +8,7 @@ module.exports = function(grunt) {
   if (grunt.option('rev')=='prod') outputDir = 'dist';
    // Configurable paths for the application
   var appConfig = {
-    app: '',
+    app: 'src',
     dist: outputDir
   };
 
@@ -35,18 +35,18 @@ module.exports = function(grunt) {
       server: '.tmp'
     },
     connect: {
-      server: {
-        options: {
-          port: 8000,
-          base: {
-            path: '.',
+          server: {
             options: {
-              index: 'index.html',
-              maxAge: 300000
+              port: 8000,
+              base: {
+                path: '<%= appConfig.app %>',
+                options: {
+                  index: 'index.html',
+                  maxAge: 300000
+                }
+              }
             }
           }
-        }
-      }
     },
     selenium_standalone: {
      options: {
@@ -57,7 +57,7 @@ module.exports = function(grunt) {
        seleniumDownloadURL: 'http://selenium-release.storage.googleapis.com',
        drivers: {
          chrome: {
-           version: '2.9',
+           version: '2.27',
            arch: process.arch,
            baseURL: 'http://chromedriver.storage.googleapis.com'
          }
@@ -67,7 +67,7 @@ module.exports = function(grunt) {
     nightwatch: {
       options: {
         "src_folders": [
-          "test/e2e"// Where you are storing your Nightwatch e2e tests
+          "<%= appConfig.app %>/test/e2e"// Where you are storing your Nightwatch e2e tests
         ],
         "output_folder": "/tmp/nightwatch/ttb/reports", // reports (test outcome) output by nightwatch
 
@@ -109,14 +109,32 @@ module.exports = function(grunt) {
         eqnull: true,
         browser: true
       },
-      all: ['Gruntfile.js', 'scripts/*.js']
+      all: ['Gruntfile.js', '<%= appConfig.app %>/scripts/*.js']
     },
+    'string-replace': {
+        inline: {
+          files: {
+            '<%= appConfig.dist %>/index.html': '<%= appConfig.app %>/index.html',
+          },
+          options: {
+            replacements: [
+              // place files inline example
+              {
+                pattern: /<section id="(.*?)" src="(.*?)">/ig,
+                replacement: function (match, p1, p2) {
+                  return '<section id="' + p1 + '">\r\n' + grunt.file.read(grunt.config.get('appConfig.app') + '/' + p2) + '\r\n';
+                }
+              }
+            ]
+          }
+        }
+      },
 
     // Reads HTML for usemin blocks to enable smart builds that automatically
     // concat, minify and revision files. Creates configurations in memory so
     // additional tasks can operate on them
     useminPrepare: {
-      html: 'index.html',
+      html: '<%= appConfig.app %>/index.html',
       options: {
         dest: '<%= appConfig.dist %>'
       }
@@ -125,6 +143,9 @@ module.exports = function(grunt) {
     // Performs rewrites based on rev and the useminPrepare configuration
     usemin: {
       html: ['<%= appConfig.dist %>/index.html'],
+      options: {
+        assetsDirs: ['<%= appConfig.dist %>']
+      }
     },
 
 
@@ -138,8 +159,6 @@ module.exports = function(grunt) {
           dest: '<%= appConfig.dist %>',
           src: [
             '*.{ico,png,txt}',
-            '*.html',
-            'templates/{,*/}*.html',
             'images/{,*/}*.{webp}',
             'fonts/*'
           ]
@@ -160,7 +179,7 @@ module.exports = function(grunt) {
         files: [{
           expand: true,
           cwd: '<%= appConfig.dist %>',
-          src: ['index.html','templates/*.html'],
+          src: ['index.html'],
           dest:'<%= appConfig.dist %>',
         }]
       }
@@ -170,23 +189,22 @@ module.exports = function(grunt) {
     generate: {
       options: {
         basePath: '',
+        cache: ['index.html'],
         network: ['http://*', 'https://*'],
         preferOnline: true,
         headcomment: " <%= pkg.name %> v<%= pkg.version %>",
         verbose: true,
         timestamp: true,
         hash: true,
-        master: ['dist/index.html'],
         process: function(path) {
-          return path.substring('dist/'.length);
+          return path.substring((appConfig.dist + '/').length);
         }
       },
       src: [
-        'dist/templates/*.html',
-          'dist/scripts/*.js',
-          'dist/styles/*.css'
+          '<%= appConfig.dist %>/scripts/*.js',
+          '<%= appConfig.dist %>/styles/*.css'
       ],
-      dest: 'dist/manifest.appcache'
+      dest: '<%= appConfig.dist %>/manifest.appcache'
     }
   }
 
@@ -198,6 +216,7 @@ module.exports = function(grunt) {
     //'test',
     'clean:dist',
     'copy:dist',
+    'string-replace',
     //'jshint',
     'useminPrepare',
     'concat',
