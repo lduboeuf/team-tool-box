@@ -30,11 +30,14 @@ module.exports = { // adapted from: https://git.io/vodU0
         client.waitForElementVisible('#team-add')
         client.setValue('input[name="name"]', 'team' +i)
         client.click('input[name="add"]')
-        client.waitForElementVisible('ul.team-list li')
+        client.waitForElementVisible('#team-list-details')
+        client.back()
+        client.waitForElementVisible('#team-add form')
       }
       done()
     })
-    .pause(1000)
+    .click('a[href="#team-list"]') //go back to team-list
+    .waitForElementVisible('ul.team-list li')
     .elements('css selector', 'ul.team-list li', function (elements) {
       var count = elements.value.length;
       this.assert.equal(count,5, 'should have a list of 5 teams')
@@ -47,12 +50,10 @@ module.exports = { // adapted from: https://git.io/vodU0
     .url('http://localhost:8000/index.html#team-list')
     .waitForElementVisible('#team-list ul.team-list li')
     .click('ul.team-list li a') //click on first team
-    .pause(1000)
     .waitForElementVisible('#team-list-details')
     .click('#team-list-details a.remove-link')
-    .pause(1000)
     .acceptAlert()
-    .waitForElementVisible('#team-list',1000)
+    .waitForElementVisible('#team-list ul.team-list li')
     .elements('css selector', 'ul.team-list li', function (elements) {
       var count = elements.value.length;
       this.assert.equal(count,4, 'should have a list of 4 teams')
