@@ -124,6 +124,32 @@ module.exports = function(grunt) {
                 replacement: function (match, p1, p2) {
                   return '<section id="' + p1 + '">\r\n' + grunt.file.read(grunt.config.get('appConfig.app') + '/' + p2) + '\r\n';
                 }
+
+              }
+            ]
+          }
+        },
+        spapp_generator:{
+          files: {
+            '<%= appConfig.app %>/index.html': '<%= appConfig.app %>/index.html',
+          },
+          options: {
+            replacements: [
+              {
+                pattern: /<!-- @import scripts -->/i,
+                replacement: function (match) {
+                  var name = grunt.option('name');
+                  var dom = '<!-- @import scripts -->\n<script src="scripts/'+ name + '.js"></script>';
+                  return dom;
+                }
+              },
+              {
+                pattern: /<!-- @import sections -->/i,
+                replacement: function (match) {
+                  var name = grunt.option('name');
+                  var dom = '<!-- @import sections -->\n<section id="'+ name +'" src="templates/'+ name +'.html"></section>';
+                  return dom;
+                }
               }
             ]
           }
@@ -209,6 +235,51 @@ module.exports = function(grunt) {
   }
 
 
+  });
+
+  grunt.registerTask('spapp_generator', 'SPapp generator', function(arg1, arg2) {
+    var path = require("path");
+    var template_folder = 'templates';
+    var script_folder = 'scripts';
+
+    var name = grunt.option('name');
+    if (!name){
+      grunt.log.error('please provide a controller/template name: '+ this.name + ' --name=ctrl_name' )
+    }else{
+      //generate template
+      var tplFilePath = path.join(grunt.config.get('appConfig.app'),template_folder, name + '.html');
+      if (grunt.file.isFile(tplFilePath)){
+        grunt.log.error('already found a file here:' + tplFilePath);
+        return;
+      }
+
+      var content = '<div></div>'; //minimum content
+      grunt.file.write(tplFilePath, content);
+      grunt.log.ok('created a template file :' + tplFilePath);
+
+
+      //generate js
+      var jsFilePath = path.join(grunt.config.get('appConfig.app'),script_folder, name + '.js');
+      if (grunt.file.isFile(jsFilePath)){
+        grunt.log.error('already found a file here:' + jsFilePath);
+        return;
+      }
+
+      var content =
+       ['app.page("'+ name +'", function() { ',
+        ' //your code here called once',
+        ' return function(params) {',
+        '   //your code called each view is called',
+        ' }',
+        '});'
+       ].join('\n');
+      grunt.file.write(jsFilePath, content);
+      grunt.log.ok('created a script file :' + jsFilePath);
+
+
+
+      grunt.task.run('string-replace:spapp_generator');
+    }
   });
 
 
