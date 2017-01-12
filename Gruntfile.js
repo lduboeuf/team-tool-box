@@ -4,6 +4,9 @@ module.exports = function(grunt) {
 
   // load grunt tasks based on dependencies in package.json
   require('load-grunt-tasks')(grunt);
+
+  //grunt.task.loadTasks('spapp_generator');
+
   var outputDir = 'dist/dev';
   if (grunt.option('rev')=='prod') outputDir = 'dist';
    // Configurable paths for the application
@@ -13,7 +16,6 @@ module.exports = function(grunt) {
   };
 
 
-    // Watches files for changes and runs tasks based on the changed files
 // Define the configuration for all the tasks
   grunt.initConfig({
 
@@ -111,50 +113,14 @@ module.exports = function(grunt) {
       },
       all: ['Gruntfile.js', '<%= appConfig.app %>/scripts/*.js']
     },
-    'string-replace': {
-        inline: {
-          files: {
-            '<%= appConfig.dist %>/index.html': '<%= appConfig.app %>/index.html',
-          },
-          options: {
-            replacements: [
-              // place files inline example
-              {
-                pattern: /<section id="(.*?)" src="(.*?)">/ig,
-                replacement: function (match, p1, p2) {
-                  return '<section id="' + p1 + '">\r\n' + grunt.file.read(grunt.config.get('appConfig.app') + '/' + p2) + '\r\n';
-                }
-
-              }
-            ]
-          }
-        },
-        spapp_generator:{
-          files: {
-            '<%= appConfig.app %>/index.html': '<%= appConfig.app %>/index.html',
-          },
-          options: {
-            replacements: [
-              {
-                pattern: /<!-- @import scripts -->/i,
-                replacement: function (match) {
-                  var name = grunt.option('name');
-                  var dom = '<!-- @import scripts -->\n<script src="scripts/'+ name + '.js"></script>';
-                  return dom;
-                }
-              },
-              {
-                pattern: /<!-- @import sections -->/i,
-                replacement: function (match) {
-                  var name = grunt.option('name');
-                  var dom = '<!-- @import sections -->\n<section id="'+ name +'" src="templates/'+ name +'.html"></section>';
-                  return dom;
-                }
-              }
-            ]
-          }
-        }
-      },
+    spapp_generator: {
+      src: '<%= appConfig.app %>/index.html',
+      dest:'<%= appConfig.dist %>/index.html',
+      options: {
+        template_folder: 'templates',
+        script_folder: 'scripts'
+      }
+    },
 
     // Reads HTML for usemin blocks to enable smart builds that automatically
     // concat, minify and revision files. Creates configurations in memory so
@@ -212,82 +178,38 @@ module.exports = function(grunt) {
     },
     pkg: grunt.file.readJSON('package.json'),
     manifest: {
-    generate: {
-      options: {
-        basePath: '',
-        cache: ['index.html'],
-        network: ['http://*', 'https://*'],
-        preferOnline: true,
-        headcomment: " <%= pkg.name %> v<%= pkg.version %>",
-        verbose: true,
-        timestamp: true,
-        hash: true,
-        process: function(path) {
-          return path.substring((appConfig.dist + '/').length);
-        }
-      },
-      src: [
-          '<%= appConfig.dist %>/scripts/*.js',
-          '<%= appConfig.dist %>/styles/*.css'
-      ],
-      dest: '<%= appConfig.dist %>/manifest.appcache'
+      generate: {
+        options: {
+          basePath: '',
+          cache: ['index.html'],
+          network: ['http://*', 'https://*'],
+          preferOnline: true,
+          headcomment: " <%= pkg.name %> v<%= pkg.version %>",
+          verbose: true,
+          timestamp: true,
+          hash: true,
+          process: function(path) {
+            return path.substring((appConfig.dist + '/').length);
+          }
+        },
+        src: [
+            '<%= appConfig.dist %>/scripts/*.js',
+            '<%= appConfig.dist %>/styles/*.css'
+        ],
+        dest: '<%= appConfig.dist %>/manifest.appcache'
+      }
     }
-  }
-
 
   });
 
-  grunt.registerTask('spapp_generator', 'SPapp generator', function(arg1, arg2) {
-    var path = require("path");
-    var template_folder = 'templates';
-    var script_folder = 'scripts';
 
-    var name = grunt.option('name');
-    if (!name){
-      grunt.log.error('please provide a controller/template name: '+ this.name + ' --name=ctrl_name' )
-    }else{
-      //generate template
-      var tplFilePath = path.join(grunt.config.get('appConfig.app'),template_folder, name + '.html');
-      if (grunt.file.isFile(tplFilePath)){
-        grunt.log.error('already found a file here:' + tplFilePath);
-        return;
-      }
-
-      var content = '<div></div>'; //minimum content
-      grunt.file.write(tplFilePath, content);
-      grunt.log.ok('created a template file :' + tplFilePath);
-
-
-      //generate js
-      var jsFilePath = path.join(grunt.config.get('appConfig.app'),script_folder, name + '.js');
-      if (grunt.file.isFile(jsFilePath)){
-        grunt.log.error('already found a file here:' + jsFilePath);
-        return;
-      }
-
-      var content =
-       ['app.page("'+ name +'", function() { ',
-        ' //your code here called once',
-        ' return function(params) {',
-        '   //your code called each view is called',
-        ' }',
-        '});'
-       ].join('\n');
-      grunt.file.write(jsFilePath, content);
-      grunt.log.ok('created a script file :' + jsFilePath);
-
-
-
-      grunt.task.run('string-replace:spapp_generator');
-    }
-  });
 
 
   grunt.registerTask('build', [
     //'test',
     'clean:dist',
     'copy:dist',
-    'string-replace',
+    'spapp_generator:inline_template',
     //'jshint',
     'useminPrepare',
     'concat',

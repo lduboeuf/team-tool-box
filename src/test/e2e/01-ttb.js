@@ -49,9 +49,10 @@ module.exports = { // adapted from: https://git.io/vodU0
     browser
     .url('http://localhost:8000/index.html#team-list')
     .waitForElementVisible('#team-list ul.team-list li')
-    .click('ul.team-list li a') //click on first team
-    .waitForElementVisible('#team-list-details')
+    .click('#team-list ul.team-list li a') //click on first team
+    .waitForElementVisible('#team-list-details a.remove-link')
     .click('#team-list-details a.remove-link')
+    .pause(1000)
     .acceptAlert()
     .waitForElementVisible('#team-list ul.team-list li')
     .elements('css selector', 'ul.team-list li', function (elements) {
