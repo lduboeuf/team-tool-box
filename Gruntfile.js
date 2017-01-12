@@ -209,7 +209,7 @@ module.exports = function(grunt) {
     //'test',
     'clean:dist',
     'copy:dist',
-    'spapp_generator:inline_template',
+    'spapp_generator:inline',
     //'jshint',
     'useminPrepare',
     'concat',
