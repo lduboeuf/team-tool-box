@@ -117,8 +117,10 @@ module.exports = function(grunt) {
       src: '<%= appConfig.app %>/index.html',
       dest:'<%= appConfig.dist %>/index.html',
       options: {
-        template_folder: 'templates',
-        script_folder: 'scripts'
+        basePath: '<%= appConfig.app %>',
+        templateFolder: 'templates',
+        scriptFolder: 'scripts',
+        css:'styles/app.css'
       }
     },
 
