@@ -111,7 +111,7 @@ module.exports = { // adapted from: https://git.io/vodU0
     .click('input[type="submit"]')
     .waitForElementVisible('#tool-build-teams div.team')
     .pause(500)
-    .assert.elementPresent("ul.teams li")
+    .assert.elementPresent("ul.list li")
     .elements('css selector', '.team h3', function (elements) {
       var count = elements.value.length;
       this.assert.equal(count,10, 'should generate a list of 10 teams')
@@ -121,7 +121,7 @@ module.exports = { // adapted from: https://git.io/vodU0
     .setValue('#tool-build-teams .nb-members', 2)
     .click('input[type="submit"]')
     .waitForElementVisible('#tool-build-teams div.team')
-    .assert.elementPresent("ul.teams li")
+    .assert.elementPresent("ul.list li")
     .elements('css selector', '.team h3', function (elements) {
       var count = elements.value.length;
       this.assert.equal(count,5, 'should generate a list of 5 teams')
