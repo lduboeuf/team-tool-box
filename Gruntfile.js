@@ -69,9 +69,9 @@ module.exports = function(grunt) {
     nightwatch: {
       options: {
         "src_folders": [
-          "<%= appConfig.app %>/test/e2e"// Where you are storing your Nightwatch e2e tests
+          "test/e2e"// Where you are storing your Nightwatch e2e tests
         ],
-        "output_folder": "/tmp/nightwatch/ttb/reports", // reports (test outcome) output by nightwatch
+        "output_folder": ".tmp/nightwatch/ttb/reports", // reports (test outcome) output by nightwatch
 
         "test_settings": {
           "default": {
@@ -79,8 +79,10 @@ module.exports = function(grunt) {
             "selenium_port"  : 4444,
             "selenium_host"  : "localhost",
             "screenshots": {
-              "enabled": true, // if you want to keep screenshots
-              "path" : "/tmp/nightwatch/ttb/screenshots/" // save screenshots here //L.D: does not seems to work
+              "enabled" : true,
+              "on_failure" : true,
+              "on_error" : true, // if you want to keep screenshots
+              "path" : ".tmp/nightwatch/ttb/screenshots" // save screenshots here //L.D: does not seems to work
             },
             "globals": {
               "waitForConditionTimeout": 4000 // sometimes internet is slow so wait.

@@ -8,7 +8,7 @@ module.exports = { // adapted from: https://git.io/vodU0
       .assert.title('Team Tool Box')
       .pause(1000)
       .assert.visible(".alert-info")
-      .saveScreenshot('/tmp/nightwatch/ttb/screenshots/home.png')
+      .saveScreenshot('.tmp/nightwatch/ttb/screenshots/home.png')
       //test links
       .click('a[href="#home"]')
       .assert.visible("#home")
@@ -25,7 +25,7 @@ module.exports = { // adapted from: https://git.io/vodU0
     .waitForElementVisible('#team-list')
     .assert.elementNotPresent("ul.team-list li") //should have no team-list
     .perform(function(client, done){
-      for (var i = 0; i <5; i++){
+      for (var i = 0; i <2; i++){ //perform creation of 2 teams
         client.click('a[href="#team-add"]')
         client.waitForElementVisible('#team-add')
         client.setValue('input[name="name"]', 'team' +i)
@@ -40,10 +40,10 @@ module.exports = { // adapted from: https://git.io/vodU0
     .waitForElementVisible('ul.team-list li')
     .elements('css selector', 'ul.team-list li', function (elements) {
       var count = elements.value.length;
-      this.assert.equal(count,5, 'should have a list of 5 teams')
+      this.assert.equal(count,2, 'should have a list of 2 teams')
     })
 
-    .saveScreenshot('/tmp/nightwatch/ttb/screenshots/team-list.png')
+    .saveScreenshot('.tmp/nightwatch/ttb/screenshots/team-list.png')
   },
   'Remove a team  ':function(browser){
     browser
@@ -57,9 +57,9 @@ module.exports = { // adapted from: https://git.io/vodU0
     .waitForElementVisible('#team-list ul.team-list li')
     .elements('css selector', 'ul.team-list li', function (elements) {
       var count = elements.value.length;
-      this.assert.equal(count,4, 'should have a list of 4 teams')
+      this.assert.equal(count,1, 'should have a list of 1 team')
     })
-    .saveScreenshot('/tmp/nightwatch/ttb/screenshots/team-list-removed-one.png')
+    .saveScreenshot('.tmp/nightwatch/ttb/screenshots/team-list-removed-one.png')
 
   },
   'Team Members Add ':function(browser){
@@ -80,7 +80,7 @@ module.exports = { // adapted from: https://git.io/vodU0
 
     })
     .assert.elementPresent("ul.team-members li")
-    .saveScreenshot('/tmp/nightwatch/ttb/screenshots/team-members.png')
+    .saveScreenshot('.tmp/nightwatch/ttb/screenshots/team-members.png')
   },
   'Team Members Update ':function(browser){
     browser
@@ -90,7 +90,7 @@ module.exports = { // adapted from: https://git.io/vodU0
     .setValue('#team-member-details input[name="name"]', 'modified member')
     .click('#team-member-details input[type="submit"]')
     .waitForElementVisible('#team-list-details')
-    .saveScreenshot('/tmp/nightwatch/ttb/screenshots/team-members-after-rename.png')
+    .saveScreenshot('.tmp/nightwatch/ttb/screenshots/team-members-after-rename.png')
   },
   'Team Members Delete ':function(browser){
     browser
@@ -101,7 +101,7 @@ module.exports = { // adapted from: https://git.io/vodU0
     .pause(500)
     .acceptAlert()
     .waitForElementVisible('#team-list-details')
-    .saveScreenshot('/tmp/nightwatch/ttb/screenshots/team-members-after-removeone.png')
+    .saveScreenshot('.tmp/nightwatch/ttb/screenshots/team-members-after-removeone.png')
   },
   'Random Teams test ':function(browser){
     browser
@@ -138,7 +138,7 @@ module.exports = { // adapted from: https://git.io/vodU0
     .setValue('#archive-save input[name="name"]', 'archive1')
     .setValue('#archive-save textarea', 'description for archive1')
     .click('#archive-save input[type="submit"]')
-    .saveScreenshot('/tmp/nightwatch/ttb/screenshots/team-generation-save.png')
+    .saveScreenshot('.tmp/nightwatch/ttb/screenshots/team-generation-save.png')
     .pause(500)
     .acceptAlert()
     .waitForElementVisible('#tool-build-teams',1000)
