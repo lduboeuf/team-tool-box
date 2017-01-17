@@ -32,6 +32,7 @@ app.page("archive-save", function()
     currentOutput = params;
 
     $teamList.innerHTML = tplTeamList(currentOutput);
+    window.scrollTo(0,0);
     $name.value ="";
     $desc.value="";
   }

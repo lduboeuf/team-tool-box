@@ -79,9 +79,9 @@ module.exports = function(grunt) {
             "selenium_port"  : 4444,
             "selenium_host"  : "localhost",
             "screenshots": {
-              "enabled" : true,
+              "enabled" : true,// if you want to keep screenshots
               "on_failure" : true,
-              "on_error" : true, // if you want to keep screenshots
+              "on_error" : true,
               "path" : ".tmp/nightwatch/ttb/screenshots" // save screenshots here //L.D: does not seems to work
             },
             "globals": {

@@ -92,6 +92,7 @@ body .brand {
 
 #archive-save .team-list{
   font-size: 0.7em;
+  opacity: 0.7;
 }
 
 select.spinner {
@@ -245,16 +246,22 @@ ul.topnav li.icon {
   margin-top: 50px;
   margin-left: auto;
   margin-right: auto;
-
 }
+.actions ul{
+  list-style-type: none;
+  padding: 0;
+}
+
 .actions a{
   display:block;
   margin-top:8px;
-  padding:12px;
+  padding:14px;
   font-weight: 700;
   color:#555555;
+  background-color: #fff;
   box-shadow: 1px 1px 0px #dbdbdb;
   border: 1px solid #cccccc;
+  border-radius:5px;
 }
 .actions a:hover{
   background-color: #F5F5F5;
@@ -272,9 +279,61 @@ ul.topnav li.icon {
   float:right;
 }
 
+
+
+.list {
+    margin: 0;
+    list-style-type: none;
+    padding: 0;
+    border: 1px solid #ddd;
+    background-color: #fff;
+}
+
+.list li {
+    padding: 0px;
+    border-bottom: 1px solid #ddd;
+}
+
+.list li a {
+    display: block;
+    padding: 10px 16px;
+    text-decoration: none;
+    color: #4078c0;
+}
+
+.list li a:hover {
+	background-color: #F5F5F5;
+}
+
+.list li:last-child {
+    border-bottom: none
+}
+
+div.team h3, .header-tbl{
+  margin:0;
+  padding:12px 0px;
+  border-bottom: 0;
+  font-weight: 700;
+}
+
+.team li {
+  padding: 10px 16px;
+}
+
+div.team li:first-child {
+  color: green;
+}
+
+.header-tbl{
+  text-align: right;
+}
+
+
 section header{
   display:flex;
   justify-content: space-between;
+  margin-bottom:20px;
+  padding:0;
 }
 
 select{
@@ -370,52 +429,5 @@ textarea{
 }
 
 
-section header {
-  margin-bottom:20px;
-  padding:0;
-}
-div.team h3, .header-tbl{
-  margin:0;
-  padding:12px 0px;
-  border-bottom: 0;
-  font-weight: 700;
-}
-
-div.team li:first-child {
-  color: green;
-}
-
-.header-tbl{
-  text-align: right;
-}
-
-section ul {
-    margin: 0;
-    list-style-type: none;
-    padding: 0;
-    border: 1px solid #ddd;
-    background-color: #fff;
-}
-
-section ul li {
-    padding: 8px 16px;
-    border-bottom: 1px solid #ddd;
-}
-
-section ul li a {
-    display: block;
-    text-decoration: none;
-    /*color: #605D5D;*/
-    color: #4078c0;
-
-}
-
-section ul li:hover {
-	background-color: #fcfcfc;
-}
-
-section ul li:last-child {
-    border-bottom: none
-}
 
 /** form elements **/

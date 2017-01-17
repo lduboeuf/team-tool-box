@@ -17,7 +17,7 @@
     {{ for(var prop in it) { }}
     <div class="team">
       <h3>{{=it[prop].name}}<input type="checkbox" name="tick_all"></input></h3>
-      <ul class="teams" >
+      <ul class="list" >
         {{~it[prop].members :member:idxm}}
           <li><label><input type="checkbox" name="member_name" value="{{=member.name}}"></input><span>{{=member.name}}</span></label></li>
         {{~}}
