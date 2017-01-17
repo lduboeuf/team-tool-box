@@ -8,7 +8,7 @@
     {{ for(var prop in it) { }}
     <li>
         <a href="#archive-details:{{=it[prop].id}}">
-          {{=it[prop].name}}
+          {{=it[prop].date || ''}} - {{=it[prop].name}}
         </a>
     </li>
     {{ } }}

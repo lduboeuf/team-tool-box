@@ -16,9 +16,12 @@ app.page("archive-save", function()
     if ($name.value.length==0){
       return false;
     }
+    var dt = new Date();
+    var newdate = dt.getFullYear() + "/" + (dt.getMonth() + 1) + "/" + dt.getDate();
     var data = {
       name: $name.value,
       description: $desc.value,
+      date: newdate,
       teams: currentOutput
     }
     remoteStorage.archives.store(data).then(function(){
