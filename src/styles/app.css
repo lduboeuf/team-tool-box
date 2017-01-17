@@ -169,6 +169,7 @@ ul.topnav li.icon {
   }
   #remotestorage-widget .rs-bubble{
     width:250px;
+    top:25px !important;
   }
 
   #remotestorage-widget .rs-hidden{
