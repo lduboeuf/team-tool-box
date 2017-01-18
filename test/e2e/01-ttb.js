@@ -52,8 +52,9 @@ module.exports = { // adapted from: https://git.io/vodU0
     .click('#team-list ul.team-list li a') //click on first team
     .waitForElementVisible('#team-list-details a.remove-link')
     .click('#team-list-details a.remove-link')
-    .pause(1000)
+    .pause(500)
     .acceptAlert()
+    .pause(500)
     .waitForElementVisible('#team-list ul.team-list li')
     .elements('css selector', 'ul.team-list li', function (elements) {
       var count = elements.value.length;
@@ -100,6 +101,7 @@ module.exports = { // adapted from: https://git.io/vodU0
     .click('#team-member-details input[type="button"]')
     .pause(500)
     .acceptAlert()
+    .pause(500)
     .waitForElementVisible('#team-list-details')
     .saveScreenshot('.tmp/nightwatch/ttb/screenshots/team-members-after-removeone.png')
   },
