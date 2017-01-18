@@ -6,7 +6,7 @@ body {
   font-size: 14px;
 }
 
-h1 { font-size: 1.10em; margin-top: 0;}
+h1 { font-size: 1.10em; }
 h2 { font-size: 1em; }
 h3 { font-size: 1em; }
 
@@ -333,6 +333,7 @@ div.team li:first-child {
 
 section header{
   display:flex;
+  align-items: center;
   justify-content: space-between;
   margin-bottom:20px;
   padding:0;
@@ -415,7 +416,7 @@ textarea{
 /*forms for mobiles*/
 @media screen and (max-width:680px) {
 
-  input[type=text], input[type=submit], select, textarea, button {
+  input[type=text], input[type=submit], input[type=button], select, textarea, button {
     width: 100%;
   }
   input[type="radio"] {
