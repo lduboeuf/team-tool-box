@@ -41,6 +41,7 @@ body.tool-find-members    > section#tool-find-members  ,
 body.tool-next-member    > section#tool-next-member  ,
 body.sync   > section#sync,
 body.settings   > section#settings,
+body.tool-match   > section#tool-match,
 /*@spapp_generator css*/
 body.team-member-details > section#team-member-details { display:block; }
 
@@ -274,10 +275,10 @@ ul.topnav li.icon {
   padding:8px;
   /*padding-top:12px;*/
 }
-#tool-next-member li label{
+#tool-next-member,  #tool-match li label{
   display:block;
 }
-#tool-next-member li input{
+#tool-next-member,  #tool-match li input{
   float:right;
 }
 
