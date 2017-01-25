@@ -275,10 +275,10 @@ ul.topnav li.icon {
   padding:8px;
   /*padding-top:12px;*/
 }
-#tool-next-member,  #tool-match li label{
+#tool-next-member li label,  #tool-match li label{
   display:block;
 }
-#tool-next-member,  #tool-match li input{
+#tool-next-member li input,  #tool-match li input{
   float:right;
 }
 
