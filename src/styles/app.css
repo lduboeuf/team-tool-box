@@ -258,11 +258,11 @@ ul.topnav li.icon {
   display:block;
   margin-top:8px;
   padding:14px;
-  font-weight: 700;
-  color:#555555;
+  font-weight: 400;
+  color:#337AB7;
   background-color: #fff;
   box-shadow: 1px 1px 0px #dbdbdb;
-  border: 1px solid #cccccc;
+  border: 1px solid #337AB7;
   border-radius:5px;
 }
 .actions a:hover{
@@ -317,6 +317,8 @@ div.team h3, .header-tbl{
   border-bottom: 0;
   font-weight: 700;
 }
+
+
 
 .team li {
   padding: 10px 16px;

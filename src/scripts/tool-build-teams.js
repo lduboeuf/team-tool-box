@@ -71,12 +71,16 @@ app.page("tool-build-teams", function()
 
       }
 
-      //handle orphans ?
-      var i = 0;
-      while (idxs.length>0){
-        teams[i].members.push(members[idxs.pop()]);
-        (i < nbTeam-1) ? i++: i = 0;
-      }
+      //any orphans ?
+      if (idxs.length>0) {
+          //add them to first team and so on
+          var tmp_members = idxs.map(function (x, i) { return members[x] });
+          var team = {
+            name : 'Team Orphan(s)',
+            members : tmp_members
+          };
+          teams.push(team);
+       }
 
 
 
@@ -87,10 +91,40 @@ app.page("tool-build-teams", function()
 
     if (teams) {
       displayTeams(teams);
+
+      if (idxs.length>0) { //special case for orphans
+        var $teamsNode = $resultList.querySelectorAll('.team');
+        var $orphansNode = $teamsNode[$teamsNode.length- 1];
+
+        var $link = document.createElement('strong');
+        $link.innerHTML = '&#10842;&nbsp;&#10842;';
+        $link.style = 'cursor:pointer;color:green';
+        $link.onclick = function(){
+          var orphans = teams.pop();
+          distribute(teams, orphans.members);
+          displayTeams(teams);
+        }
+
+        $orphansNode.firstElementChild.append($link);
+
+      }
     }
 
   }
 
+  //put members in teams
+  var distribute = function(teams, members){
+
+    var idx = 0;
+    var max = teams.length -1;
+
+    while (members.length>0){
+      var m = members.pop();
+      if (idx>=max) idx=0;
+      teams[idx].members.push(m);
+      idx++;
+    }
+  }
 
 
     var displayTeams = function(teams) {
