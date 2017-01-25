@@ -24,15 +24,16 @@ module.exports = { // adapted from: https://git.io/vodU0
     .url('http://localhost:8000/index.html#team-list')
     .waitForElementVisible('#team-list')
     .assert.elementNotPresent("ul.team-list li") //should have no team-list
+    .click('#team-list a[href="#team-add"]')
     .perform(function(client, done){
       for (var i = 0; i <2; i++){ //perform creation of 2 teams
-        client.click('a[href="#team-add"]')
-        client.waitForElementVisible('#team-add')
-        client.setValue('input[name="name"]', 'team' +i)
-        client.click('input[name="add"]')
+
+        client.waitForElementVisible('#team-add form')
+        client.setValue('#team-add input[name="name"]', 'team' +i)
+        client.click('#team-add input[type="submit"]')
+
         client.waitForElementVisible('#team-list-details')
         client.back()
-        client.waitForElementVisible('#team-add form')
       }
       done()
     })
@@ -68,17 +69,15 @@ module.exports = { // adapted from: https://git.io/vodU0
     .url('http://localhost:8000/index.html#team-list')
     .waitForElementVisible('#team-list ul.team-list li')
     .click('#team-list ul.team-list li a') //click on first team
-    .waitForElementVisible('#team-list-details')
+    .waitForElementVisible('#team-list-details form')
     .perform(function(client, done){
       for (var i = 0; i <11; i++){
-        client.click('#team-list-details a.add-link');
-        client.waitForElementVisible('section#team-member-add',1000);
-        client.setValue('#team-member-add input[name="name"]', 'member'+i);
-        client.click('#team-member-add input[name="add"]');
-        client.waitForElementVisible('#team-list-details');
-        done();
-      }
+        client.setValue('#team-list-details input[name="name"]', 'member'+i);
+        client.click('#team-list-details input[type="submit"]');
+        client.waitForElementVisible('#team-list-details .team-members a');
 
+      }
+      done();
     })
     .assert.elementPresent("ul.team-members li")
     .saveScreenshot('.tmp/nightwatch/ttb/screenshots/team-members.png')

@@ -424,6 +424,11 @@ textarea{
   input[type="radio"] {
       width: auto;
   }
+
+  #team-list-details input {
+    width:auto;
+  }
+
   .radio-group {
     display: block;
   }

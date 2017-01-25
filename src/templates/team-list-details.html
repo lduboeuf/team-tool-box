@@ -6,9 +6,13 @@
       <a href="#" class="remove-link">&#10006; remove</a>
   </header>
   <div>
-    <div class="header-tbl">
-        <a href="#team-member-add:{{=it.id}}" class="add-link btn-default">+ Add a member</a>
-    </div>
+    <h3>members:</h3>
+    <form>
+      <div class="form-group header-tbl">
+        <input name="name" type="text" placeholder="name" required=""/>
+        <input type="submit" name="add" value="add" class="button btn-success"/>
+      </div>
+    </form>
   <ul class="list team-members" >
     {{~it.members :member:index}}
     <li>
