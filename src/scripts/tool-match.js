@@ -50,6 +50,21 @@ app.page("tool-match", function()
       }
     }
 
+    //handle already selected members from left
+    if ($side==$rightResultList){
+      var leftMembers = getSelectedMembers($leftResultList);
+      if (leftMembers.length>0){
+        var $checkbox_members = $rightResultList.querySelectorAll('input[name="member_name"]');
+        for (var i=0; i < $checkbox_members.length; i++){
+          if (leftMembers.includes($checkbox_members[i].value)){
+            $checkbox_members[i].parentNode.style='text-decoration:line-through';
+            $checkbox_members[i].disabled = true;
+          }
+        }
+      }
+    }
+
+
   }
 
   var changeEvent = function($select, $side){
