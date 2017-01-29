@@ -41,7 +41,7 @@ app.page("tool-match", function()
 
   var displayTeams =function(teams,$side ){
     $side.innerHTML =  tplResultList(teams);
-    $checkbox_members = $side.querySelectorAll('input[name="member_name"]');
+    var $checkbox_members = $side.querySelectorAll('input[name="member_name"]');
     //handle tick all
     $side.querySelector('input[name="tick_all"]').onclick = function(){
       var checked = this.checked;
@@ -81,7 +81,7 @@ app.page("tool-match", function()
   }
 
   var getSelectedMembers = function($list){
-    $checkbox_members = $list.querySelectorAll('input[name="member_name"]');
+    var $checkbox_members = $list.querySelectorAll('input[name="member_name"]');
     var members = [];
     for (var i=0; i < $checkbox_members.length; i++){
       if ($checkbox_members[i].checked){
