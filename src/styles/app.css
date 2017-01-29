@@ -299,7 +299,7 @@ ul.topnav li.icon {
     border-bottom: 1px solid #ddd;
 }
 
-.list {
+.list li a  {
     display: block;
     padding: 10px 16px;
     text-decoration: none;
