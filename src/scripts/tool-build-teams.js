@@ -96,8 +96,8 @@ app.page("tool-build-teams", function()
         var $teamsNode = $resultList.querySelectorAll('.team');
         var $orphansNode = $teamsNode[$teamsNode.length- 1];
 
-        var $link = document.createElement('strong');
-        $link.innerHTML = '&#10842;&nbsp;&#10842;';
+        var $link = document.createElement('button');
+        $link.innerHTML = '&#10842;dispatch';
         $link.style = 'cursor:pointer;color:green';
         $link.onclick = function(){
           var orphans = teams.pop();
