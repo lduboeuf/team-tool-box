@@ -33,7 +33,7 @@
 
 
 
-  function show(pageName,param, modal=false) {
+  function show(pageName,param, modal) {
     var $page = document.querySelector("section#" + pageName);
     if( $page.length == 0 ) {
       console.warn("section with id=%s not found!",pageName);
@@ -88,7 +88,7 @@
     }
   }
 
-  function app(pageName,param, modal=false) {
+  function app(pageName,param, modal) {
 
     var $page = document.body.querySelector("section#" + pageName);
     if(!$page){
@@ -113,7 +113,7 @@
     };
 
   // Function to get page's html, shall return jQuery's promise. Can be overriden.
-  app.get = function(src,$page,pageName, param, modal=false) {
+  app.get = function(src,$page,pageName, param, modal) {
     //return $.get(src, "html");
     var request = new XMLHttpRequest();
     request.open('GET', src, true);
