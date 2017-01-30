@@ -4,14 +4,17 @@ app.page("archive-save", function()
   var $form = document.querySelector('#archive-save form');
   var $name = $form.querySelector('input[name="name"]');
   var $desc = $form.querySelector('textarea[name="description"]');
-  var $save = $form.querySelector('.button');
-  var $teamList = document.querySelector('#archive-save .team-list');
+  var $btnCancel = $form.querySelector('button[name="cancel"]');
+  var $btnSave = $form.querySelector('input[type="submit"]');
 
-  var tplTeamList = doT.template($teamList.innerHTML);
 
   var currentOutput;
+  $btnCancel.onclick = function(e){
+    e.preventDefault();
+    app.back();
+  }
 
-  $save.onclick = function(e){
+  $btnSave.onclick = function(e){
     e.preventDefault();
     if ($name.value.length==0){
       return false;
@@ -34,8 +37,6 @@ app.page("archive-save", function()
   return function(params) {
     currentOutput = params;
 
-    $teamList.innerHTML = tplTeamList(currentOutput);
-    window.scrollTo(0,0);
     $name.value ="";
     $desc.value="";
   }

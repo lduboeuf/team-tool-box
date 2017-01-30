@@ -8,6 +8,7 @@ app.alert = function(type, message){
   window.addEventListener('click', app.cleanUI);
 }
 
+
 app.cleanUI = function(evt){
   //toggle menu when a menu item is clicked
   if (evt.target.parentNode.className!=='icon'){
@@ -16,10 +17,11 @@ app.cleanUI = function(evt){
   }
   //make sure every alert box is hidden
   document.querySelector('.alert').style.display = 'none';
+
 }
 
-app.start = function(){
 
+document.addEventListener("DOMContentLoaded", function(event) {
   //menu handler
   var $menu = document.getElementById("menu");
   var $menu_icon = $menu.querySelector('.icon > a');
@@ -48,5 +50,4 @@ app.start = function(){
 
   //simulate a hash change at startup
   window.dispatchEvent(new CustomEvent('hashchange'));
-
-}
+});

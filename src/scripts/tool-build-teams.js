@@ -134,7 +134,7 @@ app.page("tool-build-teams", function()
         var $btnSave = $resultList.querySelector('button');
         $btnSave.onclick = function(){
           if (currentOutput){
-            app("archive-save", currentOutput);
+            app("archive-save", currentOutput, true);
           }
         }
     }
@@ -174,7 +174,8 @@ app.page("tool-build-teams", function()
 
     //list already saved ?
     if (params && params.event =='onSavedOutput'){
-      var $btnSave = $resultList.querySelector('button');
+      var $btnSave = $resultList.querySelector('button[name="save"]');
+      $btnSave.classList.toggle('btn-success');
       $btnSave.classList.toggle('btn-default');
       $btnSave.onclick = null;
     }
