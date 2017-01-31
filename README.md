@@ -28,8 +28,8 @@ TTB can be used without any web servers but you will not be able to use remote s
 
 ###compressing for publishing
   ```
-  grunt # will output app in dist/dev folder
-  grunt --rev=prod #will output in dist folder
+  grunt build # will output app in dist/dev folder
+  grunt build --rev=prod #will output in dist folder
   ```
 ###tests
 need chrome installed for instance

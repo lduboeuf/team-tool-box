@@ -5,7 +5,13 @@ module.exports = function(grunt) {
   // load grunt tasks based on dependencies in package.json
   require('load-grunt-tasks')(grunt);
 
-  //grunt.task.loadTasks('spapp_generator');
+  var help = function(){
+    grunt.log.writeln('use `grunt build` to build to dist/dev folder');
+    grunt.log.writeln('use `grunt build --rev=prod` to build to dist folder');
+    grunt.log.writeln('use `grunt connect:server:keepalive` to launch a local static server');
+    grunt.log.writeln('use `grunt test` to launch tests ( nightwatch)');
+    grunt.log.writeln('use `grunt spapp_generator:new --name=xxx to generate controller skeleton');
+  }
 
   var outputDir = 'dist/dev';
   if (grunt.option('rev')=='prod') outputDir = 'dist';
@@ -233,7 +239,5 @@ module.exports = function(grunt) {
     'selenium_standalone:default:stop'
    ]);
 
-  grunt.registerTask('default', [
-    'build'
-  ]);
+  grunt.registerTask('default', help);
 };
