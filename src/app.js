@@ -44,6 +44,17 @@ document.addEventListener("DOMContentLoaded", function(event) {
   remoteStorage.access.claim('archives', 'rw');
   remoteStorage.access.claim('config', 'rw');
 
+  //more optimized than findAll ?
+  remoteStorage.teams.findAll().then(
+    function(teams){
+
+      if (Object.keys(teams).length === 0){
+        app.alert('alert-info','<strong>hello ;-)</strong>. Welcome to <strong>Team Tool Box!</strong>. Maybe your first time here, please have a look to the <a href="#about">About</a> section');
+      }
+    }
+  );
+
+  //remoteStorage.teams.init();
 
   remoteStorage.displayWidget();
 

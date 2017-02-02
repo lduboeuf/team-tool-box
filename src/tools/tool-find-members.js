@@ -77,7 +77,7 @@ app.page("tool-find-members", function()
         var $btnSave = $resultList.querySelector('button');
         $btnSave.onclick = function(){
           if (currentOutput){
-            app("archive-save", currentOutput);
+            app("archive-save", currentOutput, true);
           }
         }
     }

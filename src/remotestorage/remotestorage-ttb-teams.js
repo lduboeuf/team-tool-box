@@ -31,6 +31,12 @@ RemoteStorage.defineModule("teams", function (privateClient, publicClient) {
 
   var teams = {
 
+        init: function() {
+          remoteStorage.scope('/teams/').getListing('').then(function(listing){
+            console.log(listing);
+          });
+        },
+
         store: function(team) {
           if (!team.id){
             team.id = generateUID();
@@ -47,7 +53,9 @@ RemoteStorage.defineModule("teams", function (privateClient, publicClient) {
             function(team){
               member.id = generateUID();
               team.members.push(member);
-              return remoteStorage.teams.store(team);
+              return remoteStorage.teams.store(team).then(function(team){
+                return team.members[team.members.length-1];
+              });
             });
         },
         findMember: function(memberId){
