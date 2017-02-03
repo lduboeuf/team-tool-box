@@ -3,28 +3,18 @@
   {
 
     var $teamListDetails = document.getElementById('team-list-details');
-    var $teamListHeader = $teamListDetails.querySelector('header');
-    var $linkRemoveTeam = $teamListHeader.querySelector('.remove-link');
-    //form add member
-    var $txtName = $teamListDetails.querySelector('form input[name="name"]');
-    var $btnAdd = $teamListDetails.querySelector('form input[type="submit"]');
-    //list of members
-    var $listMembers = $teamListDetails.querySelector('.team-members');
-    var $liMember = $listMembers.querySelector('li a');
 
-    var tplHeader = doT.template($teamListHeader.innerHTML);
-    var tplTeamList = doT.template($listMembers.innerHTML);
-    var tplMember = doT.template($liMember.innerHTML);
+    var tpl = doT.template($teamListDetails.innerHTML);
 
     var currentTeamId = null;
 
     //default is not shown
-    $teamListHeader.innerHTML = null;
-    $listMembers.innerHTML = null;
+    $teamListDetails.innerHTML=null;
 
     var remove = function(){
       if (confirm('sure you want to remove this team ?')){
 
+        //TeamRepository.removeTeam(currentTeamId);
         remoteStorage.teams.remove(currentTeamId).then(function(){
           history.back();
         })
@@ -35,26 +25,20 @@
 
     var addMember = function(e){
       e.preventDefault();
-      //var $nameInput = $teamListDetails.querySelector('input[name="name"]');
-      if ($txtName.value.length>0){
-        remoteStorage.teams.addMember(currentTeamId, { name: $txtName.value}).then(
-          function(member){
-            var $member = document.createElement('li');
-            $member.innerHTML = '<a href="#team-member-details:' + member.id + '">' + member.name + '</a>';
-            $listMembers.appendChild($member);
+      var $nameInput = $teamListDetails.querySelector('input[name="name"]');
+      if ($nameInput.value.length>0){
+        remoteStorage.teams.addMember(currentTeamId, { name: $nameInput.value}).then(
+          function(team){
+            applyTemplate(team);
         });
       }
     }
 
-
     var applyTemplate =function(team){
-      $teamListHeader.innerHTML = tplHeader(team);
-      $listMembers.innerHTML = tplTeamList(team);
-
+      $teamListDetails.innerHTML = tpl(team);
+      $teamListDetails.querySelector('.remove-link').onclick=remove;
+      $teamListDetails.querySelector('input[type="submit"]').onclick=addMember;
     }
-    //event listeners
-    $linkRemoveTeam.onclick=remove;
-    $btnAdd.onclick=addMember;
 
 
     return function(params) {
