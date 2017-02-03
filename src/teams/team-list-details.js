@@ -10,7 +10,7 @@
     var $btnAdd = $teamListDetails.querySelector('form input[type="submit"]');
     //list of members
     var $listMembers = $teamListDetails.querySelector('.team-members');
-    var $liMember = $listMembers.querySelector('li');
+    var $liMember = $listMembers.querySelector('li a');
 
     var tplHeader = doT.template($teamListHeader.innerHTML);
     var tplTeamList = doT.template($listMembers.innerHTML);
@@ -39,10 +39,9 @@
       if ($txtName.value.length>0){
         remoteStorage.teams.addMember(currentTeamId, { name: $txtName.value}).then(
           function(member){
-            var out = tplMember({member: member});
-            console.log(out);
-            //$listMembers
-            //applyTemplate(team);
+            var $member = document.createElement('li');
+            $member.innerHTML = '<a href="#team-member-details:' + member.id + '">' + member.name + '</a>';
+            $listMembers.appendChild($member);
         });
       }
     }
