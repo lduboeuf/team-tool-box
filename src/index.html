@@ -7,31 +7,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Random Team/Group generator, manage your groups randomly!">
     <!-- build:js scripts/vendors.js -->
-    <script src="scripts/vendors/remotestorage.min.js"></script>
-    <script src="scripts/vendors/doT.min.js"></script>
+    <script src="vendors/remotestorage.min.js"></script>
+    <script src="vendors/doT.min.js"></script>
+    <script src="vendors/spapp.js"></script>
     <!-- endbuild -->
 
     <!-- build:js scripts/scripts.js -->
-    <script src="scripts/remotestorage-ttb-teams.js"></script>
-    <script src="scripts/remotestorage-ttb-archives.js"></script>
-    <script src="scripts/remotestorage-ttb-config.js"></script>
-    <script src="scripts/spapp.js"></script>
-    <script src="scripts/app.js"></script>
+    <script src="remotestorage/remotestorage-ttb-teams.js"></script>
+    <script src="remotestorage/remotestorage-ttb-archives.js"></script>
+    <script src="remotestorage/remotestorage-ttb-config.js"></script>
+    <script src="spapp.js"></script>
+    <script src="app.js"></script>
 
-    <script src="scripts/team-list.js"></script>
-    <script src="scripts/team-list-details.js"></script>
-    <script src="scripts/home.js"></script>
-    <script src="scripts/team-member-details.js"></script>
-    <script src="scripts/team-member-add.js"></script>
-    <script src="scripts/team-add.js"></script>
-    <script src="scripts/archive-save.js"></script>
-    <script src="scripts/archive-list.js"></script>
-    <script src="scripts/archive-details.js"></script>
-    <script src="scripts/tool-build-teams.js"></script>
-    <script src="scripts/tool-find-members.js"></script>
-    <script src="scripts/tool-next-member.js"></script>
-    <script src="scripts/settings.js"></script>
-    <script src="scripts/tool-match.js"></script>
+    <script src="teams/team-list.js"></script>
+    <script src="teams/team-list-details.js"></script>
+    <script src="teams/team-member-details.js"></script>
+    <script src="teams/team-member-add.js"></script>
+    <script src="teams/team-add.js"></script>
+    <script src="archives/archive-save.js"></script>
+    <script src="archives/archive-list.js"></script>
+    <script src="archives/archive-details.js"></script>
+    <script src="tools/tool-build-teams.js"></script>
+    <script src="tools/tool-find-members.js"></script>
+    <script src="tools/tool-next-member.js"></script>
+    <script src="commons/settings.js"></script>
+    <script src="tools/tool-match.js"></script>
 <!-- @spapp_generator scripts -->
 
 
@@ -39,6 +39,7 @@
 
     <!-- build:css styles/main.css -->
     <link rel="stylesheet" href="styles/app.css">
+    <!-- @spapp_generator css -->
     <!-- endbuild -->
   </head>
 <body>
@@ -72,20 +73,20 @@
       </ul>
     </div>
   </section>
-  <section id="tool-build-teams" src="templates/tool-build-teams.html"></section>
-  <section id="tool-find-members" src="templates/tool-find-members.html"></section>
-  <section id="tool-next-member" src="templates/tool-next-member.html"></section>
-  <section id="team-list" src="templates/team-list.html"></section>
-  <section id="team-list-details" src="templates/team-list-details.html"></section>
-  <section id="team-add" src="templates/team-add.html"></section>
-  <section id="team-member-add" src="templates/team-member-add.html"></section>
-  <section id="team-member-details" src="templates/team-member-details.html"></section>
-  <section id="about" src="templates/about.html"></section>
-  <section id="archive-save" src="templates/archive-save.html"></section>
-  <section id="archive-list" src="templates/archive-list.html"></section>
-  <section id="archive-details" src="templates/archive-details.html"></section>
-  <section id="settings" src="templates/settings.html"></section>
-  <section id="tool-match" src="templates/tool-match.html"></section>
+  <section id="tool-build-teams" src="tools/tool-build-teams.html"></section>
+  <section id="tool-find-members" src="tools/tool-find-members.html"></section>
+  <section id="tool-next-member" src="tools/tool-next-member.html"></section>
+  <section id="team-list" src="teams/team-list.html"></section>
+  <section id="team-list-details" src="teams/team-list-details.html"></section>
+  <section id="team-add" src="teams/team-add.html"></section>
+  <section id="team-member-add" src="teams/team-member-add.html"></section>
+  <section id="team-member-details" src="teams/team-member-details.html"></section>
+  <section id="about" src="commons/about.html"></section>
+  <section id="archive-save" src="archives/archive-save.html"></section>
+  <section id="archive-list" src="archives/archive-list.html"></section>
+  <section id="archive-details" src="archives/archive-details.html"></section>
+  <section id="settings" src="commons/settings.html"></section>
+  <section id="tool-match" src="tools/tool-match.html"></section>
   <!-- @spapp_generator sections -->
   <div class="alert alert-info">
     <span onclick="this.parentElement.style.display='none'" class="alert-closebtn">&times;</span>

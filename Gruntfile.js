@@ -10,7 +10,7 @@ module.exports = function(grunt) {
     grunt.log.writeln('use `grunt build --rev=prod` to build to dist folder');
     grunt.log.writeln('use `grunt connect:server:keepalive` to launch a local static server');
     grunt.log.writeln('use `grunt test` to launch tests ( nightwatch)');
-    grunt.log.writeln('use `grunt spapp_generator:new --name=xxx to generate controller skeleton');
+    grunt.log.writeln('use `grunt spapp_generator:new --name=xxx to generate controller/view skeleton and html/css declaration ');
   }
 
   var outputDir = 'dist/dev';
@@ -119,8 +119,9 @@ module.exports = function(grunt) {
         eqnull: true,
         browser: true
       },
-      all: ['Gruntfile.js', '<%= appConfig.app %>/scripts/*.js']
+      all: ['Gruntfile.js', '<%= appConfig.app %>/**.js']
     },
+    //TODO
     spapp_generator: {
       src: '<%= appConfig.app %>/index.html',
       dest:'<%= appConfig.dist %>/index.html',
@@ -186,6 +187,7 @@ module.exports = function(grunt) {
         }]
       }
     },
+    //manifest generator
     pkg: grunt.file.readJSON('package.json'),
     manifest: {
       generate: {
