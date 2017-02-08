@@ -121,15 +121,11 @@ module.exports = function(grunt) {
       },
       all: ['Gruntfile.js', '<%= appConfig.app %>/**.js']
     },
-    //TODO
     spapp_generator: {
       src: '<%= appConfig.app %>/index.html',
       dest:'<%= appConfig.dist %>/index.html',
       options: {
-        basePath: '<%= appConfig.app %>',
-        templateFolder: 'templates',
-        scriptFolder: 'scripts',
-        css:'styles/app.css'
+        basePath: '<%= appConfig.app %>'
       }
     },
 

@@ -22,7 +22,7 @@ app.page("settings", function()
       e.stopPropagation();
       remoteStorage.teams.upgrade().then(function(success){
         if (!success){
-          app.alert('alert-info','nothing to do');
+          app.alert('alert-info','nothing to do for teams');
           return;
         }
       });

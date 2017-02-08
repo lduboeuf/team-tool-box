@@ -39,17 +39,18 @@ RemoteStorage.defineModule("teams", function (privateClient, publicClient) {
         toDelete.push(client.remove('team/' + teamId));
       }
       toDelete.push(client.remove('team/'));
-      return Promise.all(toStore).then(() => {
+      if (toStore.length==0) return false;
+      return Promise.all(toStore).then(function() {
           console.log("items moved from teams/team/ to teams/");
-          return Promise.all(toStore).then(() => {
+          return Promise.all(toStore).then(function() {
             console.log('items removed at teams/team/*');
             return true;
-          }).catch((e) => {
+          }).catch(function(e) {
             console.log('oups...' + e);
             return false;
           })
       })
-      .catch((e) => {
+      .catch(function(e) {
           console.log('oups...' + e);
           return false;
       });

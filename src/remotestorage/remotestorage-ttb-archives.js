@@ -16,17 +16,18 @@ RemoteStorage.defineModule("archives", function (privateClient, publicClient) {
         toDelete.push(client.remove('archive/' + archiveId));
       }
       toDelete.push(client.remove('archive/'));
-      return Promise.all(toStore).then(() => {
+      if (toStore.length==0) return false;
+      return Promise.all(toStore).then(function() {
           console.log("items moved from archives/archive/ to archives/");
-          return Promise.all(toStore).then(() => {
+          return Promise.all(toStore).then(function() {
             console.log('items removed at archives/archive/*');
             return true;
-          }).catch((e) => {
+          }).catch(function(e) {
             console.log('oups...' + e);
             return false;
           })
       })
-      .catch((e) => {
+      .catch(function(e) {
           console.log('oups...' + e);
           return false;
       });
