@@ -6,29 +6,59 @@ RemoteStorage.defineModule("archives", function (privateClient, publicClient) {
     "description":"archives"
   });
 
+  var upgrade = function(client){
+    return client.getAll("archive/").then(function(archives){
+
+      var toStore = [];
+      var toDelete = [];
+      for (var archiveId in archives) {
+        toStore.push(client.storeObject('',archiveId,archives[archiveId]));
+        toDelete.push(client.remove('archive/' + archiveId));
+      }
+      toDelete.push(client.remove('archive/'));
+      return Promise.all(toStore).then(() => {
+          console.log("items moved from archives/archive/ to archives/");
+          return Promise.all(toStore).then(() => {
+            console.log('items removed at archives/archive/*');
+            return true;
+          }).catch((e) => {
+            console.log('oups...' + e);
+            return false;
+          })
+      })
+      .catch((e) => {
+          console.log('oups...' + e);
+          return false;
+      });
+
+    });
+  }
+
   var archives = {
 
-        store: function(archive) {
-          if (!archive.id){
-            archive.id = generateUID();
-          }
-          var path = "archive/" + archive.id;
-          return privateClient.storeObject("archive", path, archive).
-            then(function() {
-              return archive;
-            });
-        },
-
-        remove: function(archiveId){
-          return privateClient.remove('archive/' + archiveId);
-        },
-        find: function(id) {
-          var path = "archive/" + id;
-          return privateClient.getObject(path);
-        },
-        findAll: function(){
-          return privateClient.getAll("archive/");
+      upgrade: function() {
+        return upgrade(privateClient);
+      },
+      store: function(archive) {
+        if (!archive.id){
+          archive.id = generateUID();
         }
+
+        return privateClient.storeObject("archive", archive.id, archive).
+          then(function() {
+            return archive;
+          });
+      },
+
+      remove: function(archiveId){
+        return privateClient.remove('archiveId');
+      },
+      find: function(id) {
+        return privateClient.getObject(id);
+      },
+      findAll: function(){
+        return privateClient.getAll("");
+      }
   };
 
   var ALPHABET = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';

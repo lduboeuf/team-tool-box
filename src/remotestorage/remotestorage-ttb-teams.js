@@ -29,12 +29,38 @@ RemoteStorage.defineModule("teams", function (privateClient, publicClient) {
     "required": [ "id", "name" ]
   });
 
+  var upgrade = function(client){
+    return client.getAll("team/").then(function(teams){
+
+      var toStore = [];
+      var toDelete = [];
+      for (var teamId in teams) {
+        toStore.push(client.storeObject('',teamId,teams[teamId]));
+        toDelete.push(client.remove('team/' + teamId));
+      }
+      toDelete.push(client.remove('team/'));
+      return Promise.all(toStore).then(() => {
+          console.log("items moved from teams/team/ to teams/");
+          return Promise.all(toStore).then(() => {
+            console.log('items removed at teams/team/*');
+            return true;
+          }).catch((e) => {
+            console.log('oups...' + e);
+            return false;
+          })
+      })
+      .catch((e) => {
+          console.log('oups...' + e);
+          return false;
+      });
+
+    });
+  }
+
   var teams = {
 
-        init: function() {
-          remoteStorage.scope('/teams/').getListing('').then(function(listing){
-            console.log(listing);
-          });
+        upgrade: function() {
+          return upgrade(privateClient);
         },
 
         store: function(team) {
@@ -42,8 +68,7 @@ RemoteStorage.defineModule("teams", function (privateClient, publicClient) {
             team.id = generateUID();
             team.members = [];
           }
-          var path = "team/" + team.id;
-          return privateClient.storeObject("team", path, team).
+          return privateClient.storeObject("team", team.id, team).
             then(function() {
               return team;
             });
@@ -53,13 +78,11 @@ RemoteStorage.defineModule("teams", function (privateClient, publicClient) {
             function(team){
               member.id = generateUID();
               team.members.push(member);
-              return remoteStorage.teams.store(team).then(function(team){
-                return team.members[team.members.length-1];
-              });
+              return remoteStorage.teams.store(team);
             });
         },
         findMember: function(memberId){
-          return privateClient.getAll('team/').then(function(teams){
+          return privateClient.getAll('').then(function(teams){
             for (var property in teams) {
               var member = findById(teams[property].members, memberId);
               if (member){
@@ -70,7 +93,7 @@ RemoteStorage.defineModule("teams", function (privateClient, publicClient) {
           })
         },
         updateMember: function(member){
-          return privateClient.getAll('team/').then(function(teams){
+          return privateClient.getAll('').then(function(teams){
             for (var property in teams) {
               var members = teams[property].members;
               for (var i=0; i < members.length; i++){
@@ -86,7 +109,7 @@ RemoteStorage.defineModule("teams", function (privateClient, publicClient) {
 
         },
         removeMember: function(memberId){
-          return privateClient.getAll('team/').then(function(teams){
+          return privateClient.getAll('').then(function(teams){
             for (var property in teams) {
               var members = teams[property].members;
               for (var i=0; i < members.length; i++){
@@ -100,19 +123,18 @@ RemoteStorage.defineModule("teams", function (privateClient, publicClient) {
           })
         },
         remove: function(teamId){
-          return privateClient.remove('team/' + teamId);
+          return privateClient.remove(teamId);
         },
         find: function(id) {
-          var path = "team/" + id;
-          return privateClient.getObject(path);
+          return privateClient.getObject(id);
         },
         findAll: function(){
-          return privateClient.getAll("team/");
+          return privateClient.getAll("");
         }
   };
 
   var ALPHABET = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  var ID_LENGTH = 5;
+  var ID_LENGTH = 8;
 
   var generateUID = function() {
     var rtn = '';
