@@ -4,18 +4,25 @@
 	<title>test</title>
 </head>
 <body>
+<p class="result">
+</p>
 
 <script>
-var xhr = new XMLHttpRequest();
-xhr.open('GET', 'https://5apps.com/.well-known/webfinger?resource=acct:lduboeuf@5apps.com', true);
+var test_call = function(){
+	var xhr = new XMLHttpRequest();
+	xhr.open('GET', 'https://5apps.com/.well-known/webfinger?resource=acct:lduboeuf@5apps.com', true);
+	xhr.setRequestHeader('Accept', 'application/jrd+json, application/json');
     xhr.onload = function () {
-         if(this.status == 200){
-           document.write(this.responseText);
-         } else {
-           dump("Erreur pendant le chargement de la page.\n");
-         }
+    	
+    	if (xhr.readyState==4){
+    		document.querySelector('p').innerHTML = 'status:' + xhr.status + this.responseText;
+
+	    }
       }
     xhr.send(null);
+}
+
+document.addEventListener("DOMContentLoaded",test_call);
 </script>
 
 </body>
