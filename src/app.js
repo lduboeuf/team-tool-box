@@ -44,16 +44,17 @@ document.addEventListener("DOMContentLoaded", function(event) {
   remoteStorage.access.claim('archives', 'rw');
   remoteStorage.access.claim('config', 'rw');
 
-  //more optimized than findAll ?
-  remoteStorage.teams.findAll().then(
-    function(teams){
+  remoteStorage.on('ready', function() {
+    //more optimized than findAll ?
+    remoteStorage.teams.findAll().then(
+      function(teams){
 
-      if (Object.keys(teams).length === 0){
-        app.alert('alert-info','<strong>hello ;-)</strong>. Welcome to <strong>Team Tool Box!</strong>. Maybe your first time here, please have a look to the <a href="#about">About</a> section. For those who may not retrieve your datas, be sure to be synced with remoteStorage or see <a href="#settings">settings</a> to upgrade');
+        if (Object.keys(teams).length === 0){
+          app.alert('alert-info','<strong>hello ;-)</strong>. Welcome to <strong>Team Tool Box!</strong>. Maybe your first time here, please have a look to the <a href="#about">About</a> section. For those who may not retrieve your datas, be sure to be synced with remoteStorage or see <a href="#settings">settings</a> to upgrade');
+        }
       }
-    }
-  );
-
+    );
+  });
 
 
   remoteStorage.displayWidget();
