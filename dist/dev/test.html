@@ -8,18 +8,25 @@
 </p>
 
 <script>
+var xhr = new XMLHttpRequest();
+function __processState(){
+	document.querySelector('p').innerHTML = 'status:' + xhr.status + xhr.responseText;
+}
+
 var test_call = function(){
-	var xhr = new XMLHttpRequest();
+	
+	xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+          __processState();
+        }
+      };
+
+  	xhr.onload = function (a, b) {
+    	__processState();
+  	}
 	xhr.open('GET', 'https://5apps.com/.well-known/webfinger?resource=acct:lduboeuf@5apps.com', true);
 	xhr.setRequestHeader('Accept', 'application/jrd+json, application/json');
-    xhr.onload = function () {
-    	
-    	if (xhr.readyState==4){
-    		document.querySelector('p').innerHTML = 'status:' + xhr.status + this.responseText;
-
-	    }
-      }
-    xhr.send(null);
+    xhr.send();
 }
 
 document.addEventListener("DOMContentLoaded",test_call);
