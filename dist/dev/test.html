@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>test</title>
+</head>
+<body>
+
+<script>
+var xhr = new XMLHttpRequest();
+xhr.open('GET', 'https://5apps.com/.well-known/webfinger?resource=acct:lduboeuf@5apps.com', true);
+    xhr.onload = function () {
+         if(this.status == 200){
+           document.write(this.responseText);
+         } else {
+           dump("Erreur pendant le chargement de la page.\n");
+         }
+      }
+    xhr.send(null);
+</script>
+
+</body>
+</html>
