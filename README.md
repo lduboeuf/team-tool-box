@@ -1,39 +1,32 @@
-#Welcome to Team Tool Box!
+#Welcome to Team Toolbox!
 A web app that helps you to:
  - build teams randomly
  - choose randomly members from a Team
  - define passing order
+ - find pairs (e.g matches of 2 people)
 
-TTB can be used without any web servers but you will not be able to use remote storage (Oauth constraints)
+This webapp can be used without any web servers (at least with firefox web browser) but you will not be able to use remote storage (Oauth constraints)
 
 ##what's inside
  - `spapp` MVC library borrowed and turned into native js from ( https://github.com/c-smile/spapp )
  - `doT` templating engine (https://github.com/olado/doT)
- - `remoteStorage` (https://remotestorage.io/)
- - `nightwatch` as test framework (http://nightwatchjs.org/)
+ - `remoteStorage` (https://remotestorage.io/) for datas syncing between devices
+ - `nightwatch` as a test framework (http://nightwatchjs.org/)
 
-##usage
+##install
  - open index.html in your favorite browser
 
 ##development
   TTB does not need anything more than an editor to work.
   But it use nodejs, grunt for tests execution and for publishing preparation
-  - need nodejs
+  - nodejs
   - grunt: `npm install -g grunt`
 
   ```
   npm install #will install dev dependencies
   ```
+  see `grunt help` for available tasks 
 
 
-###compressing for publishing
-  ```
-  grunt build # will output app in dist/dev folder
-  grunt build --rev=prod #will output in dist folder
-  ```
-###tests
-need chrome installed for instance
-  ```
-  grunt test
 
-```
+
