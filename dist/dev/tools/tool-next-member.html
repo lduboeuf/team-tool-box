@@ -1,0 +1,39 @@
+<div>
+  <header>
+    <h1><a href="javascript:void(0);" onclick="history.back();" class="link-home">&#8592;</a>Define passing order</h1>
+</header>
+<form>
+    <label for="team-list">select:</label>
+    <select class="team-list" name="team-list">
+      <option value="-1" selected="selected"></option>
+      {{ for(var prop in it) { }}
+        <option value="{{=it[prop].id}}">{{=it[prop].name}} ({{=it[prop].members.length}})</option>
+      {{ } }}
+      <option value="-1">--all groups--</option>
+    </select>
+
+</form>
+  <div class="teams-result">
+    {{ for(var prop in it) { }}
+    <div class="team">
+      <h3>{{=it[prop].name}}<input type="checkbox" name="tick_all"></input></h3>
+      <ul class="list" >
+        {{~it[prop].members :member:idxm}}
+          <li><label><input type="checkbox" name="member_name" value="{{=member.name}}"></input><span>{{=member.name}}</span></label></li>
+        {{~}}
+      </ul>
+    </div>
+    {{ } }}
+    <div>
+      <input type="submit" name="ok" value="sort" class="button btn-default"/>
+    </div>
+  </div>
+  <div id="shuffle-result">
+    <h3>Random ordered list</h3>
+      <ol class="teams" >
+        {{~it :name:idx}}
+          <li>{{=name}}</li>
+        {{~}}
+      </ol>
+  </div>
+</div>
