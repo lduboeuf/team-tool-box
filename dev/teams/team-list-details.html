@@ -1,0 +1,26 @@
+<div>
+
+  <header>
+      <a href="javascript:void(0);" onclick="history.back();" class="link-home">&#8592;</a>
+      <h1>Group "{{=it.name}}"</h1>
+      <a href="#" class="remove-link">&#10006; remove</a>
+  </header>
+  <div>
+    <form>
+      <div class="form-group header-tbl">
+        <input name="name" type="text" placeholder="name" required=""/>
+        <input type="submit" name="add" value="add" class="button btn-success"/>
+      </div>
+    </form>
+    <h3>members:</h3>
+  <ul class="list team-members" >
+    {{~it.members :member:index}}
+    <li>
+        <a href="#team-member-details:{{=member.id}}">
+          {{=member.name}}
+        </a>
+    </li>
+    {{~}}
+  </ul>
+</div>
+</div>
