@@ -113,17 +113,24 @@ app.page("tool-build-teams", function()
     }
   }
 
+  var saveResult = function(){
+    if (currentOutput){
+      //make it backward compatible
+      var res = currentOutput.teams;
+      if (currentOutput.orphans){
+        res.push({name:"Team orphan(s)", members: currentOutput.orphans});
+      }
+
+      app("archive-save", res, true);
+    }
+  }
 
     var displayResult = function(result) {
         currentOutput = result;
 
         $resultList.innerHTML = tplResultList(result);
         var $btnSave = $resultList.querySelector('button[name="save"]');
-        $btnSave.onclick = function(){
-          if (currentOutput){
-            app("archive-save", currentOutput, true);
-          }
-        }
+        $btnSave.onclick = saveResult;
     }
 
     //empty tpl by default
