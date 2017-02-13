@@ -50,13 +50,13 @@ app.page("tool-build-teams", function()
     var idxs = members.map(function (x, i) { return i });
 
     var nbPers = parseInt($nb.value);
-    var teams = null;
     var nbTeam = Math.floor(members.length / nbPers);
 
     var idx, n;
-    var teams = [];
+    var result = {teams:[]};
     if (nbTeam==0){
-      teams.push({ name: 'Team ' + team_names[0], members: members});
+      result.teams.push({ name: 'Team ' + team_names[0], members: members});
+      idxs = []; //reset idxs array
     }else{
       for (var i = 0; i < nbTeam; i++) {
         var team = { name : 'Team ' +team_names[i] + ':'};
@@ -67,7 +67,7 @@ app.page("tool-build-teams", function()
           tmp_members[j] = members[idx];
         }
         team.members = tmp_members;
-        teams[i] = team;
+        result.teams[i] = team;
 
       }
 
@@ -75,42 +75,29 @@ app.page("tool-build-teams", function()
       if (idxs.length>0) {
           //add them to first team and so on
           var tmp_members = idxs.map(function (x, i) { return members[x] });
-          var team = {
-            name : 'Team Orphan(s)',
-            members : tmp_members
-          };
-          teams.push(team);
-       }
+          result.orphans = tmp_members;
+      }
 
 
 
     }
 
+    displayResult(result);
 
+    if (result.orphans) { //handle dispatch
+      var $btnDispatch = $resultList.querySelector('.team-orphans button');
 
-
-    if (teams) {
-      displayTeams(teams);
-
-      if (idxs.length>0) { //special case for orphans
-        var $teamsNode = $resultList.querySelectorAll('.team');
-        var $orphansNode = $teamsNode[$teamsNode.length- 1];
-
-        var $link = document.createElement('button');
-        $link.innerHTML = 'dispatch';
-        $link.style = 'cursor:pointer;color:blue';
-        $link.onclick = function(){
-          var orphans = teams.pop();
-          distribute(teams, orphans.members);
-          displayTeams(teams);
-        }
-
-        $orphansNode.firstElementChild.append($link);
-
+      $btnDispatch.onclick = function(){
+        distribute(result.teams, result.orphans);
+        result.orphans = null;
+        displayResult(result);
       }
+
+
     }
 
   }
+
 
   //put members in teams
   var distribute = function(teams, members){
@@ -127,11 +114,11 @@ app.page("tool-build-teams", function()
   }
 
 
-    var displayTeams = function(teams) {
-        currentOutput = teams;
+    var displayResult = function(result) {
+        currentOutput = result;
 
-        $resultList.innerHTML = tplResultList(teams);
-        var $btnSave = $resultList.querySelector('button');
+        $resultList.innerHTML = tplResultList(result);
+        var $btnSave = $resultList.querySelector('button[name="save"]');
         $btnSave.onclick = function(){
           if (currentOutput){
             app("archive-save", currentOutput, true);

@@ -136,7 +136,7 @@ module.exports = function(grunt) {
       dist: {
         files: [{
           dot: true,
-          src: [ '.tmp','<%= appConfig.dist %>/*','!<%= appConfig.dist %>/.git*']
+          src: [ '.tmp','<%= appConfig.dist %>/*','!<%= appConfig.dist %>/.git*','!<%= appConfig.dist %>/dev/**']
         }]
       },
       dev:{

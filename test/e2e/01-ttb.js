@@ -129,7 +129,7 @@ module.exports = { // adapted from: https://git.io/vodU0
     })
     .pause(1000)
 
-    .click('#tool-build-teams .teams-result button')
+    .click('#tool-build-teams .teams-result button[name="save"]')
     .waitForElementVisible('#archive-save',1000)
     //test for name empty
     .setValue('#archive-save input[name="name"]', '')

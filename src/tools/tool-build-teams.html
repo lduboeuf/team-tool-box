@@ -20,7 +20,7 @@
 
       {{ for(var prop in it) { }}
 
-        <option value="{{=it[prop].id}}">{{=it[prop].name}} ({{=it[prop].members.length}})</option>
+        <option value="{{=it[prop].id}}">{{=it[prop].name}}</option>
       {{ } }}
       <option value="-1">--all groups--</option>
     </select>
@@ -29,16 +29,26 @@
 
 </form>
   <div class="teams-result">
-    {{~it :team:idx}}
+    {{~it.teams :team:idx}}
     <div class="team">
       <h3>{{=team.name}}</h3>
       <ul class="list" >
         {{~team.members :member:idxm}}
-          <li>{{=member.name}}</li>
+          <li data-id="{{=member.id}}">{{=member.name}}</li>
         {{~}}
       </ul>
     </div>
     {{~}}
+    {{? it.orphans }}
+    <div class="team team-orphans">
+      <h3>Team Orphan(s)<button class="btn-default">dispatch</button></h3>
+      <ul class="list" >
+        {{~it.orphans :orphan:idx}}
+          <li data-id="{{=orphan.id}}">{{=orphan.name}}</li>
+        {{~}}
+      </ul>
+    </div>
+    {{?}}
     <div>
       <button class="btn-default btn-success" name="save">save result</button>
     </div>
