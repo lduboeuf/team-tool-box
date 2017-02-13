@@ -16,8 +16,24 @@ module.exports = function(grunt) {
    // Configurable paths for the application
   var appConfig = {
     app: 'src',
-    dist: 'dist'
+    dist: 'dist',
+    distDev: 'dist/dev'
   };
+
+  var folderToTest = function(){
+    var f = appConfig.app;
+    grunt.log.writeln('target:'+grunt.task.current.target);
+    if (grunt.task.current.args){
+      var arg = grunt.task.current.args[0];
+      if (arg==='dev'){
+        f = appConfig.distDev;
+      }else if(arg==='prod'){
+        f = appConfig.dist;
+      }
+    }
+
+    return f;
+  }
 
 
 // Define the configuration for all the tasks
@@ -27,18 +43,30 @@ module.exports = function(grunt) {
 
 
     connect: {
-          server: {
+      src: {
+        options: {
+          port: 8000,
+          base: {
+            path: '<%= appConfig.app %>',
             options: {
-              port: 8000,
-              base: {
-                path: '<%= appConfig.app %>',
-                options: {
-                  index: 'index.html',
-                  maxAge: 300000
-                }
-              }
+              index: 'index.html',
+              maxAge: 300000
             }
           }
+        }
+      },
+      prod: {
+        options: {
+          port: 8000,
+          base: {
+            path: '<%= appConfig.dist %>',
+            options: {
+              index: 'index.html',
+              maxAge: 300000
+            }
+          }
+        }
+      },
     },
     selenium_standalone: {
      options: {
@@ -224,20 +252,24 @@ module.exports = function(grunt) {
     'cssmin',
     'usemin',
     'htmlmin:dist',
-    'manifest'
+    'manifest',
+    'test:prod'
   ]);
   grunt.registerTask('build:dev', [
     'clean:dev',
     'copy:dev'
   ]);
 
-  grunt.registerTask('test', [
-    'selenium_standalone:default:install',
-    'connect',
+  grunt.registerTask('test', function(n) {
+    if (n == null) {
+      n = 'src';
+    }
+    grunt.task.run('selenium_standalone:default:install',
+    'connect:' + n,
     'selenium_standalone:default:start',
     'nightwatch',
-    'selenium_standalone:default:stop'
-   ]);
+    'selenium_standalone:default:stop');
+  });
 
   grunt.registerTask('default', help);
 };
