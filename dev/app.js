@@ -21,7 +21,7 @@ app.cleanUI = function(evt){
 }
 
 
-document.addEventListener("DOMContentLoaded", function(event) {
+app.init = function(event) {
   //menu handler
   var $menu = document.getElementById("menu");
   var $menu_icon = $menu.querySelector('.icon > a');
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   remoteStorage.access.claim('config', 'rw');
 
   remoteStorage.on('ready', function() {
-    //more optimized than findAll ?
+    //more optimized than findAll ?-> getListing
     remoteStorage.teams.findAll().then(
       function(teams){
 
@@ -62,4 +62,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
   //simulate a hash change at startup
   window.dispatchEvent(new CustomEvent('hashchange'));
-});
+}
+
+document.addEventListener("DOMContentLoaded",app.init);
