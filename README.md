@@ -18,15 +18,9 @@ This webapp can be used without any web servers (at least with firefox web brows
 
 ##development
   TTB does not need anything more than an editor to work.
-  But it use nodejs, grunt for tests execution and for publishing preparation
-  - nodejs
-  - grunt: `npm install -g grunt`
+  But it use nodejs, grunt(`npm install -g grunt`) for tests execution and for publishing preparation
 
   ```
   npm install #will install dev dependencies
   ```
-  see `grunt help` for available tasks 
-
-
-
-
+  see `grunt help` for available tasks

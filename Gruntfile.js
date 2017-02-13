@@ -6,19 +6,17 @@ module.exports = function(grunt) {
   require('load-grunt-tasks')(grunt);
 
   var help = function(){
-    grunt.log.writeln('use `grunt build` to build to dist/dev folder');
-    grunt.log.writeln('use `grunt build --rev=prod` to build to dist folder');
+    grunt.log.writeln('use `grunt build:dev` to build to dist/dev folder');
+    grunt.log.writeln('use `grunt build:prod` to build to dist folder');
     grunt.log.writeln('use `grunt connect:server:keepalive` to launch a local static server');
     grunt.log.writeln('use `grunt test` to launch tests ( nightwatch)');
     grunt.log.writeln('use `grunt spapp_generator:new --name=xxx to generate controller/view skeleton and html/css declaration ');
   }
 
-  var outputDir = 'dist/dev';
-  if (grunt.option('rev')=='prod') outputDir = 'dist';
    // Configurable paths for the application
   var appConfig = {
     app: 'src',
-    dist: outputDir
+    dist: 'dist'
   };
 
 
@@ -28,20 +26,6 @@ module.exports = function(grunt) {
     appConfig : appConfig,
 
 
-    // Empties folders to start fresh
-    clean: {
-      dist: {
-        files: [{
-          dot: true,
-          src: [
-            '.tmp',
-            '<%= appConfig.dist %>/*',
-            '!<%= appConfig.dist %>/.git*'
-          ]
-        }]
-      },
-      server: '.tmp'
-    },
     connect: {
           server: {
             options: {
@@ -147,6 +131,22 @@ module.exports = function(grunt) {
       }
     },
 
+    // Empties folders to start fresh
+    clean: {
+      dist: {
+        files: [{
+          dot: true,
+          src: [ '.tmp','<%= appConfig.dist %>/*','!<%= appConfig.dist %>/.git*']
+        }]
+      },
+      dev:{
+        files: [{
+          dot: true,
+          src: [ '.tmp','<%= appConfig.dist %>/dev/*']
+        }]
+      },
+      server: '.tmp'
+    },
 
     // Copies remaining files to places other tasks can use
     copy: {
@@ -156,16 +156,16 @@ module.exports = function(grunt) {
           dot: true,
           cwd: '<%= appConfig.app %>',
           dest: '<%= appConfig.dist %>',
-          src: [
-            '*.{ico,png,txt}',
-            'images/{,*/}*.{webp}',
-            'fonts/*'
-          ]
-        }, {
+          src: ['*.{ico,png,txt}','images/{,*/}*.{webp}','fonts/*']
+        }]
+      },
+      dev: {
+        files: [{
           expand: true,
-          cwd: '.tmp/images',
-          dest: '<%= appConfig.dist %>/images',
-          src: ['generated/*']
+          dot: true,
+          cwd: '<%= appConfig.app %>',
+          dest: '<%= appConfig.dist %>/dev',
+          src: ['**/*']
         }]
       }
     },
@@ -190,7 +190,7 @@ module.exports = function(grunt) {
         options: {
           basePath: '',
           cache: ['index.html'],
-          network: ['http://*', 'https://*'],
+          network: ['*'],
           preferOnline: true,
           headcomment: " <%= pkg.name %> v<%= pkg.version %>",
           verbose: true,
@@ -212,13 +212,12 @@ module.exports = function(grunt) {
 
 
 
+  grunt.registerTask('build', ['build:dev']);
 
-  grunt.registerTask('build', [
-    //'test',
+  grunt.registerTask('build:prod', [
     'clean:dist',
     'copy:dist',
     'spapp_generator:inline',
-    //'jshint',
     'useminPrepare',
     'concat',
     'uglify',
@@ -226,7 +225,10 @@ module.exports = function(grunt) {
     'usemin',
     'htmlmin:dist',
     'manifest'
-
+  ]);
+  grunt.registerTask('build:dev', [
+    'clean:dev',
+    'copy:dev'
   ]);
 
   grunt.registerTask('test', [
