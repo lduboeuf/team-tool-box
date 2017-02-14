@@ -3,13 +3,21 @@
   {
 
     var $teamListDetails = document.getElementById('team-list-details');
+    var $header = $teamListDetails.querySelector('header');
 
-    var tpl = doT.template($teamListDetails.innerHTML);
+    var $nameInput = $teamListDetails.querySelector('input[name="name"]');
+    var $btnAddMember = $teamListDetails.querySelector('input[type="submit"]');
+
+    var $ulTeamMembers = $teamListDetails.querySelector('ul.team-members');
+
+    var tplHeader = doT.template($header.innerHTML);
+    var tplMembers = doT.template($ulTeamMembers.innerHTML);
 
     var currentTeamId = null;
 
     //default is not shown
-    $teamListDetails.innerHTML=null;
+    //$teamListDetails.innerHTML=null;
+    $ulTeamMembers.innerHTML = null;
 
     var remove = function(){
       if (confirm('sure you want to remove this team ?')){
@@ -25,7 +33,6 @@
 
     var addMember = function(e){
       e.preventDefault();
-      var $nameInput = $teamListDetails.querySelector('input[name="name"]');
       if ($nameInput.value.length>0){
         remoteStorage.teams.addMember(currentTeamId, { name: $nameInput.value}).then(
           function(team){
@@ -35,10 +42,16 @@
     }
 
     var applyTemplate =function(team){
-      $teamListDetails.innerHTML = tpl(team);
+
+      $ulTeamMembers.innerHTML = tplMembers(team);
+      $header.innerHTML = tplHeader(team);
+
+      $nameInput.value = "";
       $teamListDetails.querySelector('.remove-link').onclick=remove;
-      $teamListDetails.querySelector('input[type="submit"]').onclick=addMember;
     }
+
+
+    $teamListDetails.querySelector('input[type="submit"]').onclick=addMember;
 
 
     return function(params) {

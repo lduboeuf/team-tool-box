@@ -7,7 +7,7 @@
     <select class="team-list" name="team-list">
       <option value="-1" selected="selected"></option>
       {{ for(var prop in it) { }}
-        <option value="{{=it[prop].id}}">{{=it[prop].name}} ({{=it[prop].members.length}})</option>
+        <option value="{{=it[prop].id}}">{{=it[prop].name}}</option>
       {{ } }}
       <option value="-1">--all groups--</option>
     </select>
