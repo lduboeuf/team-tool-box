@@ -33,43 +33,38 @@
 
 
 
-  function show(pageName,param, modal) {
+  function show(pageName,param) {
     var $page = document.querySelector("section#" + pageName);
     if( $page.length == 0 ) {
       console.warn("section with id=%s not found!",pageName);
       return;
     }
+    var modal = $page.classList.contains('modal');
     var ph = pageHandlers[pageName];
     if( ph ) {
       var that = $page.length > 0 ? $page[0] : null;
       var r = ph.call(that , param);
       if( typeof r == "function" ) { // it returns the function that's used for view rendering
         if (!matches($page, '[no-ctl-cache]'))
-        //if(!$page.is("[no-ctl-cache]"))
             pageHandlers[pageName] = r;
         r.call(that, param); // call that rendering function
       }
     }
     if(currentPageName) { // "close" current page view
       //
-      if (modal!==true){
+      if (modal!==true){ //when modal keep currentPage in background
         document.body.classList.remove(currentPageName); // remove old page class
-        $currentPage.classList.remove('modal');
       }
       if($currentPage) {
 
         document.dispatchEvent(new CustomEvent('page.hidden',{'currentPage' : currentPageName }));
-        //$currentPage.trigger("page.hidden",currentPageName);
         if($currentPage.getAttribute('src') && matches($currentPage, '[no-ctl-cache]'))
             $currentPage.innerHTML = null;
-            //$currentPage.empty();
       }
     }
     oldPageName = currentPageName;
     document.body.classList.add(currentPageName = pageName); // set new page class
-    if (modal===true){
-      $page.classList.add('modal');
-    }
+
 
 
     if($currentPage = $page){
@@ -88,7 +83,7 @@
     }
   }
 
-  function app(pageName,param, modal) {
+  function app(pageName,param) {
 
     var $page = document.body.querySelector("section#" + pageName);
     if(!$page){
@@ -96,12 +91,12 @@
     }
     var src = $page.getAttribute("src");
     if( src && !$page.hasChildNodes()) { // it has src and is empty
-      app.get(src, $page, pageName, param,modal);
+      app.get(src, $page, pageName, param);
       // app.get(src, $page, pageName)
       //     .done(function(html){$page.html(html); show(pageName,param); })
       //     .fail(function(){ console.warn("failed to get %s page!",pageName);});
     } else
-      show(pageName,param,modal);
+      show(pageName,param);
   }
 
   app.back = function(params){
@@ -113,7 +108,7 @@
     };
 
   // Function to get page's html, shall return jQuery's promise. Can be overriden.
-  app.get = function(src,$page,pageName, param, modal) {
+  app.get = function(src,$page,pageName, param) {
     //return $.get(src, "html");
     var request = new XMLHttpRequest();
     request.open('GET', src, true);
@@ -122,7 +117,7 @@
       if (request.status >= 200 && request.status < 400) {
         // Success!
         $page.innerHTML = request.responseText;
-        show(pageName,param, modal);
+        show(pageName,param);
       } else {
         // We reached our target server, but it returned an error
         console.warn("failed to get %s page!",pageName);

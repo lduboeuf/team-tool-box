@@ -121,7 +121,7 @@ app.page("tool-build-teams", function()
         res.push({name:"Team orphan(s)", members: currentOutput.orphans});
       }
 
-      app("archive-save", res, true);
+      app("archive-save", res);
     }
   }
 

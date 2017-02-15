@@ -218,7 +218,7 @@ ul.topnav li.icon {
 /** modal **/
 .modal{
   margin:0;
-  display: block;
+  display: none;
   position: fixed;
   left: 0;
   top: 0;
@@ -227,6 +227,10 @@ ul.topnav li.icon {
   overflow: auto;
   background-color: rgb(0,0,0);
   background-color: rgba(0,0,0,0.4);
+}
+
+.modal:target{
+  display: block;
 }
 
 .modal>div{
