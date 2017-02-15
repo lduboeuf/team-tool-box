@@ -16,8 +16,23 @@ module.exports = { // adapted from: https://git.io/vodU0
       .assert.visible("#team-list")
       .click('a[href="#archive-list"]')
       .assert.visible("#archive-list")
+      .click('a[href="#settings"]')
+      .assert.visible("#settings")
       .click('a[href="#about"]')
       .assert.visible("#about")
+      //test actions
+      .click('a[href="#home"]')
+      .click('.actions a[href="#tool-build-teams"]')
+      .assert.visible("#tool-build-teams")
+      .click('a[href="#home"]')
+      .click('.actions a[href="#tool-find-members"]')
+      .assert.visible("#tool-find-members")
+      .click('a[href="#home"]')
+      .click('.actions a[href="#tool-next-member"]')
+      .assert.visible("#tool-next-member")
+      .click('a[href="#home"]')
+      .click('.actions a[href="#tool-match"]')
+      .assert.visible("#tool-match")
   },
   'Add a team  ':function(browser){
     browser
@@ -51,8 +66,8 @@ module.exports = { // adapted from: https://git.io/vodU0
     .url('http://localhost:8000/index.html#team-list')
     .waitForElementVisible('#team-list ul.team-list li')
     .click('#team-list ul.team-list li a') //click on first team
-    .waitForElementVisible('#team-list-details a.remove-link')
-    .click('#team-list-details a.remove-link')
+    .waitForElementVisible('#team-list-details button[name="remove"]')
+    .click('#team-list-details button[name="remove"]')
     .pause(500)
     .acceptAlert()
     .pause(500)
