@@ -68,6 +68,14 @@ body> header {
   width: 100%;
 }
 
+#navigation {
+    background: white;
+    color: #04102A;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    font-weight: 700;
+}
 
 header h2{
   display: inline-block;

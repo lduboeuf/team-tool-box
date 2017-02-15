@@ -6,7 +6,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Random Team/Group generator, manage your groups randomly!">
-    
+
     <!-- build:js scripts/vendors.js -->
     <script src="vendors/remotestorage.min.js"></script>
     <script src="vendors/doT.min.js"></script>
@@ -60,6 +60,10 @@
        <a href="javascript:void(0);">&#9776;</a>
      </li>
    </ul>
+   <div id="navigation">
+    <a href="javascript:void(0);" onclick="history.back();" title="back" class="link-home">&#8962;</a>
+    <h1>title</h1>
+  </div>
  </header>
   <!-- <div id="loader" class="loader"></div> -->
   <section id="home" default>
@@ -73,20 +77,20 @@
       </ul>
     </div>
   </section>
-  <section id="tool-build-teams" src="tools/tool-build-teams.html"></section>
-  <section id="tool-find-members" src="tools/tool-find-members.html"></section>
-  <section id="tool-next-member" src="tools/tool-next-member.html"></section>
-  <section id="team-list" src="teams/team-list.html"></section>
-  <section id="team-list-details" src="teams/team-list-details.html"></section>
-  <section id="team-add" src="teams/team-add.html"></section>
-  <section id="team-member-add" src="teams/team-member-add.html"></section>
-  <section id="team-member-details" src="teams/team-member-details.html"></section>
-  <section id="about" src="commons/about.html"></section>
-  <section id="archive-save" src="archives/archive-save.html"></section>
-  <section id="archive-list" src="archives/archive-list.html"></section>
-  <section id="archive-details" src="archives/archive-details.html"></section>
-  <section id="settings" src="commons/settings.html"></section>
-  <section id="tool-match" src="tools/tool-match.html"></section>
+  <section id="tool-build-teams" src="tools/tool-build-teams.html" title="Build teams"></section>
+  <section id="tool-find-members" src="tools/tool-find-members.html" title="Find members"></section>
+  <section id="tool-next-member" src="tools/tool-next-member.html" title="Passing order"></section>
+  <section id="team-list" src="teams/team-list.html" title="My Groups"></section>
+  <section id="team-list-details" src="teams/team-list-details.html" title="Group details"></section>
+  <section id="team-add" src="teams/team-add.html" title="Add a group"></section>
+  <section id="team-member-add" src="teams/team-member-add.html" title="Add a member"></section>
+  <section id="team-member-details" src="teams/team-member-details.html" title="Edit a member"></section>
+  <section id="about" src="commons/about.html" title="About"></section>
+  <section id="archive-save" src="archives/archive-save.html" title="Save to archive"></section>
+  <section id="archive-list" src="archives/archive-list.html" title="Archive list"></section>
+  <section id="archive-details" src="archives/archive-details.html" title="Archive details"></section>
+  <section id="settings" src="commons/settings.html" title="Settings"></section>
+  <section id="tool-match" src="tools/tool-match.html" title="Match"></section>
   <!-- @spapp_generator sections -->
   <div class="alert alert-info">
     <span onclick="this.parentElement.style.display='none'" class="alert-closebtn">&times;</span>

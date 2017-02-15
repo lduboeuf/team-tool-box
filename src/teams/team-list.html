@@ -1,19 +1,14 @@
 <div>
-  <header>
-    <h1><a href="javascript:void(0);" onclick="history.back();" class="link-home">&#8592;</a>My groups</h1>
-  </header>
-  <div>
-    <div class="header-tbl">
-      <a href="#team-add" class="add-link btn-default">+ Add a group</a>
-    </div>
-    <ul class="list team-list" >
-      {{ for(var prop in it) { }}
-      <li>
-          <a href="#team-list-details:{{=it[prop].id}}">
-            {{=it[prop].name}}
-          </a>
-      </li>
-      {{ } }}
-    </ul>
+  <div class="header-tbl">
+    <a href="#team-add" class="add-link btn-default">+ Add a group</a>
   </div>
+  <ul class="list team-list" >
+    {{ for(var prop in it) { }}
+    <li>
+        <a href="#team-list-details:{{=it[prop].id}}">
+          {{=it[prop].name}}
+        </a>
+    </li>
+    {{ } }}
+  </ul>
 </div>

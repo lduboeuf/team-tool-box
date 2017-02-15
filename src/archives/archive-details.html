@@ -1,10 +1,5 @@
 <div>
-
-  <header>
-    <a href="javascript:void(0);" onclick="history.back();" class="link-home">&#8592;</a>
-    <h1>Archive "{{=it.date || '' }} - {{=it.name}}"</h1>
-    <a href="#" class="remove-link">&#10006; remove</a>
-  </header>
+  <h2>archive: {{=it.date || '' }} - {{=it.name}}</h2>
 
   <div class="team-list">
     <h3>description:</h3>
@@ -27,4 +22,5 @@
       <input type="submit" name="add" value="add comment" class="button btn-success"/>
     </div>
   </form>
+  <button name="remove" class="btn-danger">&#10006; remove archive</button>
 </div>

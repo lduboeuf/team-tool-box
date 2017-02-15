@@ -74,7 +74,7 @@
 
     if($currentPage = $page){
 
-      document.dispatchEvent(new CustomEvent('page.shown', {'currentPage' : currentPageName}));
+      document.dispatchEvent(new CustomEvent('page.shown', {'detail' : {'currentPage' : currentPageName, 'title': $page.getAttribute('title')}}));
       //update url location if not
       if ($page.getAttribute('default')!=""){
         var url = '#' + currentPageName;
