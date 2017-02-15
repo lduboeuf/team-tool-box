@@ -3,7 +3,7 @@
   {
 
     var $teamListDetails = document.getElementById('team-list-details');
-    var $header = $teamListDetails.querySelector('header');
+    var $header = $teamListDetails.querySelector('h2');
 
     var $nameInput = $teamListDetails.querySelector('input[name="name"]');
     var $btnAddMember = $teamListDetails.querySelector('input[type="submit"]');
@@ -47,7 +47,7 @@
       $header.innerHTML = tplHeader(team);
 
       $nameInput.value = "";
-      $teamListDetails.querySelector('.remove-link').onclick=remove;
+      $teamListDetails.querySelector('button[name="remove"]').onclick=remove;
     }
 
 
