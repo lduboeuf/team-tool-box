@@ -28,9 +28,15 @@ app.page("archive-details", function()
     }
     currentArchive.comment = $comment.value;
 
-    remoteStorage.archives.store(currentArchive).then(function(){
-      history.back();
+    remoteStorage.archives.store(currentArchive).then(function(archive){
+      applyTemplate(archive);
     });
+  }
+
+  var applyTemplate = function(archive){
+    $section.innerHTML = tpl(archive);
+    $section.querySelector('button[name="remove"]').onclick=remove;
+    $section.querySelector('input[name="add"]').onclick=update;
   }
 
 
@@ -39,9 +45,7 @@ app.page("archive-details", function()
     remoteStorage.archives.find(params).then(
       function(archive){
         currentArchive = archive;
-        $section.innerHTML = tpl(archive);
-        $section.querySelector('.remove-link').onclick=remove;
-        $section.querySelector('input[name="add"]').onclick=update;
+        applyTemplate(archive);
       }
     )
 

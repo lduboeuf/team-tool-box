@@ -39,20 +39,20 @@ module.exports = { // adapted from: https://git.io/vodU0
     .url('http://localhost:8000/index.html#team-list')
     .waitForElementVisible('#team-list')
     .assert.elementNotPresent("ul.team-list li") //should have no team-list
-    .click('#team-list a[href="#team-add"]')
+
     .perform(function(client, done){
       for (var i = 0; i <2; i++){ //perform creation of 2 teams
-
+        client.click('#team-list a[href="#team-add"]')
         client.waitForElementVisible('#team-add form')
         client.setValue('#team-add input[name="name"]', 'team' +i)
         client.click('#team-add input[type="submit"]')
-
         client.waitForElementVisible('#team-list-details')
         client.back()
+        client.waitForElementVisible('#team-list li')
       }
       done()
     })
-    .click('a[href="#team-list"]') //go back to team-list
+    //.click('a[href="#team-list"]') //go back to team-list
     .waitForElementVisible('ul.team-list li')
     .elements('css selector', 'ul.team-list li', function (elements) {
       var count = elements.value.length;
@@ -143,14 +143,14 @@ module.exports = { // adapted from: https://git.io/vodU0
       this.assert.equal(count,5, 'should generate a list of 5 teams')
     })
     .pause(1000)
-
-    .click('#tool-build-teams .teams-result button[name="save"]')
-    .waitForElementVisible('#archive-save',1000)
-    //test for name empty
+    //save to archive
+    .click('#tool-build-teams button[name="save"]')
+    .waitForElementVisible('#archive-save')
+    //test for empty name
     .setValue('#archive-save input[name="name"]', '')
-    .click('#archive-save input[type="submit"]')
+    .click('#archive-save input[type="submit"]') //should do nothing (TODO handle msg error)
     //
-    .assert.urlContains('#archive-save') //test if empty
+    //.assert.urlContains('#archive-save')
     .setValue('#archive-save input[name="name"]', 'archive1')
     .setValue('#archive-save textarea', 'description for archive1')
     .click('#archive-save input[type="submit"]')
@@ -160,9 +160,22 @@ module.exports = { // adapted from: https://git.io/vodU0
     .waitForElementVisible('#tool-build-teams',1000)
     .assert.cssClassNotPresent('#tool-build-teams .teams-result button', 'btn-success')
 
-    .pause(1000)
+
+  },
+  'Archive update ':function(browser){
+    browser.url('http://localhost:8000/index.html#archive-list')
+    //remove a member
+    .waitForElementVisible('#archive-list .archive-list')
+    .assert.elementPresent("#archive-list .archive-list li")
+    .click("#archive-list .archive-list li:last-child a") //click on last element
+    .waitForElementVisible('#archive-details')
+    .setValue('#archive-details textarea[name="comment"]', 'comment for archive here')
+    .click('#archive-details input[type="submit"]')
+    .pause(500)
+    .assert.containsText('#archive-details textarea','comment for archive here')
+    .saveScreenshot('.tmp/nightwatch/ttb/screenshots/archive-update.png')
     .end();
-  }
+  },
 
 
 };
