@@ -9,7 +9,7 @@ module.exports = function(grunt) {
     grunt.log.writeln('use `grunt build:dev` to build to dist/dev folder');
     grunt.log.writeln('use `grunt build:prod` to build to dist folder');
     grunt.log.writeln('use `grunt connect:server:keepalive` to launch a local static server');
-    grunt.log.writeln('use `grunt test` to launch tests ( nightwatch)');
+    grunt.log.writeln('use `grunt test` to launch tests ( nightwatch with chrome), use `grunt test:src|prod:gecko` to run within Firefox');
     grunt.log.writeln('use `grunt spapp_generator:new --name=xxx to generate controller/view skeleton and html/css declaration ');
   }
 
@@ -80,7 +80,12 @@ module.exports = function(grunt) {
            version: '2.27',
            arch: process.arch,
            baseURL: 'http://chromedriver.storage.googleapis.com'
-         }
+         },
+         firefox: {
+          version: '0.14.0',
+          arch: process.arch,
+          baseURL: 'https://github.com/mozilla/geckodriver/releases/download',
+        }
        }
      }
    } ,
@@ -117,7 +122,7 @@ module.exports = function(grunt) {
           },
           "gecko": {
             "desiredCapabilities": {
-              "browserName": "gecko",
+              "browserName": "firefox",
               "javascriptEnabled": true // turn off to test progressive enhancement
             }
           }
@@ -260,16 +265,19 @@ module.exports = function(grunt) {
     'copy:dev'
   ]);
 
-  grunt.registerTask('test', function(n) {
-    if (n == null) {
-      n = 'src';
+  grunt.registerTask('test', function(arg1, arg2) {
+    if (arg1 == null) {
+      arg1 = 'src';
+    }
+    if(arg2==null){
+      arg2 = 'chrome';
     }
     grunt.task.run('selenium_standalone:default:install',
-    'connect:' + n,
+    'connect:' + arg1,
     'selenium_standalone:default:start',
-    'nightwatch',
+    'nightwatch:' + arg2,
     'selenium_standalone:default:stop');
   });
-
+  grunt.registerTask('help', help);
   grunt.registerTask('default', help);
 };

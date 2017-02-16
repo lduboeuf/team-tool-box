@@ -6,8 +6,8 @@ module.exports = { // adapted from: https://git.io/vodU0
       .url('http://localhost:8000/index.html')
       .waitForElementVisible('body')
       .assert.title('Team ToolBox')
-      .pause(1000)
-      .assert.visible(".alert-info")
+      //.pause(1000)
+      .waitForElementVisible(".alert-info")
       .saveScreenshot('.tmp/nightwatch/ttb/screenshots/home.png')
       //test links
       .click('a[href="#home"]')
