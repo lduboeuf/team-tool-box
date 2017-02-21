@@ -21,6 +21,7 @@ module.exports = { // adapted from: https://git.io/vodU0
       .click('a[href="#about"]')
       .assert.visible("#about")
       //test actions
+      /*
       .click('a[href="#home"]')
       .click('.actions a[href="#tool-build-teams"]')
       .assert.visible("#tool-build-teams")
@@ -33,6 +34,7 @@ module.exports = { // adapted from: https://git.io/vodU0
       .click('a[href="#home"]')
       .click('.actions a[href="#tool-match"]')
       .assert.visible("#tool-match")
+      */
   },
   'Add a team  ':function(browser){
     browser
@@ -174,8 +176,34 @@ module.exports = { // adapted from: https://git.io/vodU0
     .pause(500)
     .assert.containsText('#archive-details textarea','comment for archive here')
     .saveScreenshot('.tmp/nightwatch/ttb/screenshots/archive-update.png')
-    .end();
   },
+  'Find members ':function(browser){
+    browser.url('http://localhost:8000/index.html#tool-find-members')
+    .waitForElementVisible('#tool-find-members form')
+    .setValue('#tool-find-members .nb-members', 4)
+    .click('#tool-find-members input[type="submit"]')
+    .waitForElementVisible('#tool-find-members div.team')
+    .assert.elementPresent("ul.list li")
+    .elements('css selector', '#tool-find-members .team li', function (elements) {
+      var count = elements.value.length;
+      this.assert.equal(count,4, 'should generate a list of 4 members')
+    })
+    .end()
+  }
+  // ,
+  // 'Next members ':function(browser){
+  //   browser.url('http://localhost:8000/index.html#tool-next-member')
+  //   .waitForElementVisible('#tool-next-member form')
+  //   .setValue('#tool-find-members select[name="team-list"]', 4)
+  //
+  //   .waitForElementVisible('#teams-result')
+  //   .assert.elementPresent("#teams-result ul.list li")
+  //   .elements('css selector', '#tool-find-members .team li', function (elements) {
+  //     var count = elements.value.length;
+  //     this.assert.equal(count,4, 'should generate a list of 4 members')
+  //   })
+  //   .end();
+  }
 
 
 };

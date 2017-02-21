@@ -81,6 +81,16 @@ header h2{
   display: inline-block;
 }
 
+footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 10px;
+  background-color: #efefef;
+  text-align: center;
+}
+
 .remove-link{
   margin:0;
   color: #D9534F;
