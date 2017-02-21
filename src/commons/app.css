@@ -325,8 +325,12 @@ ul.topnav li.icon {
   padding:8px;
   /*padding-top:12px;*/
 }
+#tool-next-member li,  #tool-match li{
+  padding:0;
+}
 #tool-next-member li label,  #tool-match li label{
   display:block;
+  padding:10px 16px;
 }
 #tool-next-member li input,  #tool-match li input{
   float:right;
