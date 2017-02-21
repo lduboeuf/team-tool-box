@@ -203,7 +203,7 @@ module.exports = { // adapted from: https://git.io/vodU0
   //     this.assert.equal(count,4, 'should generate a list of 4 members')
   //   })
   //   .end();
-  }
+  //}
 
 
 };
