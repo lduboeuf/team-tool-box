@@ -9,7 +9,7 @@ module.exports = function(grunt) {
     grunt.log.writeln('use `grunt build:dev` to build to dist/dev folder');
     grunt.log.writeln('use `grunt build:prod` to build to dist folder');
     grunt.log.writeln('use `grunt connect:server:keepalive` to launch a local static server');
-    grunt.log.writeln('use `grunt test` to launch tests ( nightwatch with chrome), use `grunt test:src|prod:gecko` to run within Firefox');
+    grunt.log.writeln('use `grunt test:src|prod` to launch tests to src folder or production folder( nightwatch with chrome by default), use `grunt test:src|prod:gecko` to run within Firefox');
     grunt.log.writeln('use `grunt spapp_generator:new --name=xxx to generate controller/view skeleton and html/css declaration ');
   }
 
