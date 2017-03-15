@@ -180,7 +180,7 @@ module.exports = function(grunt) {
           src: [ '.tmp','<%= appConfig.dist %>/dev/*']
         }]
       },
-      server: '.tmp'
+      tmp: '.tmp'
     },
 
     // Copies remaining files to places other tasks can use
@@ -260,7 +260,8 @@ module.exports = function(grunt) {
     'usemin',
     //'htmlmin:dist',
     'manifest',
-    'test:prod'
+    'test:prod',
+    'clean:tmp'
   ]);
   grunt.registerTask('build:dev', [
     'clean:dev',
