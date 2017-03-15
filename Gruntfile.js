@@ -258,7 +258,7 @@ module.exports = function(grunt) {
     'uglify',
     'cssmin',
     'usemin',
-    //'htmlmin:dist',
+    'htmlmin:dist',
     'manifest',
     'test:prod',
     'clean:tmp'
