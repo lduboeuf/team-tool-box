@@ -98,7 +98,9 @@
     };
 
   // Function to get page's html, shall return jQuery's promise. Can be overriden.
-  app.get = function(src,$page,pageName, param) {
+  // Function to get page's html, shall return jQuery's promise. Can be overriden.
+  app.get = function(src,$page,pageName, param, modal) {
+    //return $.get(src, "html");
     var request = new XMLHttpRequest();
     request.open('GET', src, true);
 
@@ -106,7 +108,11 @@
       if (request.status >= 200 && request.status < 400) {
         // Success!
         $page.innerHTML = request.responseText;
-        show(pageName,param);
+        $script = $page.querySelector('script');
+        if ($script){
+          eval($script.text);
+        }
+        show(pageName,param, modal);
       } else {
         // We reached our target server, but it returned an error
         console.warn("failed to get %s page!",pageName);
