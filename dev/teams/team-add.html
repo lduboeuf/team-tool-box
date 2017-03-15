@@ -1,9 +1,41 @@
 <div>
-  <h1><a href="javascript:void(0);" onclick="history.back();" class="link-home">&#8592;</a>Add a group</h1>
   <form>
     <div class="form-group">
       <input name="name" type="text" placeholder="name" required=""/>
       <input type="submit" name="add" value="add" class="button btn-success"/>
     </div>
   </form>
+
+
+  <script type="text/javascript">
+  app.page("team-add", function()
+  {
+    var $nameInput = document.querySelector('#team-add form input[name="name"]');
+    var $submitBtn = document.querySelector('#team-add form input[name="add"]');
+
+
+    $submitBtn.onclick = function(e){
+      e.preventDefault();
+      if ($nameInput.value.length>0){
+
+        remoteStorage.teams.store({ "name": $nameInput.value}).then(function(team){
+          app('team-list-details',team.id);
+        });
+
+
+      }else {
+        //handle error msg
+
+      }
+
+
+    }
+
+    return function(params) {
+
+      $nameInput.value = "";
+    }
+  });
+
+  </script>
 </div>
