@@ -1,19 +1,39 @@
 <div>
-  <header>
-    <h1><a href="javascript:void(0);" onclick="history.back();" class="link-home">&#8592;</a>My groups</h1>
-  </header>
-  <div>
-    <div class="header-tbl">
-      <a href="#team-add" class="add-link btn-default">+ Add a group</a>
-    </div>
-    <ul class="list team-list" >
-      {{ for(var prop in it) { }}
-      <li>
-          <a href="#team-list-details:{{=it[prop].id}}">
-            {{=it[prop].name}}
-          </a>
-      </li>
-      {{ } }}
-    </ul>
+  <div class="header-tbl">
+    <a href="#team-add" class="add-link btn-default">+ Add a group</a>
   </div>
+  <ul class="list team-list" >
+    {{ for(var prop in it) { }}
+    <li>
+        <a href="#team-list-details:{{=it[prop].id}}">
+          {{=it[prop].name}}
+        </a>
+    </li>
+    {{ } }}
+  </ul>
+  <script type="text/javascript">
+
+    app.page("team-list", function()
+    {
+
+      var $teamList = document.querySelector('#team-list ul');
+      //var tplTeamList = $teamList.innerHTML;
+      var tpl = doT.template($teamList.innerHTML);
+
+      $teamList.innerHTML=null;
+
+
+      return function(params) {
+
+        //var teams = TeamRepository.findAll();
+        remoteStorage.teams.findAll().then(
+          function(teams){
+            $teamList.innerHTML = tpl(teams);
+          }
+        );
+
+      }
+    });
+
+  </script>
 </div>

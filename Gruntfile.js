@@ -142,7 +142,9 @@ module.exports = function(grunt) {
       src: '<%= appConfig.app %>/index.html',
       dest:'<%= appConfig.dist %>/index.html',
       options: {
-        basePath: '<%= appConfig.app %>'
+        basePath: '<%= appConfig.app %>',
+        js:'.tmp/spapp/spapp.js',
+        css:'.tmp/spapp/spapp.css'
       }
     },
 
@@ -256,7 +258,7 @@ module.exports = function(grunt) {
     'uglify',
     'cssmin',
     'usemin',
-    'htmlmin:dist',
+    //'htmlmin:dist',
     'manifest',
     'test:prod'
   ]);

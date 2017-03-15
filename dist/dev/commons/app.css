@@ -2,7 +2,6 @@
 body {
   margin:0;
   font-family: Verdana,sans-serif;
-  background-color: #F5F5F5;
   font-size: 14px;
 }
 
@@ -43,7 +42,7 @@ body.sync   > section#sync,
 body.settings   > section#settings,
 body.tool-match   > section#tool-match,
 /*@spapp_generator css*/
-body.team-member-details > section#team-member-details { display:block; }
+body.team-member-details > section#team-member-details { display:block;}
 
 /* nav highlightion rules */
 body.about #menu a[href="#about"],
@@ -63,14 +62,31 @@ body.home #menu a[href="#home"] { background-color: #555; }
 body> header {
   background-color: #04102A;
   color: #f2f2f2;
-  box-shadow: 0px 5px 8px #ccc;
   top:0;
   width: 100%;
 }
 
+#navigation {
+    background: white;
+    color: #04102A;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    font-weight: 700;
+}
 
 header h2{
   display: inline-block;
+}
+
+footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 10px;
+  background-color: #efefef;
+  text-align: center;
 }
 
 .remove-link{
@@ -210,7 +226,7 @@ ul.topnav li.icon {
 /** modal **/
 .modal{
   margin:0;
-  display: block;
+  display: none;
   position: fixed;
   left: 0;
   top: 0;
@@ -219,6 +235,10 @@ ul.topnav li.icon {
   overflow: auto;
   background-color: rgb(0,0,0);
   background-color: rgba(0,0,0,0.4);
+}
+
+.modal:target{
+  display: block;
 }
 
 .modal>div{
@@ -291,8 +311,8 @@ ul.topnav li.icon {
   color:#337AB7;
   background-color: #fff;
   box-shadow: 1px 1px 0px #dbdbdb;
-  border: 1px solid #337AB7;
   border-radius:5px;
+  font-size: 1.1em;
 }
 .actions a:hover{
   background-color: #F5F5F5;
@@ -303,8 +323,12 @@ ul.topnav li.icon {
   padding:8px;
   /*padding-top:12px;*/
 }
+#tool-next-member li,  #tool-match li{
+  padding:0;
+}
 #tool-next-member li label,  #tool-match li label{
   display:block;
+  padding:10px 16px;
 }
 #tool-next-member li input,  #tool-match li input{
   float:right;

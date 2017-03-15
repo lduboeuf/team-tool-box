@@ -7,39 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Random Team/Group generator, manage your groups randomly!">
 
-    <!-- build:js scripts/vendors.js -->
-    <script src="vendors/remotestorage.min.js"></script>
-    <script src="vendors/doT.min.js"></script>
-    <script src="vendors/spapp.js"></script>
-    <!-- endbuild -->
-
-    <!-- build:js scripts/scripts.js -->
-    <script src="remotestorage/remotestorage-ttb-teams.js"></script>
-    <script src="remotestorage/remotestorage-ttb-archives.js"></script>
-    <script src="remotestorage/remotestorage-ttb-config.js"></script>
-    <script src="app.js"></script>
-
-    <script src="teams/team-list.js"></script>
-    <script src="teams/team-list-details.js"></script>
-    <script src="teams/team-member-details.js"></script>
-    <script src="teams/team-member-add.js"></script>
-    <script src="teams/team-add.js"></script>
-    <script src="archives/archive-save.js"></script>
-    <script src="archives/archive-list.js"></script>
-    <script src="archives/archive-details.js"></script>
-    <script src="tools/tool-build-teams.js"></script>
-    <script src="tools/tool-find-members.js"></script>
-    <script src="tools/tool-next-member.js"></script>
-    <script src="commons/settings.js"></script>
-    <script src="tools/tool-match.js"></script>
-<!-- @spapp_generator scripts -->
-
-
-    <!-- endbuild -->
-
     <!-- build:css styles/main.css -->
     <link rel="stylesheet" href="commons/app.css">
-    <!-- @spapp_generator css -->
+    <link rel="stylesheet" href="../.tmp/spapp/spapp.css">
     <!-- endbuild -->
   </head>
 <body>
@@ -91,11 +61,22 @@
   <section id="archive-details" src="archives/archive-details.html" title="Archive details"></section>
   <section id="settings" src="commons/settings.html" title="Settings"></section>
   <section id="tool-match" src="tools/tool-match.html" title="Match"></section>
-  <!-- @spapp_generator sections -->
   <div class="alert alert-info">
     <span onclick="this.parentElement.style.display='none'" class="alert-closebtn">&times;</span>
     <p class="alert-msg"></p>
   </div>
+  <!-- build:js scripts/vendors.js -->
+  <script src="vendors/remotestorage.min.js"></script>
+  <script src="vendors/doT.min.js"></script>
+  <script src="vendors/spapp.js"></script>
+  <!-- endbuild -->
 
+  <!-- build:js scripts/scripts.js -->
+  <script src="remotestorage/remotestorage-ttb-teams.js"></script>
+  <script src="remotestorage/remotestorage-ttb-archives.js"></script>
+  <script src="remotestorage/remotestorage-ttb-config.js"></script>
+  <script src="app.js"></script>
+  <script src="../.tmp/spapp/spapp.js"></script>
+  <!-- endbuild -->
 </body>
 </html>
