@@ -64,15 +64,17 @@
 
       document.dispatchEvent(new CustomEvent('page.shown', {'detail' : {'currentPage' : currentPageName, 'title': $page.getAttribute('title')}}));
       //update url location if not
+      /*
       if ($page.hasAttribute('default')){
         var url = '#' + currentPageName;
         if (param && typeof(param)!=='object') //don't display object in url
           url += ':' + param;
 
-        if (location.hash=="" || location.hash!==url){
+        if (location.hash!==url){
           history.pushState(null, null, url);
         }
       }
+      */
     }
   }
 
