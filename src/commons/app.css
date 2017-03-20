@@ -323,18 +323,23 @@ ul.topnav li.icon {
   padding:8px;
   /*padding-top:12px;*/
 }
-#tool-next-member li,  #tool-match li{
+#tool-next-member .list li,  #tool-match .list li{
   padding:0;
 }
-#tool-next-member li label,  #tool-match li label{
+#tool-next-member .list li label,  #tool-match .list li label{
   display:block;
   padding:10px 16px;
 }
-#tool-next-member li input,  #tool-match li input{
+#tool-next-member .list li input,  #tool-match .list li input{
   float:right;
 }
 
-
+.danger-zone{
+  padding:1em;
+  margin:1em 0;
+  border: 1px dashed grey;
+  text-align: center;
+}
 
 
 .list {
@@ -364,6 +369,33 @@ ul.topnav li.icon {
 .list li:last-child {
     border-bottom: none
 }
+
+
+
+
+
+ol {
+  counter-reset: nbres;
+}
+ol li{
+	list-style-type: none;
+	counter-increment: nbres; /* on incrémente le compteur à chaque nouveau li */
+	margin-bottom: 10px;
+  border-bottom: : 1px solid #ddd;
+}
+ol li::before{
+  content: counter(nbres);
+  padding: 0 20px 6px;
+  margin-right: 8px;
+  vertical-align: top;
+  background: #678;
+  -moz-border-radius: 60px;
+  border-radius: 60px;
+  font-weight: bold;
+  font-size: 0.8em;
+  color: white;
+}
+
 
 div.team h3, .header-tbl{
   margin:0;
@@ -463,7 +495,7 @@ button, input[type=submit], input[type=button]:hover {
 textarea{
   color: #5f5f5f;
   box-sizing: border-box;
-  width: 50%;
+  width: 100%;
   height: 80px;
   box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.08);
   font: normal 13px sans-serif;

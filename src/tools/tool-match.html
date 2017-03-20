@@ -52,15 +52,53 @@
 <div>
   <input type="submit" name="ok" value="match" class="button btn-default"/>
 </div>
-<div class="result team">
-  <h3>Matches</h3>
-    <ul class="list" >
-      {{~it.left :lname:idx}}
-        <li>{{=lname}} -- {{=it.right[idx]}}</li>
+<div class="result">
+  <h3>Matches:</h3>
+  <ul class="matches-left">
+      {{~it.left :name:idx}}
+        <li>{{=name}}</li>
       {{~}}
+   </ul>
+   <ul class="matches-right">
+       {{~it.right :name:idx}}
+         <li>{{=name}}</li>
+       {{~}}
     </ul>
 </div>
 </div>
+
+<style>
+
+.result > ul {
+  list-style-type: none;
+  padding:0;
+  margin:0;
+}
+
+.matches-left li , .matches-right li{
+  padding:8px 12px;
+  margin:2px 8px;
+	color: white;
+}
+
+.matches-left{
+
+  float: left;
+  width: 50%;
+}
+
+.matches-right{
+  float: right;
+  width: 50%;
+}
+.matches-left li{
+  background: #8d8d8d;
+}
+.matches-right li{
+    background: #927373;
+}
+
+</style>
 
 <script type="text/javascript">
 
