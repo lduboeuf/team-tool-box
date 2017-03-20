@@ -1,6 +1,7 @@
 <div>
+
   <form>
-      <label for="team-list">select left group:</label>
+      <label for="team-list">select right group:</label>
       <select class="team-list" name="team-list">
         <option value="-1" selected="selected"></option>
         {{ for(var prop in it) { }}
@@ -21,18 +22,17 @@
       </ul>
     </div>
     {{ } }}
-    <button class="btn-default">next</button>
+    <div>
+      <button class="btn-default">match</button>
+    </div>
   </div>
-
 
 <script type="text/javascript">
 
-app.page("tool-match", function()
+app.page("tool-match2", function()
 {
 
-  var $section = document.getElementById('tool-match');
-
-
+  var $section = document.getElementById('tool-match2');
   var $selectTeamList = $section.querySelector('.team-list');
   var $teamList = $section.querySelector('.teams-result');
 
@@ -45,6 +45,7 @@ app.page("tool-match", function()
   $selectTeamList.innerHTML =  '<option value="-1" selected="selected"></option>';
   $teamList.innerHTML = null;
 
+  var selectedMembers = {};
 
   var displayTeams =function(teams){
     $teamList.innerHTML =  tplTeamList(teams);
@@ -59,10 +60,20 @@ app.page("tool-match", function()
 
     $section.querySelector('button').onclick = function(e){
 
-      var leftMembers = getSelectedMembers();
-      app('tool-match2', leftMembers);
+      selectedMembers.right = getSelectedMembers();
+      app('tool-match3', selectedMembers);
 
     }
+
+    //handle already selected members from left
+    var leftMembers = selectedMembers.left;
+    for (var i=0; i < leftMembers.length; i++){
+      if (leftMembers.includes($checkbox_members[i].value)){
+        $checkbox_members[i].parentNode.style='text-decoration:line-through';
+        $checkbox_members[i].disabled = true;
+      }
+    }
+
   }
 
   var fetchMembers = function(teamId){
@@ -89,7 +100,6 @@ app.page("tool-match", function()
     fetchMembers(this.value);
   }
 
-
   var getSelectedMembers = function($){
     var $checkbox_members = $teamList.querySelectorAll('input[name="member_name"]');
     var members = [];
@@ -103,8 +113,14 @@ app.page("tool-match", function()
 
 
 
-
   return function(params) {
+
+    if (!params){
+      app('tool-match');
+      return;
+    }
+
+    selectedMembers.left = params;
 
     remoteStorage.teams.findAll().then(
       function(teams){
@@ -119,6 +135,6 @@ app.page("tool-match", function()
 
   }
 });
-
+//# sourceURL=tool-match2.js
 </script>
 </div>
