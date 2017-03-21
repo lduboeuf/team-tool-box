@@ -64,7 +64,7 @@
 
       document.dispatchEvent(new CustomEvent('page.shown', {'detail' : {'currentPage' : currentPageName, 'title': $page.getAttribute('title')}}));
       //update url location when access pages via code
-      if (!$page.hasAttribute('default')){
+      if (!$page.hasAttribute('default') && !modal){
         var url = '#' + currentPageName;
         if (param && typeof(param)!=='object') //don't display object in url
           url += ':' + param;

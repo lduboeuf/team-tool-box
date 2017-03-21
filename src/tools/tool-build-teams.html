@@ -14,41 +14,16 @@
     </select>
     <label for="team-list">members/team within:</label>
     <select class="team-list" name="team-list">
-
-      {{ for(var prop in it) { }}
-
-        <option value="{{=it[prop].id}}">{{=it[prop].name}}</option>
-      {{ } }}
-      <option value="-1">--all groups--</option>
     </select>
     <input type="submit" name="ok" value="generate" class="button btn-default"/>
 
 
 </form>
   <div class="teams-result">
-    {{~it.teams :team:idx}}
-    <div class="team">
-      <h3>{{=team.name}}</h3>
-      <ul class="list" >
-        {{~team.members :member:idxm}}
-          <li data-id="{{=member.id}}">{{=member.name}}</li>
-        {{~}}
-      </ul>
-    </div>
-    {{~}}
-    {{? it.orphans }}
-    <div class="team team-orphans">
-      <h3>Team Orphan(s)<button class="btn-default">dispatch</button></h3>
-      <ul class="list" >
-        {{~it.orphans :orphan:idx}}
-          <li data-id="{{=orphan.id}}">{{=orphan.name}}</li>
-        {{~}}
-      </ul>
-    </div>
-    {{?}}
-    <div>
-      <button class="btn-default btn-success" name="save">save result</button>
-    </div>
+
+  </div>
+  <div>
+    <button class="btn-default btn-success" name="save">save result</button>
   </div>
 
 
@@ -62,46 +37,27 @@
     var $teamList = $section.querySelector('.team-list');
     var $resultList = $section.querySelector('.teams-result');
     var $okBtn = $section.querySelector('input[type="submit"]');
+    var $btnSave = $section.querySelector('button');
 
-    //store template definition
-    var tplTeamList = doT.template($teamList.innerHTML);
-    var tplResultList = doT.template($resultList.innerHTML);
+    //btn save is invisible by default
+    $btnSave.style.display='none';
+
+    app.selectList.applyTo($teamList);
+    app.list.applyTo($resultList);
 
     var currentOutput = null;
     var config = null;
 
-    var exec = function(){
-      var teamId = $teamList.value;
-      //special case for all teams
-      if (teamId==-1){
+    var generate = function(members){
 
-          remoteStorage.teams.findAll().then(
-            function(teams){
-              var team = {members:[]};
-              for (var t_id in teams){
-                team.members.push.apply(team.members, teams[t_id].members);
-              }
-
-              generate(team);
-            }
-          );
-
-        }else{
-          //team = TeamRepository.findById(teamId);
-          remoteStorage.teams.find(teamId).then(generate);
-        }
-    }
-
-    var generate = function(team){
-
-      var team_names = config.team_names || [1,2,3,4,5,6,7,8,9,10];
-
-      var members = team.members;
       if (members.length==0){
           $resultList.innerHTML = null;
           app.alert('alert-info','humm, no members found, you can add members by clicking on the "My Groups" menu');
         return;
       }
+
+      var team_names = config.team_names || [1,2,3,4,5,6,7,8,9,10];
+
       //define an array of indices
       var idxs = members.map(function (x, i) { return i });
 
@@ -183,40 +139,28 @@
 
       var displayResult = function(result) {
           currentOutput = result;
-
-          $resultList.innerHTML = tplResultList(result);
-          var $btnSave = $resultList.querySelector('button[name="save"]');
-          $btnSave.onclick = saveResult;
+          $resultList.render(result);
+          $btnSave.style.display = 'block';
       }
 
-      //empty tpl by default
-      $teamList.innerHTML = '<option value="-1">--all groups--</option>';
-      //$teamList.classList.add('spinner');
-      $resultList.innerHTML = null;
 
-
+      $btnSave.onclick = saveResult;
 
       $okBtn.onclick = function(e){
         e.preventDefault();
-        exec();
+        var selectedTeams = $teamList.getSelectedItems();
+        var members = [];
+        for (var t_id in selectedTeams){
+          members.push.apply(members, selectedTeams[t_id].members);
+        }
+
+        generate(members);
       }
-
-
-      //save output
-
 
 
     return function(params) {
 
-      remoteStorage.teams.findAll().then(
-        function(teams){
-
-          if (Object.keys(teams).length === 0){
-            app.alert('alert-info','humm, no members found, you can add members by clicking on the "My Groups" menu');
-          }
-          $teamList.innerHTML = tplTeamList(teams);
-        }
-      );
+      $teamList.populate();
 
       remoteStorage.config.get().then(function(conf){
         config = conf;
@@ -232,6 +176,6 @@
 
     }
   });
-
+//# sourceURL=tool-build-teams.js
   </script>
 </div>

@@ -43,13 +43,13 @@ module.exports = { // adapted from: https://git.io/vodU0
     .assert.elementNotPresent("ul.team-list li") //should have no team-list
 
     .perform(function(client, done){
-      for (var i = 0; i <2; i++){ //perform creation of 2 teams
+      for (var i = 0; i <3; i++){ //perform creation of 3 teams
         client.click('#team-list a[href="#team-add"]')
         client.waitForElementVisible('#team-add form')
         client.setValue('#team-add input[name="name"]', 'team' +i)
         client.click('#team-add input[type="submit"]')
         client.waitForElementVisible('#team-list-details')
-        client.back()
+        client.click('a[href="#team-list"]')
         client.waitForElementVisible('#team-list li')
       }
       done()
@@ -58,7 +58,7 @@ module.exports = { // adapted from: https://git.io/vodU0
     .waitForElementVisible('ul.team-list li')
     .elements('css selector', 'ul.team-list li', function (elements) {
       var count = elements.value.length;
-      this.assert.equal(count,2, 'should have a list of 2 teams')
+      this.assert.equal(count,3, 'should have a list of 3 teams')
     })
 
     .saveScreenshot('.tmp/nightwatch/ttb/screenshots/team-list.png')
@@ -76,7 +76,7 @@ module.exports = { // adapted from: https://git.io/vodU0
     .waitForElementVisible('#team-list ul.team-list li')
     .elements('css selector', 'ul.team-list li', function (elements) {
       var count = elements.value.length;
-      this.assert.equal(count,1, 'should have a list of 1 team')
+      this.assert.equal(count,2, 'should have a list of 2 team')
     })
     .saveScreenshot('.tmp/nightwatch/ttb/screenshots/team-list-removed-one.png')
 
@@ -97,6 +97,17 @@ module.exports = { // adapted from: https://git.io/vodU0
       done();
     })
     .assert.elementPresent("ul.team-members li")
+    .click('#team-list ul.team-list li:nth-child(2) a') //click on second team
+    .waitForElementVisible('#team-list-details form')
+    .perform(function(client, done){
+      for (var i = 0; i <2; i++){
+        client.setValue('#team-list-details input[name="name"]', 'member'+i);
+        client.click('#team-list-details input[type="submit"]');
+        client.waitForElementVisible('#team-list-details .team-members a');
+
+      }
+      done();
+    })
     .saveScreenshot('.tmp/nightwatch/ttb/screenshots/team-members.png')
   },
   'Team Members Update ':function(browser){
@@ -132,7 +143,7 @@ module.exports = { // adapted from: https://git.io/vodU0
     .assert.elementPresent("ul.list li")
     .elements('css selector', '#tool-build-teams .team h3', function (elements) {
       var count = elements.value.length;
-      this.assert.equal(count,10, 'should generate a list of 10 teams')
+      this.assert.equal(count,12, 'should generate a list of 12 teams')
     })
     .pause(1000)
     //------
@@ -142,7 +153,7 @@ module.exports = { // adapted from: https://git.io/vodU0
     .assert.elementPresent("ul.list li")
     .elements('css selector', '#tool-build-teams .team h3', function (elements) {
       var count = elements.value.length;
-      this.assert.equal(count,5, 'should generate a list of 5 teams')
+      this.assert.equal(count,6, 'should generate a list of 6 teams')
     })
     .pause(1000)
     //save to archive

@@ -1,69 +1,26 @@
 <div>
-
-  <div class="result">
-    <h3>Pairs:</h3>
-    <ul class="matches-left">
-        {{~it.left :name:idx}}
-          <li>{{=name}}</li>
-        {{~}}
-     </ul>
-     <ul class="matches-right">
-         {{~it.right :name:idx}}
-           <li>{{=name}}</li>
-         {{~}}
-      </ul>
+  <h2>Result:</h2>
+  <div class="teams-result"></div>
+  <div>
+    <button class="btn-default btn-success">save result</button>
   </div>
-
-
-<style>
-
-.result > ul {
-  list-style-type: none;
-  padding:0;
-  margin:0;
-}
-
-.matches-left li , .matches-right li{
-  padding:8px 12px;
-  margin:2px 8px;
-	color: white;
-}
-
-.matches-left{
-
-  float: left;
-  width: 50%;
-}
-
-.matches-right{
-  float: right;
-  width: 50%;
-}
-.matches-left li{
-  background: #8d8d8d;
-}
-.matches-right li{
-    background: #927373;
-}
-
-</style>
 
 <script type="text/javascript">
 
 app.page("tool-match3", function()
 {
-
   var $section = document.getElementById('tool-match3');
-  var $resultList = $section.querySelector('.result');
-
-  //store template definition
-
-  var tplOutputRes = doT.template($resultList.innerHTML);
+  var $resultList = $section.querySelector('.teams-result');
+  var $btnSave = $section.querySelector('button');
 
 
+  //btn save is invisible by default
+  $btnSave.style.display='none';
 
-  //empty tpl by default
-  $resultList.innerHTML = null;
+  //bind component
+  app.list.applyTo($resultList);
+
+  var currentOutput = null;
 
   var shuffle = function(members){
     var j, x, i;
@@ -76,6 +33,11 @@ app.page("tool-match3", function()
 
   }
 
+  $btnSave.onclick = function(){
+    if (currentOutput){
+      app("archive-save", currentOutput.teams);
+    }
+  }
 
 
   return function(params) {
@@ -85,14 +47,33 @@ app.page("tool-match3", function()
       return;
     }
 
+    //list already saved ?
+    if (params.event ==='onSavedOutput'){
+      $btnSave.classList.toggle('btn-success');
+      $btnSave.classList.toggle('btn-default');
+      $btnSave.onclick = null;
+      return;
+    }
+
     //shuffle members
     shuffle(params.left);
     shuffle(params.right);
 
 
-    $resultList.innerHTML = tplOutputRes({left:params.left, right:params.right});
+    //present the model
+    var teams = [];
 
+    for (var i=0; i < params.left.length; i++){
+      var team = { name: 'Pair #' + i, members: []};
+      team.members.push(params.left[i]);
+      team.members.push(params.right[i]);
+      teams.push(team);
+    }
 
+    currentOutput = {teams: teams};
+
+    $resultList.render(currentOutput);
+    $btnSave.style.display='block';
 
   }
 });

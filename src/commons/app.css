@@ -59,6 +59,10 @@ body.archive-details  #menu a[href="#archive-list "],
 body.settings #menu a[href="#settings"],
 body.home #menu a[href="#home"] { background-color: #555; }
 
+/*components*/
+#components {
+  display: none;
+}
 
 /*header*/
 body> header {
@@ -325,16 +329,20 @@ ul.topnav li.icon {
   padding:8px;
   /*padding-top:12px;*/
 }
-#tool-next-member .list li,  #tool-match .list li{
+
+.checklist li{
   padding:0;
 }
-#tool-next-member .list li label,  #tool-match .list li label{
+
+.checklist li label{
   display:block;
   padding:10px 16px;
 }
-#tool-next-member .list li input,  #tool-match .list li input{
+
+.checklist li input{
   float:right;
 }
+
 
 .danger-zone{
   padding:1em;
