@@ -5,7 +5,7 @@ module.exports = { // adapted from: https://git.io/vodU0
     browser
       .url('http://localhost:8000/index.html')
       .waitForElementVisible('body')
-      .assert.title('Team ToolBox')
+      .assert.title('Team Toolbox')
       //.pause(1000)
       .waitForElementVisible(".alert-info")
       .saveScreenshot('.tmp/nightwatch/ttb/screenshots/home.png')
