@@ -1,7 +1,7 @@
 <div>
 
   <div class="result">
-    <h3>Matches:</h3>
+    <h3>Pairs:</h3>
     <ul class="matches-left">
         {{~it.left :name:idx}}
           <li>{{=name}}</li>
@@ -80,7 +80,7 @@ app.page("tool-match3", function()
 
   return function(params) {
 
-    if(!params){
+    if(!params){ //redirect to initial page
       app('tool-match');
       return;
     }

@@ -63,7 +63,16 @@
     if($currentPage = $page){
 
       document.dispatchEvent(new CustomEvent('page.shown', {'detail' : {'currentPage' : currentPageName, 'title': $page.getAttribute('title')}}));
-      //update url location if not
+      //update url location when access pages via code
+      if (!$page.hasAttribute('default')){
+        var url = '#' + currentPageName;
+        if (param && typeof(param)!=='object') //don't display object in url
+          url += ':' + param;
+
+        if (location.hash!==url){
+          history.pushState(null, null, url);
+        }
+      }
       /*
       if ($page.hasAttribute('default')){
         var url = '#' + currentPageName;
