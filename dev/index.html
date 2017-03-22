@@ -2,41 +2,21 @@
 <html manifest="manifest.appcache">
   <head>
     <meta charset="utf-8">
-    <title>Team ToolBox</title>
+    <title>Team Toolbox</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Random Team/Group generator, manage your groups randomly!">
 
-    <!-- build:js scripts/vendors.js -->
-    <script src="vendors/remotestorage.min.js"></script>
-    <script src="vendors/doT.min.js"></script>
-    <script src="vendors/spapp.js"></script>
-    <!-- endbuild -->
-
-    <!-- build:js scripts/scripts.js -->
-    <script src="remotestorage/remotestorage-ttb-teams.js"></script>
-    <script src="remotestorage/remotestorage-ttb-archives.js"></script>
-    <script src="remotestorage/remotestorage-ttb-config.js"></script>
-    <script src="app.js"></script>
-
-    <script src="../.tmp/spapp/spapp.js"></script>
-
-<!-- @spapp_generator scripts -->
-
-
-    <!-- endbuild -->
-
     <!-- build:css styles/main.css -->
     <link rel="stylesheet" href="commons/app.css">
     <link rel="stylesheet" href="../.tmp/spapp/spapp.css">
-    <!-- @spapp_generator css -->
     <!-- endbuild -->
   </head>
 <body>
   <!--[if lt IE 10]> <p class="browserupgrade"><strong>Ohlala, so sorry!</strong>, developping apps for old browser is so painfull and time consuming that i choosed not to support them ... Please <a href="http://browsehappy.com/">upgrade your browser</a> .</p> <![endif]-->
   <header>
     <div class="brand">
-      <a href="#home">Team ToolBox</a>
+      <a href="">Team ToolBox</a>
       <span>Build your teams randomly!</span>
     </div>
 
@@ -63,7 +43,7 @@
       <li><a href="#tool-build-teams">build teams</a></li>
       <li><a href="#tool-find-members">find members</a></li>
       <li><a href="#tool-next-member">who's next</a></li>
-      <li><a href="#tool-match">match</a></li>
+      <li><a href="#tool-match">find pairs</a></li>
       </ul>
     </div>
   </section>
@@ -80,12 +60,70 @@
   <section id="archive-list" src="archives/archive-list.html" title="Archive list"></section>
   <section id="archive-details" src="archives/archive-details.html" title="Archive details"></section>
   <section id="settings" src="commons/settings.html" title="Settings"></section>
-  <section id="tool-match" src="tools/tool-match.html" title="Match"></section>
-  <!-- @spapp_generator sections -->
+  <section id="tool-match" src="tools/tool-match.html" title="Find pairs #1"></section>
+  <section id="tool-match2" src="tools/tool-match2.html" title="Find pairs #2"></section>
+  <section id="tool-match3" src="tools/tool-match3.html" title="Find pairs #3"></section>
   <div class="alert alert-info">
     <span onclick="this.parentElement.style.display='none'" class="alert-closebtn">&times;</span>
     <p class="alert-msg"></p>
   </div>
+  <div id="components">
+    <div id="check-list">
+      {{ for(var prop in it) { }}
+      <div class="group">
+        <h3>{{=it[prop].name}}<input type="checkbox" name="tick_all"></input></h3>
+        <ul class="list checklist" >
+          {{~it[prop].members :member:idxm}}
+            <li><label><input type="checkbox" name="member_id" value="{{=member.id}}"></input><span>{{=member.name}}</span></label></li>
+          {{~}}
+        </ul>
+      </div>
+      {{ } }}
+    </div>
+    <div id="select-list">
+        <option value="-1" selected="selected"></option>
+        {{ for(var prop in it) { }}
+          <option value="{{=it[prop].id}}">{{=it[prop].name}} ({{=it[prop].members.length}})</option>
+        {{ } }}
+        <option value="-1">--all groups--</option>
+    </div>
+    <div id="list">
+      {{~it.teams :team:idx}}
+      <div class="team">
+        <h3>{{=team.name}}</h3>
+        <ul class="list" >
+          {{~team.members :member:idxm}}
+            <li data-id="{{=member.id}}">{{=member.name}}</li>
+          {{~}}
+        </ul>
+      </div>
+      {{~}}
+      {{? it.orphans }}
+      <div class="team team-orphans">
+        <h3>Team Orphan(s)<button class="btn-default">dispatch</button></h3>
+        <ul class="list" >
+          {{~it.orphans :orphan:idx}}
+            <li data-id="{{=orphan.id}}">{{=orphan.name}}</li>
+          {{~}}
+        </ul>
+      </div>
+      {{?}}
+    </div>
 
+  </div>
+  <!-- build:js scripts/vendors.js -->
+  <script src="vendors/remotestorage.min.js"></script>
+  <script src="vendors/doT.min.js"></script>
+  <script src="vendors/spapp.js"></script>
+  <!-- endbuild -->
+
+  <!-- build:js scripts/scripts.js -->
+  <script src="remotestorage/remotestorage-ttb-teams.js"></script>
+  <script src="remotestorage/remotestorage-ttb-archives.js"></script>
+  <script src="remotestorage/remotestorage-ttb-config.js"></script>
+  <script src="app.js"></script>
+  <script src="commons/app-components.js"></script>
+  <script src="../.tmp/spapp/spapp.js"></script>
+  <!-- endbuild -->
 </body>
 </html>

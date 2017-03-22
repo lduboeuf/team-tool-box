@@ -1,0 +1,82 @@
+<div>
+  <h2>Result:</h2>
+  <div class="teams-result"></div>
+  <div>
+    <button class="btn-default btn-success">save result</button>
+  </div>
+
+<script type="text/javascript">
+
+app.page("tool-match3", function()
+{
+  var $section = document.getElementById('tool-match3');
+  var $resultList = $section.querySelector('.teams-result');
+  var $btnSave = $section.querySelector('button');
+
+
+  //btn save is invisible by default
+  $btnSave.style.display='none';
+
+  //bind component
+  app.list.applyTo($resultList);
+
+  var currentOutput = null;
+
+  var shuffle = function(members){
+    var j, x, i;
+    for (i = members.length; i; i--) {
+        j = Math.floor(Math.random() * i);
+        x = members[i - 1];
+        members[i - 1] = members[j];
+        members[j] = x;
+    }
+
+  }
+
+  $btnSave.onclick = function(){
+    if (currentOutput){
+      app("archive-save", currentOutput.teams);
+    }
+  }
+
+
+  return function(params) {
+
+    if(!params){ //redirect to initial page
+      app('tool-match');
+      return;
+    }
+
+    //list already saved ?
+    if (params.event ==='onSavedOutput'){
+      $btnSave.classList.toggle('btn-success');
+      $btnSave.classList.toggle('btn-default');
+      $btnSave.onclick = null;
+      return;
+    }
+
+    //shuffle members
+    shuffle(params.left);
+    shuffle(params.right);
+
+
+    //present the model
+    var teams = [];
+
+    for (var i=0; i < params.left.length; i++){
+      var team = { name: 'Pair #' + i, members: []};
+      team.members.push(params.left[i]);
+      team.members.push(params.right[i]);
+      teams.push(team);
+    }
+
+    currentOutput = {teams: teams};
+
+    $resultList.render(currentOutput);
+    $btnSave.style.display='block';
+
+  }
+});
+//# sourceURL=tool-match3.js
+</script>
+</div>

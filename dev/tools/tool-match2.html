@@ -1,0 +1,90 @@
+<div>
+  <form>
+      <label for="team-list">select right group:</label>
+      <select class="team-list" name="team-list"></select>
+  </form>
+  <div class="teams-result"></div>
+  <div>
+    <button class="btn-default">find pairs</button>
+  </div>
+
+<script type="text/javascript">
+
+app.page("tool-match2", function()
+{
+
+  var $section = document.getElementById('tool-match2');
+  var $selectTeamList = $section.querySelector('.team-list');
+  var $teamList = $section.querySelector('.teams-result');
+  var $btnNext = $section.querySelector('button');
+
+  //bind components to
+  app.checkList.applyTo($teamList);
+  app.selectList.applyTo($selectTeamList);
+
+  //btn is invisible by default
+  $btnNext.style.display='none';
+
+  var selectedMembers = {};
+
+  var contains = function(id){
+    var leftMembers = selectedMembers.left;
+    for (var i=0; i < leftMembers.length; i++){
+      if (leftMembers[i].id===id){
+        return true;
+      }
+    }
+    return false;
+  }
+
+
+  var render = function(teams){
+    $teamList.render(teams);
+
+    //handle already selected members from left
+    var $checkbox_members = $teamList.querySelectorAll('input[name="member_id"]');
+    var leftMembers = selectedMembers.left;
+    for (var i=0; i < $checkbox_members.length; i++){
+      if (contains($checkbox_members[i].value)){
+        $checkbox_members[i].parentNode.style='text-decoration:line-through';
+        $checkbox_members[i].disabled = true;
+      }
+    }
+
+    $btnNext.style.display='block';
+
+  }
+
+
+  $selectTeamList.onchange = function(e){
+    render($selectTeamList.getSelectedItems());
+  }
+
+  $btnNext.onclick = function(e){
+
+    selectedMembers.right = $teamList.getSelectedItems();
+    app('tool-match3', selectedMembers);
+
+  }
+
+
+
+
+  return function(params) {
+
+    if (!params){ //redirect to initial page
+      app('tool-match');
+      return;
+    }
+
+    selectedMembers.left = params;
+
+    $selectTeamList.populate();
+    
+    $teamList.innerHTML = null;
+
+  }
+});
+//# sourceURL=tool-match2.js
+</script>
+</div>
