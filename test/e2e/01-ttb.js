@@ -140,7 +140,7 @@ module.exports = { // adapted from: https://git.io/vodU0
     .click('input[type="submit"]')
     .waitForElementVisible('#tool-build-teams div.team')
     .pause(500)
-    .assert.elementPresent("ul.list li")
+    .assert.elementPresent("#tool-build-teams ul.list li")
     .elements('css selector', '#tool-build-teams .team h3', function (elements) {
       var count = elements.value.length;
       this.assert.equal(count,12, 'should generate a list of 12 teams')
@@ -170,8 +170,8 @@ module.exports = { // adapted from: https://git.io/vodU0
     .saveScreenshot('.tmp/nightwatch/ttb/screenshots/team-generation-save.png')
     .pause(500)
     .acceptAlert()
-    .waitForElementVisible('#tool-build-teams',1000)
-    .assert.cssClassNotPresent('#tool-build-teams .teams-result button', 'btn-success')
+    .pause(500)
+    .assert.cssClassNotPresent('#tool-build-teams  button', 'btn-success')
 
 
   },
@@ -199,22 +199,46 @@ module.exports = { // adapted from: https://git.io/vodU0
       var count = elements.value.length;
       this.assert.equal(count,4, 'should generate a list of 4 members')
     })
-    .end()
+  },
+  'Next members ':function(browser){
+    browser.url('http://localhost:8000/index.html#tool-next-member')
+    .waitForElementVisible('#tool-next-member form')
+    .setValue('#tool-next-member select[name="team-list"]', -1)
+    .waitForElementVisible('#tool-next-member .checklist')
+    .click('#tool-next-member input[name="tick_all"]')
+    .pause(500)
+    .click('#tool-next-member button')
+    .waitForElementVisible('#tool-next-member ol li')
+    .elements('css selector', '#tool-next-member ol li', function (elements) {
+      var count = elements.value.length;
+      this.assert.equal(count,12, 'should generate a list of 12 members')
+    })
+    .saveScreenshot('.tmp/nightwatch/ttb/screenshots/next-member.png')
+  },
+  'Find pairs ':function(browser){
+    browser.url('http://localhost:8000/index.html#tool-match')
+    .waitForElementVisible('#tool-match form')
+    .setValue('#tool-match select[name="team-list"]', -1) //select all
+    .waitForElementVisible('#tool-match .checklist')
+    .click('#tool-match .checklist li:nth-child(1)')
+    .click('#tool-match .checklist li:nth-child(2)')
+    .click('#tool-match button')
+    .waitForElementVisible('#tool-match2 form')
+    .setValue('#tool-match2 select[name="team-list"]', -1) //select all
+    .waitForElementVisible('#tool-match2 .checklist')
+    .click('#tool-match2 .checklist li:nth-child(3)')
+    .click('#tool-match2 .checklist li:nth-child(4)')
+    .click('#tool-match2 button')
+    .waitForElementVisible('#tool-match3 .teams-result')
+    .elements('css selector', '#tool-match3 .team h3', function (elements) {
+      var count = elements.value.length;
+      this.assert.equal(count,2, 'should have a list of 2 pairs')
+    })
+
+
+    .saveScreenshot('.tmp/nightwatch/ttb/screenshots/find-pairs.png')
+    .end();
   }
-  // ,
-  // 'Next members ':function(browser){
-  //   browser.url('http://localhost:8000/index.html#tool-next-member')
-  //   .waitForElementVisible('#tool-next-member form')
-  //   .setValue('#tool-find-members select[name="team-list"]', 4)
-  //
-  //   .waitForElementVisible('#teams-result')
-  //   .assert.elementPresent("#teams-result ul.list li")
-  //   .elements('css selector', '#tool-find-members .team li', function (elements) {
-  //     var count = elements.value.length;
-  //     this.assert.equal(count,4, 'should generate a list of 4 members')
-  //   })
-  //   .end();
-  //}
 
 
 };
