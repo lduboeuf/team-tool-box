@@ -65,8 +65,10 @@ app.page("tool-match3", function()
 
     for (var i=0; i < params.left.length; i++){
       var team = { name: 'Pair #' + i, members: []};
-      team.members.push(params.left[i]);
-      team.members.push(params.right[i]);
+      if (params.right[i]){
+        team.members.push(params.left[i]);
+        team.members.push(params.right[i]);
+      }
       teams.push(team);
     }
 
