@@ -9,6 +9,7 @@ app.alert = function(type, message){
 }
 
 
+
 app.cleanUI = function(evt){
   //toggle menu when a menu item is clicked
   if (evt.target.parentNode.className!=='icon'){
@@ -38,6 +39,7 @@ app.init = function(event) {
 
 
   $menu_icon.onclick = toggleMenu;
+
 
   //remotestorage
   remoteStorage.access.claim('teams', 'rw');

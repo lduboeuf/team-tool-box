@@ -52,7 +52,7 @@ RemoteStorage.defineModule("archives", function (privateClient, publicClient) {
       },
 
       remove: function(archiveId){
-        return privateClient.remove('archiveId');
+        return privateClient.remove(archiveId);
       },
       find: function(id) {
         return privateClient.getObject(id);

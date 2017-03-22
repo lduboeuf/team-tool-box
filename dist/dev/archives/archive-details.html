@@ -18,11 +18,15 @@
   <br/>
   <form>
     <div class="form-group">
-      <textarea name="comment" placeholder="comments" required="">{{=it.comment}}</textarea>
-      <input type="submit" name="add" value="add comment" class="button btn-success"/>
+      <textarea name="comment" placeholder="comments" required="">{{=it.comment || ''}}</textarea>
+      <input type="submit" name="add" value="update comment" class="button btn-success"/>
     </div>
   </form>
-  <button name="remove" class="btn-danger">&#10006; remove archive</button>
+  <div class="danger-zone">
+    <button name="remove" class="btn-danger">&#10006; remove archive</button>
+  </div>
+
+
   <script type="text/javascript">
   app.page("archive-details", function()
   {
@@ -78,6 +82,6 @@
 
     }
   });
-
+  //# sourceURL=archive-details.js
   </script>
 </div>
