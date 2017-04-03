@@ -1,4 +1,4 @@
-#Welcome to Team Toolbox!
+# Welcome to Team Toolbox!
 A web app that helps you to:
  - build teams randomly
  - choose randomly members from a Team
@@ -7,16 +7,16 @@ A web app that helps you to:
 
 This webapp can be used without any web servers (at least with firefox web browser) but you will not be able to use remote storage (Oauth constraints)
 
-##what's inside
+## what's inside
  - MVC library: `spapp.js` borrowed and turned into native js from ( https://github.com/c-smile/spapp )
  - Templating:`doT` templating engine (https://github.com/olado/doT)
  - Persistence and data sync: `remoteStorage` (https://remotestorage.io/) 
  - Test framework: `nightwatch`  (http://nightwatchjs.org/)
 
-##install
+## install
  - open index.html in your favorite browser
 
-##development
+## development
   TTB does not need anything more than an editor to work.
   But it use nodejs, grunt(`npm install -g grunt`) for tests execution and for publishing preparation
 
