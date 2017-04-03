@@ -8,10 +8,10 @@ A web app that helps you to:
 This webapp can be used without any web servers (at least with firefox web browser) but you will not be able to use remote storage (Oauth constraints)
 
 ##what's inside
- - `spapp` MVC library borrowed and turned into native js from ( https://github.com/c-smile/spapp )
- - `doT` templating engine (https://github.com/olado/doT)
- - `remoteStorage` (https://remotestorage.io/) for datas syncing between devices
- - `nightwatch` as a test framework (http://nightwatchjs.org/)
+ - MVC library: `spapp.js` borrowed and turned into native js from ( https://github.com/c-smile/spapp )
+ - Templating:`doT` templating engine (https://github.com/olado/doT)
+ - Persistence and data sync: `remoteStorage` (https://remotestorage.io/) 
+ - Test framework: `nightwatch`  (http://nightwatchjs.org/)
 
 ##install
  - open index.html in your favorite browser
