@@ -43,6 +43,7 @@
     app.selectList.applyTo($teamList);
     app.list.applyTo($resultList);
 
+    var selectedTeams = null;
     var currentOutput = null;
 
     var generate = function(members){
@@ -89,13 +90,23 @@
 
       $btnSave.onclick = function(){
         if (currentOutput){
-          app("archive-save", currentOutput);
+
+          var keys = Object.keys(selectedTeams);
+          var group;
+          if (keys.length>1){
+            group = 'All';
+          }else{
+            group = selectedTeams[keys[0]].name;
+          }
+
+          app("archive-save", { group: group, teams: currentOutput});
+
         }
       }
 
       $okBtn.onclick = function(e){
         e.preventDefault();
-        var selectedTeams = $teamList.getSelectedItems();
+         selectedTeams = $teamList.getSelectedItems();
         var members = [];
         for (var t_id in selectedTeams){
           members.push.apply(members, selectedTeams[t_id].members);

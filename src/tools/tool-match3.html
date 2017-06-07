@@ -21,6 +21,7 @@ app.page("tool-match3", function()
   app.list.applyTo($resultList);
 
   var currentOutput = null;
+  var selectedTeams = null;
 
   var shuffle = function(members){
     var j, x, i;
@@ -35,7 +36,8 @@ app.page("tool-match3", function()
 
   $btnSave.onclick = function(){
     if (currentOutput){
-      app("archive-save", currentOutput.teams);
+      var group = 'All';
+      app("archive-save", { group: group, teams: currentOutput.teams});
     }
   }
 

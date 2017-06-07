@@ -45,6 +45,7 @@
     app.selectList.applyTo($teamList);
     app.list.applyTo($resultList);
 
+    var selectedTeams = null;
     var currentOutput = null;
     var config = null;
 
@@ -128,12 +129,20 @@
     var saveResult = function(){
       if (currentOutput){
         //make it backward compatible
-        var res = currentOutput.teams;
+        var teams = currentOutput.teams;
         if (currentOutput.orphans){
-          res.push({name:"Team orphan(s)", members: currentOutput.orphans});
+          teams.push({name:"Team orphan(s)", members: currentOutput.orphans});
         }
 
-        app("archive-save", res);
+        var keys = Object.keys(selectedTeams);
+        var group;
+        if (keys.length>1){
+          group = 'All';
+        }else{
+          group = selectedTeams[keys[0]].name;
+        }
+
+        app("archive-save", { group: group, teams: teams});
       }
     }
 
@@ -148,7 +157,10 @@
 
       $okBtn.onclick = function(e){
         e.preventDefault();
-        var selectedTeams = $teamList.getSelectedItems();
+        selectedTeams = $teamList.getSelectedItems();
+
+
+
         var members = [];
         for (var t_id in selectedTeams){
           members.push.apply(members, selectedTeams[t_id].members);
