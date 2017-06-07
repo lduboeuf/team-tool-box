@@ -5,7 +5,7 @@
     {{ for(var prop in it) { }}
     <li>
         <a href="#archive-details:{{=it[prop].id}}">
-          {{=it[prop].date || ''}} - {{=it[prop].name}}
+          <span class="group">{{=it[prop].group || 'All'}} </span>: {{=it[prop].name}} (<em>{{=it[prop].date || ''}}</em>)
         </a>
     </li>
     {{ } }}
@@ -40,6 +40,6 @@ app.page("archive-list", function()
 
   }
 });
-
+//# sourceURL=archive-list.js
 </script>
 </div>

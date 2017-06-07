@@ -36,7 +36,8 @@
         name: $name.value,
         description: $desc.value,
         date: newdate,
-        teams: currentOutput
+        teams: currentOutput.teams,
+        group: currentOutput.group
       }
       remoteStorage.archives.store(data).then(function(){
         alert('cool, generated teams archived, you can retrieve it in Archives menu');
