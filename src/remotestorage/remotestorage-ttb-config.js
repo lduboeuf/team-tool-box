@@ -1,10 +1,14 @@
-RemoteStorage.defineModule("config", function (privateClient, publicClient) {
+var TTBConfig = {
+  name: 'config',
+  builder: function(privateClient){
+    privateClient.cache('', 'ALL');
 
-  privateClient.cache('', 'ALL');
-  privateClient.declareType('config', {
-    "type": "object",
-    "description":"config",
-  });
+    privateClient.cache('', 'ALL');
+    privateClient.declareType('config', {
+      "type": "object",
+      "description":"config",
+    });
+
 
   var config = {
         path : 'aaa',
@@ -23,11 +27,12 @@ RemoteStorage.defineModule("config", function (privateClient, publicClient) {
         set: function(conf) {
           return privateClient.storeObject("config", config.path, conf);
         }
-  };
+        
+  }
 
 
 
     // Return and export public functions
    return { exports: config };
-
-});
+ }
+};

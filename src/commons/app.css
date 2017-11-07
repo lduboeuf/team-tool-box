@@ -155,6 +155,19 @@ ul.topnav li.icon {
   display: none;
 }
 
+#remotestorage-widget{
+  position:absolute;
+  right: 8px !important;
+  top: 0px !important;
+  opacity: 0.8;
+}
+
+.rs-widget {
+  padding:2px !important;
+  margin:2px !important;
+}
+
+
 
 @media screen and (max-width:680px) {
   ul.topnav {
@@ -181,24 +194,11 @@ ul.topnav li.icon {
     margin:auto;
   }
 
-
-  #remotestorage-widget{
-    right: 8px !important;
-    top: 0px !important;
-    opacity: 0.8;
-  }
-  #remotestorage-widget .rs-bubble-text{
-    color:grey;
+  .rs-state-initial .rs-box {
     display:none;
   }
-  #remotestorage-widget .rs-bubble{
-    width:250px;
-    top:25px !important;
-  }
 
-  #remotestorage-widget .rs-hidden{
-    background-color: inherit !important;
-  }
+
 
   ul.topnav.responsive {
     position: absolute;
@@ -219,6 +219,9 @@ ul.topnav li.icon {
     text-align: left;
   }
 
+  #remotestorage-widget .rs-state-initial {
+    background-color: inherit !important;
+  }
 
 
 }
@@ -517,7 +520,7 @@ textarea{
 /*forms for mobiles*/
 @media screen and (max-width:680px) {
 
-  input[type=text], input[type=submit], input[type=button], select, textarea, button {
+  form input[type=text], form input[type=submit], form input[type=button], form select, form textarea, form button {
     width: 100%;
   }
   input[type="radio"] {

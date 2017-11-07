@@ -117,13 +117,13 @@ module.exports = { // adapted from: https://git.io/vodU0
     .waitForElementVisible('#team-member-details')
     .setValue('#team-member-details input[name="name"]', 'modified member')
     .click('#team-member-details input[type="submit"]')
-    .waitForElementVisible('#team-list-details')
+    .waitForElementVisible('#team-list-details ul li')
     .saveScreenshot('.tmp/nightwatch/ttb/screenshots/team-members-after-rename.png')
   },
   'Team Members Delete ':function(browser){
     browser
     //remove a member
-    .click("ul.team-members li:last-child a") //click on last element
+    .click("ul.team-members li a")
     .waitForElementVisible('#team-member-details')
     .click('#team-member-details input[type="button"]')
     .pause(500)
@@ -155,10 +155,11 @@ module.exports = { // adapted from: https://git.io/vodU0
       var count = elements.value.length;
       this.assert.equal(count,6, 'should generate a list of 6 teams')
     })
-    .pause(1000)
+
     //save to archive
+    .waitForElementVisible('#tool-build-teams button[name="save"]')
     .click('#tool-build-teams button[name="save"]')
-    .waitForElementVisible('#archive-save')
+    .waitForElementVisible('#archive-save input[type="submit"]')
     //test for empty name
     .setValue('#archive-save input[name="name"]', '')
     .click('#archive-save input[type="submit"]') //should do nothing (TODO handle msg error)
@@ -181,11 +182,12 @@ module.exports = { // adapted from: https://git.io/vodU0
     .waitForElementVisible('#archive-list .archive-list')
     .assert.elementPresent("#archive-list .archive-list li")
     .click("#archive-list .archive-list li:last-child a") //click on last element
-    .waitForElementVisible('#archive-details')
+    .waitForElementVisible('#archive-details input[type="submit"]')
     .setValue('#archive-details textarea[name="comment"]', 'comment for archive here')
     .click('#archive-details input[type="submit"]')
     .pause(500)
-    .assert.containsText('#archive-details textarea','comment for archive here')
+    .acceptAlert()
+    .assert.containsText('#archive-details textarea[name="comment"]','comment for archive here')
     .saveScreenshot('.tmp/nightwatch/ttb/screenshots/archive-update.png')
   },
   'Find members ':function(browser){

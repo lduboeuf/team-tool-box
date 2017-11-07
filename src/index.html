@@ -67,6 +67,7 @@
     <span onclick="this.parentElement.style.display='none'" class="alert-closebtn">&times;</span>
     <p class="alert-msg"></p>
   </div>
+
   <div id="components">
     <div id="check-list">
       {{ for(var prop in it) { }}
@@ -111,8 +112,10 @@
     </div>
 
   </div>
+
   <!-- build:js scripts/vendors.js -->
-  <script src="vendors/remotestorage.min.js"></script>
+  <script src="vendors/rs-widget.js"></script>
+  <script src="vendors/remotestorage.js"></script>
   <script src="vendors/doT.min.js"></script>
   <script src="vendors/spapp.js"></script>
   <!-- endbuild -->

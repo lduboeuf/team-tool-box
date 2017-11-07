@@ -1,4 +1,7 @@
-RemoteStorage.defineModule("teams", function (privateClient, publicClient) {
+var TTBTeams = {
+  name: 'teams',
+  builder: function(privateClient){
+    privateClient.cache('', 'ALL');
 
   privateClient.cache('', 'ALL');
   privateClient.declareType('team', {
@@ -156,5 +159,5 @@ RemoteStorage.defineModule("teams", function (privateClient, publicClient) {
 
     // Return and export public functions
    return { exports: teams };
-
-});
+ }
+};

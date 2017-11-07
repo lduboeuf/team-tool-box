@@ -42,6 +42,13 @@ app.init = function(event) {
 
 
   //remotestorage
+
+  remoteStorage = new RemoteStorage({
+    changeEvents: { local: true, window: true, remote: true, conflicts: true },
+    modules: [TTBArchives, TTBConfig, TTBTeams]
+  })
+
+
   remoteStorage.access.claim('teams', 'rw');
   remoteStorage.access.claim('archives', 'rw');
   remoteStorage.access.claim('config', 'rw');
@@ -56,10 +63,11 @@ app.init = function(event) {
         }
       }
     );
+
   });
 
-
-  remoteStorage.displayWidget();
+  var widget = new Widget(remoteStorage);
+  widget.attach();
 
 
   //navigation handling
