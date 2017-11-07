@@ -73,16 +73,16 @@ module.exports = function(grunt) {
        stopOnExit: true
      },
      default: {
-       seleniumVersion: '3.0.0',
+       seleniumVersion: '3.7.1',
        seleniumDownloadURL: 'http://selenium-release.storage.googleapis.com',
        drivers: {
          chrome: {
-           version: '2.27',
+           version: '2.33',
            arch: process.arch,
            baseURL: 'http://chromedriver.storage.googleapis.com'
          },
          firefox: {
-          version: '0.14.0',
+          version: '0.19.1',
           arch: process.arch,
           baseURL: 'https://github.com/mozilla/geckodriver/releases/download',
         }
