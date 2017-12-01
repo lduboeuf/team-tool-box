@@ -61,7 +61,16 @@
       if ($nameInput.value.length>0){
         remoteStorage.teams.addMember(currentTeamId, { name: $nameInput.value}).then(
           function(team){
-            applyTemplate(team);
+            //<li>
+            //  <a href="#team-member-details:{{=member.id}}">
+            //    {{=member.name}}
+            //  </a>
+            //</li>
+            var member = team.members[team.members.length-1]; //get the last created
+            var $liTeam = document.createElement('li');
+            $liTeam.innerHTML = '<a href="#team-member-details:'+ member.id + '">' + member.name + '</a>';
+            $ulTeamMembers.appendChild($liTeam);
+            //applyTemplate(team);
         });
       }
     }
@@ -90,6 +99,6 @@
       )
     }
   });
-
+//# sourceURL=team-list-details.js
 </script>
 </div>

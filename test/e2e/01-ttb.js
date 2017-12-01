@@ -4,7 +4,7 @@ module.exports = { // adapted from: https://git.io/vodU0
   'TTB Assert Home Page, navigation': function(browser) {
     browser
       .url('http://localhost:8000/index.html')
-      .waitForElementVisible('body')
+      .waitForElementVisible('body', 8000)
       .assert.title('Team Toolbox')
       //.pause(1000)
       .waitForElementVisible(".alert-info")
@@ -89,14 +89,20 @@ module.exports = { // adapted from: https://git.io/vodU0
     .waitForElementVisible('#team-list-details form')
     .perform(function(client, done){
       for (var i = 0; i <11; i++){
+        
         client.setValue('#team-list-details input[name="name"]', 'member'+i);
         client.click('#team-list-details input[type="submit"]');
-        client.waitForElementVisible('#team-list-details .team-members a');
+        //issue https://github.com/nightwatchjs/nightwatch/issues/4
+        client.execute(function() {
+          document.querySelector('#team-list-details input[name="name"]').value = '';
+        });
+        //client.waitForElementVisible('#team-list-details .team-members a');
 
       }
       done();
     })
-    .assert.elementPresent("ul.team-members li")
+    .click(' a.link-home')
+    .waitForElementVisible('#team-list ul.team-list li')
     .click('#team-list ul.team-list li:nth-child(2) a') //click on second team
     .waitForElementVisible('#team-list-details form')
     .perform(function(client, done){
