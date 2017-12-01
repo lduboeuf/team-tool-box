@@ -59,7 +59,7 @@ app.init = function(event) {
       function(teams){
 
         if (Object.keys(teams).length === 0){
-          app.alert('alert-info','<strong>hello ;-)</strong>. Welcome to <strong>Team Tool Box!</strong>. Maybe your first time here, please have a look to the <a href="#about">About</a> section. For those who may not retrieve your datas, be sure to be synced with remoteStorage or see <a href="#settings">settings</a> to upgrade');
+          app.alert('alert-info','<strong>hello ;-)</strong>. Welcome to <strong>Team Toolbox!</strong>. Maybe your first time here, please have a look to the <a href="#about">About</a> section. For those who may not retrieve your datas, be sure to be synced with remoteStorage or see <a href="#settings">settings</a> to upgrade');
         }
       }
     );
