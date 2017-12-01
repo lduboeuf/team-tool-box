@@ -75,7 +75,7 @@ app.selectList = (function(){
         function(teams){
 
           if (Object.keys(teams).length === 0){
-            app.alert('alert-info','humm, no members found, you can add members by clicking on the "My Groups" menu');
+            app.alert('alert-info','humm, no members found, you can add members by clicking on the "<a href="#team-list">My Groups</a>" menu');
           }
           $this.render(teams);
         }
