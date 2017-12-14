@@ -108,6 +108,7 @@ body .brand {
 .brand a{
   text-decoration: none;
   font-weight: bold;
+  font-size: 1.2em;
   color: #f2f2f2;
 }
 .brand span{
@@ -153,6 +154,7 @@ ul.topnav li a:hover {background-color: #555;}
 ul.topnav li a.selected {background-color: #555;}
 ul.topnav li.icon {
   display: none;
+  font-size: 1.2em;
 }
 
 #remotestorage-widget{

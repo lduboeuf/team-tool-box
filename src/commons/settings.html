@@ -3,7 +3,8 @@
     <h2>Team names:</h2>
     <p>This names will be displayed as team names when using random team generator:</p>
     <form>
-      <input type="text" name="team_names" style="width:80%;"/>
+      <textarea name="team_names"></textarea>
+      
       <input type="submit" name="submit" value="update" class="btn-success" />
     </form>
   </div>
@@ -15,7 +16,7 @@
   app.page("settings", function()
   {
     var $settings = document.getElementById('settings');
-    var $teamNames = $settings.querySelector('input[name="team_names"]');
+    var $teamNames = $settings.querySelector('textarea');
     var $update_conf = $settings.querySelector('input[name="submit"]');
     var $btnUpgrade = $settings.querySelector('button[name="upgrade"]');
 

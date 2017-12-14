@@ -21,6 +21,25 @@ app.cleanUI = function(evt){
 
 }
 
+//breadcrump navigation management
+app.navigation = {
+  $navTitle : document.querySelector('#navigation h1'),
+  $navLink : document.querySelector('#navigation a'),
+  set: function(title){
+    var title = title || 'Home';
+    var icon = (title==='Home') ? '&#8962;': '&#8592;';
+
+    this.$navTitle.innerHTML = title;
+    this.$navLink.innerHTML = icon;
+  },
+
+  add: function(title){
+    this.$navTitle.innerHTML = this.$navTitle.innerHTML + ' : ' + title;
+  }
+
+
+}
+
 
 app.init = function(event) {
   //menu handler
@@ -70,19 +89,11 @@ app.init = function(event) {
   widget.attach();
 
 
-  //navigation handling
-  var $navTitle = document.querySelector('#navigation h1');
-  var $navLink = document.querySelector('#navigation a');
 
-  var updateNavigation = function(e){
-    var title = e.detail.title || 'Home';
-    var icon = (e.detail.currentPage==='home') ? '&#8962;': '&#8592;';
-
-    $navTitle.innerHTML = title;
-    $navLink.innerHTML = icon;
-  }
   //subscribe to page.shown event
-  document.addEventListener('page.shown', updateNavigation);
+  document.addEventListener('page.shown', function(e){
+    app.navigation.set(e.detail.title);
+  });
 
   //simulate a hash change at startup
   window.dispatchEvent(new CustomEvent('hashchange'));

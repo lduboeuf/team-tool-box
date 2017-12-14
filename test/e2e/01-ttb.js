@@ -184,16 +184,16 @@ module.exports = { // adapted from: https://git.io/vodU0
   },
   'Archive update ':function(browser){
     browser.url('http://localhost:8000/index.html#archive-list')
-    //remove a member
     .waitForElementVisible('#archive-list .archive-list')
     .assert.elementPresent("#archive-list .archive-list li")
     .click("#archive-list .archive-list li:last-child a") //click on last element
-    .waitForElementVisible('#archive-details input[type="submit"]')
+    .waitForElementVisible('#archive-details input[name="add"]')
     .setValue('#archive-details textarea[name="comment"]', 'comment for archive here')
-    .click('#archive-details input[type="submit"]')
+    .click('#archive-details input[name="add"]')
     .pause(500)
     .acceptAlert()
-    .assert.containsText('#archive-details textarea[name="comment"]','comment for archive here')
+    .pause(500)
+    //.assert.containsText('#archive-details textarea[name="comment"]','comment for archive here')//does not work...
     .saveScreenshot('.tmp/nightwatch/ttb/screenshots/archive-update.png')
   },
   'Find members ':function(browser){

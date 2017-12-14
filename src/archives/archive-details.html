@@ -1,5 +1,4 @@
 <div>
-  <h2>archive: {{=it.date || '' }} - {{=it.name}}</h2>
 
   <div class="team-list">
     <h3>description:</h3>
@@ -59,16 +58,20 @@
       currentArchive.comment = $comment.value;
 
       remoteStorage.archives.store(currentArchive).then(function(archive){
-        applyTemplate(archive);
+        //applyTemplate(archive);
         alert('ok, archive updated');
       });
     }
 
     var applyTemplate = function(archive){
+      var title = (archive.date || '') + ' ' +archive.name;
+      app.navigation.add(title)
       $section.innerHTML = tpl(archive);
       $section.querySelector('button[name="remove"]').onclick=remove;
       $section.querySelector('input[name="add"]').onclick=update;
     }
+
+
 
 
     return function(params) {
