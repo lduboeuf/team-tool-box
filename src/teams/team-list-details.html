@@ -36,6 +36,7 @@
     var tplMembers = doT.template($ulTeamMembers.innerHTML);
 
     var currentTeamId = null;
+    $nameInput.value ="";
 
     //default is not shown
     //$teamListDetails.innerHTML=null;
@@ -63,6 +64,7 @@
             var $liTeam = document.createElement('li');
             $liTeam.innerHTML = '<a href="#team-member-details:'+ member.id + '">' + member.name + '</a>';
             $ulTeamMembers.appendChild($liTeam);
+            $nameInput.value = "";
         });
       }
     }
