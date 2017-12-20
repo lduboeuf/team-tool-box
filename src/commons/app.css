@@ -317,13 +317,13 @@ ul.topnav li.icon {
 .actions a{
   display:block;
   margin-top:8px;
-  padding:14px;
+  padding:16px;
   font-weight: 400;
-  color:#337AB7;
+  color:#66220f;
   background-color: #fff;
   box-shadow: 1px 1px 0px #dbdbdb;
-  border-radius:5px;
-  font-size: 1.1em;
+  font-size: 1.2em;
+  border: 1px solid #dbdbdb;
 }
 .actions a:hover{
   background-color: #F5F5F5;
@@ -341,7 +341,7 @@ ul.topnav li.icon {
 
 .checklist li label{
   display:block;
-  padding:10px 16px;
+  padding:16px 16px;
 }
 
 .checklist li input{
@@ -372,9 +372,9 @@ ul.topnav li.icon {
 
 .list li a  {
     display: block;
-    padding: 10px 16px;
+    padding: 16px 16px;
     text-decoration: none;
-    color: #4078c0;
+    color: #66220f;
 }
 
 .list li a:hover {
@@ -460,6 +460,10 @@ input[type=text], input[type=url], input[type=email], input[type=password], inpu
   padding: 8px;
   border: 1px solid #dbdbdb;
 }
+
+.btn-actions {
+  text-align: right;
+}
 .btn-danger{
   background-color: #D9534F;
 }
@@ -475,6 +479,13 @@ input[type=text], input[type=url], input[type=email], input[type=password], inpu
 }
 .btn-success{
   background-color: #5CB85C;
+}
+.disabled {
+  display: none;
+}
+
+.enabled {
+  display: inline-block;
 }
 
 button, input[type=submit],input[type=button] {
@@ -522,7 +533,7 @@ textarea{
 /*forms for mobiles*/
 @media screen and (max-width:680px) {
 
-  form input[type=text], form input[type=submit], form input[type=button], form select, form textarea, form button {
+  form input[type=text], form input[type=submit], form input[type=button], form select, form textarea, form button, .btn-actions button{
     width: 100%;
   }
   input[type="radio"] {

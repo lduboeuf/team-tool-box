@@ -20,8 +20,8 @@
 
 </form>
   <div class="teams-result"></div>
-  <div>
-    <button class="btn-default">save result</button>
+  <div class="btn-actions">
+    <button class="btn-default btn-success disabled">save result</button>
   </div>
 
 
@@ -37,8 +37,7 @@
     var $btnSave = $section.querySelector('button');
 
 
-    //btn save is invisible by default
-    $btnSave.style.display='none';
+
 
     app.selectList.applyTo($teamList);
     app.list.applyTo($resultList);
@@ -83,8 +82,7 @@
           currentOutput = teams;
 
           $resultList.render({teams: teams});
-
-          $btnSave.style.display='block';
+          $btnSave.classList.remove('disabled');
       }
 
 
@@ -122,9 +120,7 @@
 
       //list already saved ?
       if (params && params.event =='onSavedOutput'){
-        var $btnSave = $resultList.querySelector('button');
-        $btnSave.classList.toggle('btn-default');
-        $btnSave.onclick = null;
+        $btnSave.classList.add('disabled');
       }
 
     }

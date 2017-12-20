@@ -8,8 +8,8 @@
   <div class="teams-result">
 
   </div>
-  <div>
-    <button class="btn-default">sort</button>
+  <div class="btn-actions">
+    <button class="btn-default disabled">sort</button>
   </div>
   <div id="shuffle-result">
     <h3>Random ordered list:</h3>
@@ -35,8 +35,6 @@
     //empty tpl by default
     $shuffleResult.innerHTML = null;
 
-    //btn is invisible by default
-    $btnSort.style.display='none';
 
     //bind to checklist and selectList components
     app.checkList.applyTo($resultList);
@@ -71,7 +69,7 @@
 
     $teamList.onchange = function(e){
       $resultList.render($teamList.getSelectedItems());
-      $btnSort.style.display='block';
+      $btnSort.classList.toggle('disabled');
     }
 
     return function(params) {

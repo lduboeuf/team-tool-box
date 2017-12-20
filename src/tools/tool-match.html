@@ -7,7 +7,8 @@
   </form>
   <div class="teams-result">
   </div>
-  <button class="btn-default">next</button>
+  <div class="btn-actions"><button class="btn-default disabled">next</button></div>
+  
 
 <script type="text/javascript">
 
@@ -23,16 +24,13 @@ app.page("tool-match", function()
   app.selectList.applyTo($selectTeamList);
   app.checkList.applyTo($teamList);
 
-  //btn is invisible by default
-  $btnNext.style.display='none';
 
 
 
   $selectTeamList.onchange = function(e){
     $teamList.render($selectTeamList.getSelectedItems());
 
-    $btnNext.style.display='block';
-
+    $btnNext.classList.toggle('disabled');
   }
 
   $btnNext.onclick = function(e){

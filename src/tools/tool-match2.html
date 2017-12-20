@@ -4,8 +4,8 @@
       <select class="team-list" name="team-list"></select>
   </form>
   <div class="teams-result"></div>
-  <div>
-    <button class="btn-default">find pairs</button>
+  <div class="btn-actions">
+    <button class="btn-default disabled">find pairs</button>
   </div>
 
 <script type="text/javascript">
@@ -22,8 +22,6 @@ app.page("tool-match2", function()
   app.checkList.applyTo($teamList);
   app.selectList.applyTo($selectTeamList);
 
-  //btn is invisible by default
-  $btnNext.style.display='none';
 
   var selectedMembers = {};
 
@@ -51,7 +49,7 @@ app.page("tool-match2", function()
       }
     }
 
-    $btnNext.style.display='block';
+    $btnNext.classList.toggle('disabled');
 
   }
 

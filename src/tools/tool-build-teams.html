@@ -22,8 +22,8 @@
   <div class="teams-result">
 
   </div>
-  <div>
-    <button class="btn-default btn-success" name="save">save result</button>
+  <div class="btn-actions">
+    <button name="save" class="btn-default btn-success disabled">save result</button>
   </div>
 
 
@@ -39,8 +39,7 @@
     var $okBtn = $section.querySelector('input[type="submit"]');
     var $btnSave = $section.querySelector('button');
 
-    //btn save is invisible by default
-    $btnSave.style.display='none';
+
 
     app.selectList.applyTo($teamList);
     app.list.applyTo($resultList);
@@ -146,28 +145,33 @@
       }
     }
 
-      var displayResult = function(result) {
-          currentOutput = result;
-          $resultList.render(result);
-          $btnSave.style.display = 'block';
+    var displayResult = function(result) {
+        currentOutput = result;
+        $resultList.render(result);
+        $btnSave.classList.remove('disabled');
+
       }
 
 
-      $btnSave.onclick = saveResult;
+      
 
-      $okBtn.onclick = function(e){
-        e.preventDefault();
-        selectedTeams = $teamList.getSelectedItems();
+    $okBtn.onclick = function(e){
+      e.preventDefault();
+      selectedTeams = $teamList.getSelectedItems();
 
 
 
-        var members = [];
-        for (var t_id in selectedTeams){
-          members.push.apply(members, selectedTeams[t_id].members);
-        }
-
-        generate(members);
+      var members = [];
+      for (var t_id in selectedTeams){
+        members.push.apply(members, selectedTeams[t_id].members);
       }
+
+      generate(members);
+
+    }
+
+    $btnSave.onclick = saveResult;
+
 
 
     return function(params) {
@@ -180,9 +184,7 @@
 
       //list already saved ?
       if (params && params.event =='onSavedOutput'){
-        $btnSave.classList.toggle('btn-success');
-        $btnSave.classList.toggle('btn-default');
-        $btnSave.onclick = null;
+        $btnSave.classList.toggle('disabled');
       }
 
     }

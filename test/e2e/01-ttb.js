@@ -178,7 +178,7 @@ module.exports = { // adapted from: https://git.io/vodU0
     .pause(500)
     .acceptAlert()
     .pause(500)
-    .assert.cssClassNotPresent('#tool-build-teams  button', 'btn-success')
+    .assert.cssClassPresent('#tool-build-teams  button', 'disabled')
 
 
   },
