@@ -94,7 +94,7 @@
         <h3>{{=team.name}}</h3>
         <ul class="list" >
           {{~team.members :member:idxm}}
-            <li data-id="{{=member.id}}">{{=member.name}}</li>
+            <li data-id="{{=member.id}}">{{=member.name}}<span class="remove-item">X</span></li>
           {{~}}
         </ul>
       </div>

@@ -145,19 +145,43 @@
       }
     }
 
+    var removeItem = function(evt){
+      var member_id = evt.target.parentElement.getAttribute('data-id');
+      var members = [];
+      for (var t_id in selectedTeams){
+        for (var m_id in selectedTeams[t_id].members){
+          var member = selectedTeams[t_id].members[m_id];
+          if (member.id === member_id){
+            selectedTeams[t_id].members.splice(m_id, 1);
+          }
+        }
+        members.push.apply(members, selectedTeams[t_id].members);
+      }
+      generate(members);
+
+    }
+
     var displayResult = function(result) {
         currentOutput = result;
         $resultList.render(result);
         $btnSave.classList.remove('disabled');
 
-      }
+        //handle remove btn on items
+        var $items = $resultList.querySelectorAll('.remove-item');
+        for (var index = 0; index < $items.length; index++) {
+          var $item = $items[index];
+          $item.onclick = removeItem;
+          
+        }
 
+      }
 
       
 
     $okBtn.onclick = function(e){
       e.preventDefault();
-      selectedTeams = $teamList.getSelectedItems();
+      //copy of datas
+      selectedTeams = JSON.parse( JSON.stringify( $teamList.getSelectedItems() ) );
 
 
 
@@ -188,7 +212,7 @@
       }
 
     }
-  });
-//# sourceURL=tool-build-teams.js
+  });//# sourceURL=tool-build-teams.js
+  
   </script>
 </div>

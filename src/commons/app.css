@@ -377,6 +377,11 @@ ul.topnav li.icon {
     color: #66220f;
 }
 
+.list li .remove-item {
+  float: right;
+  cursor: pointer;
+}
+
 .list li a:hover {
 	background-color: #F5F5F5;
 }
