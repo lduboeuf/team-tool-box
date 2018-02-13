@@ -7,6 +7,8 @@ A web app that helps you to:
 
 This webapp can be used without any web servers (at least with firefox web browser) but you will not be able to use remote storage (Oauth constraints)
 
+**This webapp source code is not meant to be good programming practice. I made it just for fun.**
+
 ## what's inside
  - MVC library: `spapp.js` borrowed and turned into native js from ( https://github.com/c-smile/spapp )
  - Templating:`doT` templating engine (https://github.com/olado/doT)
